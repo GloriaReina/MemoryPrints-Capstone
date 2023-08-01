@@ -1,6 +1,6 @@
 ﻿namespace MemoryPrints.Models
 {
-    public class JournalEntryKidProfiles
+    public class JournalEntryChildProfiles
     {
         public int Id { get; set; }
 
