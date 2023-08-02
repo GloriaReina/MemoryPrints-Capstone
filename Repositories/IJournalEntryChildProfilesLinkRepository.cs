@@ -5,7 +5,9 @@ namespace MemoryPrints.Repositories
     public interface IJournalEntryChildProfilesLinkRepository
     {
         void AddJournalEntryKidProfile(JournalEntryChildProfiles journalEntryChildProfile);
-        void DeleteJournalEntryKidProfile(int id);
+        void Update(JournalEntryChildProfiles journalEntryChildProfile);
+
+       void DeleteJournalEntryKidProfile(int id);
         List<JournalEntryChildProfiles> GetJournalEntryKidProfilesByChildUserId(int childUserId);
         List<JournalEntryChildProfiles> GetJournalEntryKidProfilesByJournalId(int journalId);
     }

@@ -72,5 +72,35 @@ namespace MemoryPrints.Controllers
             _journalRepository.Delete(id);
             return NoContent();
         }
+
+        [HttpGet("searchbyterm")]
+        public IActionResult SearchByTerm(string searchTerm)
+        {
+            return Ok(_journalRepository.SearchByTerm(searchTerm));
+        }
+
+        [HttpGet("searchbydate")]
+        public IActionResult SearchByDate(DateTime searchDate)
+        {
+            return Ok(_journalRepository.SearchByDate(searchDate));
+        }
+
+        [HttpGet("searchbycategory")]
+        public IActionResult SearchByCategory(string categoryName)
+        {
+            return Ok(_journalRepository.SearchByCategory(categoryName));
+        }
+
+        [HttpGet("searchbyuserrole")]
+        public IActionResult SearchByUserRole(string roleName)
+        {
+            return Ok(_journalRepository.SearchByUserRole(roleName));
+        }
+
+        [HttpGet("searchbyuser")]
+        public IActionResult SearchByUser(string searchValue, string searchType)
+        {
+            return Ok(_journalRepository.SearchByUser(searchValue, searchType));
+        }
     }
 }
