@@ -267,6 +267,255 @@ namespace MemoryPrints.Repositories
             }
         }
 
+        /* All the methods use the same sorting logic= simplify code by creating a separate private method for fetching the data and sorting the results in descending order. */
+        private List<Journal> FetchAndSortData(string sqlQuery, SqlParameter parameter)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = sqlQuery;
+                    if (parameter != null)
+                    {
+                        DbUtils.AddParameter(cmd, "@Criterion", parameter.Value);
+                    }
+                
+
+                    var reader = cmd.ExecuteReader();
+
+                    var journals = new List<Journal>();
+                    while (reader.Read())
+                    {
+                        journals.Add(new Journal()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            Title = DbUtils.GetString(reader, "Title"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            Gratitude = DbUtils.GetString(reader, "Gratitude"),
+                            Intention = DbUtils.GetString(reader, "Intention"),
+                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            IsApproved = DbUtils.GetBool(reader, "IsApproved"),
+                            CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
+                            Category = new Category()
+                            {
+                                Id = DbUtils.GetInt(reader, "CategoryId"),
+                                Name = DbUtils.GetString(reader, "CategoryName")
+                            },
+                        });
+                    }
+
+                    reader.Close();
+
+                    // Sort the journals in descending order based on CreationDate
+                    journals.Sort((a, b) => b.CreationDate.CompareTo(a.CreationDate));
+
+                    return journals;
+                }
+            }
+        }
+
+        public List<Journal> SearchByTerm(string searchTerm)
+        {
+            var sqlQuery = @"
+            SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                   j.CategoryId, j.IsApproved, j.CreationDate,
+                   c.Name
+            FROM Journal j
+            LEFT JOIN Category c ON j.CategoryId = c.Id
+            WHERE j.Title LIKE @Criterion OR j.Content LIKE @Criterion";
+
+            var parameter = new SqlParameter("@Criterion", $"%{searchTerm}%");
+            return FetchAndSortData(sqlQuery, parameter);
+        }
+        public List<Journal> SearchByDate(DateTime searchDate)
+        {
+            var sqlQuery = @"
+            SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                   j.CategoryId, j.IsApproved, j.CreationDate,
+                   c.Name
+            FROM Journal j
+            INNER JOIN Category c ON j.CategoryId = c.Id
+            WHERE j.CreationDate >= @Criterion";
+
+            var parameter = new SqlParameter("@Criterion", searchDate);
+            return FetchAndSortData(sqlQuery, parameter);
+        }
+
+        public List<Journal> SearchByCategory(string categoryName)
+        {
+            var sqlQuery = @"
+            SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                   j.CategoryId, j.IsApproved, j.CreationDate,
+                   c.Name
+            FROM Journal j
+            LEFT JOIN Category c ON j.CategoryId = c.Id
+            WHERE c.Name LIKE @Criterion";
+
+            var parameter = new SqlParameter("@Criterion", $"%{categoryName}%");
+            return FetchAndSortData(sqlQuery, parameter);
+        }
+
+        public List<Journal> SearchByUserRole(string roleName)
+        {
+            var sqlQuery = @"
+            SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                   j.CategoryId, j.IsApproved, j.CreationDate,
+                   c.[Name], ur.[Name]
+            FROM Journal j
+            LEFT JOIN Category c ON j.CategoryId = c.Id
+            LEFT JOIN UserRole ur ON j.UserId = ur.Id
+            WHERE ur.[Name] LIKE @Criterion";
+
+            var parameter = new SqlParameter("@Criterion", $"%{roleName}%");
+            return FetchAndSortData(sqlQuery, parameter);
+        }
+        public List<Journal> SearchByUser(string searchValue, string searchType)
+        {
+            string columnName;
+            switch (searchType.ToLower()) // Convert to lowercase to make the comparison case-insensitive
+            {
+                case "firstname":
+                    columnName = "FirstName";
+                    break;
+                case "lastname":
+                    columnName = "LastName";
+                    break;
+                case "displayname":
+                    columnName = "DisplayName";
+                    break;
+                default:
+                    throw new ArgumentException("Invalid search type.", nameof(searchType));
+            }
+
+            var sqlQuery = $@"
+            SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                   j.CategoryId, j.IsApproved, j.CreationDate,
+                   c.[Name]
+            FROM Journal j
+            LEFT JOIN Category c ON j.CategoryId = c.Id
+            LEFT JOIN [User] u ON j.UserId = u.Id
+            WHERE u.{columnName} LIKE @Criterion";
+
+            var parameter = new SqlParameter("@Criterion", $"%{searchValue}%");
+            return FetchAndSortData(sqlQuery, parameter);
+        }
     }
 }
 
+
+/* public List<Journal> SearchByTerm(string searchTerm, bool sortDescending)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    var sql = @"
+                    SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                           j.CategoryId, j.IsApproved, j.CreationDate,
+                           c.CategoryName, c.CategoryDescription
+                    FROM Journal j
+                    INNER JOIN Category c ON j.CategoryId = c.Id
+                    WHERE j.Title LIKE @Criterion OR j.Content LIKE @Criterion";
+
+                    if (sortDescending)
+                    {
+                        sql += " ORDER BY j.CreationDate DESC";
+                    }
+                    else
+                    {
+                        sql += " ORDER BY j.CreationDate";
+                    }
+
+                    cmd.CommandText = sql;
+                    DbUtils.AddParameter(cmd, "@Criterion", $"%{searchTerm}%");
+                    var reader = cmd.ExecuteReader();
+
+                    var journals = new List<Journal>();
+                    while (reader.Read())
+                    {
+                        journals.Add(new Journal()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            Title = DbUtils.GetString(reader, "Title"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            Gratitude = DbUtils.GetString(reader, "Gratitude"),
+                            Intention = DbUtils.GetString(reader, "Intention"),
+                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            IsApproved = DbUtils.GetBool(reader, "IsApproved"),
+                            CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
+                            Category = new Category()
+                            {
+                                Id = DbUtils.GetInt(reader, "CategoryId"),
+                                Name = DbUtils.GetString(reader, "CategoryName")
+                            },
+                        });
+                    }
+
+                    reader.Close();
+
+                    return journals;
+                }
+            }
+        }
+
+        public List<Journal> SearchByDate(DateTime searchDate, bool sortDescending)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    var sql = @"
+                    SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+                           j.CategoryId, j.IsApproved, j.CreationDate,
+                           c.Name
+                    FROM Journal j
+                    INNER JOIN Category c ON j.CategoryId = c.Id
+                    WHERE j.CreationDate >= @Criterion";
+
+                    if (sortDescending)
+                    {
+                        sql += " ORDER BY j.CreationDate DESC";
+                    }
+                    else
+                    {
+                        sql += " ORDER BY j.CreationDate";
+                    }
+
+                    cmd.CommandText = sql;
+                    DbUtils.AddParameter(cmd, "@Criterion", searchDate);
+                    var reader = cmd.ExecuteReader();
+
+                    var journals = new List<Journal>();
+                    while (reader.Read())
+                    {
+                        journals.Add(new Journal()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            Title = DbUtils.GetString(reader, "Title"),
+                            Content = DbUtils.GetString(reader, "Content"),
+                            Gratitude = DbUtils.GetString(reader, "Gratitude"),
+                            Intention = DbUtils.GetString(reader, "Intention"),
+                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            IsApproved = DbUtils.GetBool(reader, "IsApproved"),
+                            CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
+                            Category = new Category()
+                            {
+                                Id = DbUtils.GetInt(reader, "CategoryId"),
+                                Name = DbUtils.GetString(reader, "CategoryName")
+                            
+                            },
+                        });
+                    }
+
+                    reader.Close();
+
+                    return journals;
+                }
+            }
+        }*/

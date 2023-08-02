@@ -9,7 +9,7 @@ namespace MemoryPrints.Models
 
         [Required]
         public int UserId { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -25,7 +25,7 @@ namespace MemoryPrints.Models
 
         [Required]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         [Required]
         public bool IsApproved { get; set; }
@@ -38,5 +38,7 @@ namespace MemoryPrints.Models
         //public List<JournalEntryKidProfiles> JournalEntryKidProfiles { get; set; }
     }
 }
+
+
 
 

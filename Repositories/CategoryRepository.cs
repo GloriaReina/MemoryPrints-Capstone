@@ -8,7 +8,7 @@ namespace MemoryPrints.Repositories
         public CategoryRepository(IConfiguration configuration) : base(configuration) { }
 
 
-        public List<Category> GetAll() //gets category Data
+        public List<Category> GetAll() 
         {
             using (var conn = Connection)
             {

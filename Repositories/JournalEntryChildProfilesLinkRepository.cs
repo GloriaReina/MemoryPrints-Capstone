@@ -100,6 +100,28 @@ namespace MemoryPrints.Repositories
                 }
             }
         }
+        public void Update(JournalEntryChildProfiles journalEntryChildProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                UPDATE JournalEntryChildProfiles
+                SET JournalId = @JournalId,
+                    ChildUserId = @ChildUserId
+                WHERE Id = @Id";
+
+                    cmd.Parameters.AddWithValue("@JournalId", journalEntryChildProfile.JournalId);
+                    cmd.Parameters.AddWithValue("@ChildUserId", journalEntryChildProfile.ChildUserId);
+                    cmd.Parameters.AddWithValue("@Id", journalEntryChildProfile.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
     }
 }

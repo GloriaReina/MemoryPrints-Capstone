@@ -30,7 +30,7 @@ namespace MemoryPrints.Models
         public string ImageLocation { get; set; }
 
         public int UserRoleId { get; set; }
-        public UserRole UserRole { get; set; }
+        public UserRole? UserRole { get; set; }
 
     }
 }

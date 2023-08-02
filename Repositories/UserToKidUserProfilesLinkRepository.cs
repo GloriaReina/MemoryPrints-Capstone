@@ -41,9 +41,11 @@ namespace MemoryPrints.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, UserId, ChildUserId
-                                FROM UserToKidUserProfilesLink
-                                WHERE UserId = @userId";
+                    cmd.CommandText = @"SELECT upl.Id, upl.UserId, upl.ChildUserId, parent.FirstName AS ParentFirstName, parent.LastName AS ParentLastName, child.FirstName AS ChildFirstName, child.LastName AS ChildLastName
+                      FROM UserToKidUserProfilesLink upl
+                      LEFT JOIN [User] parent ON parent.id = upl.UserId
+                      LEFT JOIN [User] child ON child.id = upl.ChildUserId
+                     WHERE upl.UserId = @userId";
 
                     DbUtils.AddParameter(cmd, "@userId", userId);
 
