@@ -16,12 +16,18 @@ namespace MemoryPrints.Controllers
             _userRepository = userRepository;
         }
 
+      
+
         [HttpPost]
         public IActionResult AddUser(User user)
         {
+            user.CreateDateTime = DateTime.Now;
+
             _userRepository.AddUser(user);
-            return Ok();
+
+            return CreatedAtAction("authenticate", new { email = user.Email }, user);
         }
+
 
         [HttpPut("user/{id}")]
         public IActionResult UpdateUser(int id, User user)
@@ -99,6 +105,16 @@ namespace MemoryPrints.Controllers
 
     }
 }
+
+
+
+//[HttpPost]
+//public IActionResult AddUser(User user)
+//{
+//    _userRepository.AddUser(user);
+//    return Ok();
+//}
+
 
 
 /*For anthentication,if dont want to send sensitive info in http request then use FromBody=>
