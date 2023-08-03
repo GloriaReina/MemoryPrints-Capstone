@@ -1,4 +1,6 @@
 {
+  "name": "memoryprints",
+  "proxy": "https://localhost:7278",
   "dependencies": {
     "bootstrap": "^5.3.1",
     "emoji-mart": "^5.5.2",
