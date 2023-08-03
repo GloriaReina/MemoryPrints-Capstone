@@ -1,4 +1,4 @@
-const baseUrl = "/api/user";
+const baseUrl = "/api/User";
 
 export const login = (userObject) => {
   return fetch(
