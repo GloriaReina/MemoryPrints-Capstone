@@ -164,6 +164,47 @@ namespace MemoryPrints.Repositories
             }
         }
 
+        public List<User> GetAllKidUsers()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                  SELECT Id, DisplayName, FirstName, LastName, RelationShip, Email, Password,
+                       CreateDateTime, ImageLocation, UserRoleId
+                FROM [User]
+                WHERE UserRoleId = 3";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var users = new List<User>();
+
+                    while (reader.Read())
+                    {
+                        var user = new User
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            FirstName = DbUtils.GetString(reader, "FirstName"),
+                            LastName = DbUtils.GetString(reader, "LastName"),
+                            RelationShip = DbUtils.GetString(reader, "RelationShip"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            Password = DbUtils.GetString(reader, "Password"),
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
+                            UserRoleId = DbUtils.GetInt(reader, "UserRoleId"),
+                        };
+                        users.Add(user);
+                    }
+
+                    reader.Close();
+                    return users;
+                }
+            }
+        }
+
         public List<User> GetUsersByUserRole(int userRoleId)
         {
             using (var conn = Connection)

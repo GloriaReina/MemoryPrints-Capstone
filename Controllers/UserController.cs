@@ -16,17 +16,26 @@ namespace MemoryPrints.Controllers
             _userRepository = userRepository;
         }
 
-      
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            List<User> users = _userRepository.GetAllUsers();
+            return Ok(users);
+        }
 
         [HttpPost]
         public IActionResult AddUser(User user)
         {
             user.CreateDateTime = DateTime.Now;
 
+            // Register the user without kidUserId
             _userRepository.AddUser(user);
 
-            return CreatedAtAction("authenticate", new { email = user.Email }, user);
+            // Return the main user's ID in the response
+            return CreatedAtAction("GetUserById", new { id = user.Id }, user);
         }
+
+
 
 
         [HttpPut("user/{id}")]
@@ -61,10 +70,12 @@ namespace MemoryPrints.Controllers
             return Ok(user);
         }
 
-        [HttpGet]
-        public IActionResult GetAllUsers()
+       
+
+        [HttpGet ("users/kids")]
+        public IActionResult GetAllKidUsers()
         {
-            List<User> users = _userRepository.GetAllUsers();
+            List<User> users = _userRepository.GetAllKidUsers();
             return Ok(users);
         }
 
@@ -106,6 +117,16 @@ namespace MemoryPrints.Controllers
     }
 }
 
+
+//[HttpPost]
+//public IActionResult AddUser(User user)
+//{
+//    user.CreateDateTime = DateTime.Now;
+
+//    _userRepository.AddUser(user);
+
+//    return CreatedAtAction("authenticate", new { email = user.Email }, user);
+//}
 
 
 //[HttpPost]

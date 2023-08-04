@@ -15,6 +15,8 @@ export const login = (userObject) => {
     });
 };
 
+
+
 export const logout = () => {
     localStorage.clear()
 };
@@ -31,4 +33,12 @@ export const register = (userObject,password) => {
       .then((savedUser) => {
         localStorage.setItem("user", JSON.stringify(savedUser))
       });
+  };
+
+
+
+/*Retrieves a list of user with user role of 3(kids)*/
+export const GetListOfKidUsers= ()=> {
+    return fetch(`${baseUrl}/users/kids`) 
+      .then((res) => res.json())
   };

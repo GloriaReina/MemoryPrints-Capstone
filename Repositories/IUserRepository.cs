@@ -8,6 +8,7 @@ namespace MemoryPrints.Repositories
         User AuthenticateUser(string email, string password);
         bool ChangePassword(string email, string currentPassword, string newPassword);
         void DeleteUser(int userId);
+        List<User> GetAllKidUsers();
         List<User> GetAllUsers();
         User GetUserById(int id);
         List<User> GetUsersByUserRole(int userRoleId);
