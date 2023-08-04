@@ -4,7 +4,7 @@ namespace MemoryPrints.Repositories
 {
     public interface IUserToKidUserProfilesLinkRepository
     {
-        void AddUserToKidUserProfilesLink(UserToKidUserProfilesLink userToKidUserProfilesLink);
+        void AddUserToKidUserProfilesLink(int userId, UserToKidUserProfilesLink userToKidUserProfilesLink);
         void DeleteUserToKidUserProfilesLink(int id);
         List<UserToKidUserProfilesLink> GetAllUserToKidUserProfilesLinks();
         List<UserToKidUserProfilesLink> GetUserToKidUserProfilesLinksByUserId(int userId);
