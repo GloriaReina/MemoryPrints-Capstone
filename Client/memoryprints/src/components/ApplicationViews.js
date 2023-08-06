@@ -9,8 +9,8 @@ export default function ApplicationViews() {
  return(
       <Routes>
       <Route path="/" element={<HomePage />} /> 
-      <Route path="/allentries" element= {<AllJournalEntries />} />
-      <Route path="/myprofile" element= {<MyProfile />} />
+      {/* <Route path="/allentries" element= {<AllJournalEntries />} />
+      <Route path="/myprofile" element= {<MyProfile />} /> */}
 
       </Routes>
 

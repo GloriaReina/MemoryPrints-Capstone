@@ -56,7 +56,6 @@ export default function Register({ setIsLoggedIn }) {
         const userId = response.Id;
         console.log(userId)
        
-
         // Once the main user is registered, create a link with the selected childUserId
         if (childUserId) {
           console.log(childUserId)//do i get the right type and an id? yes!

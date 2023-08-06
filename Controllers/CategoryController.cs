@@ -37,7 +37,7 @@ namespace MemoryPrints.Controllers
         public IActionResult AddCategory(Category category)
         {
             _categoryRepository.Add(category);
-            return CreatedAtAction("Get", new { id = category.Id }, category);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
         [HttpDelete("{id}")]

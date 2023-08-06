@@ -21,6 +21,9 @@ export const logout = () => {
     localStorage.clear()
 };
 
+
+
+
 export const register = (userObject,password) => {
     return  fetch(`${baseUrl}`, {
       method: "POST",

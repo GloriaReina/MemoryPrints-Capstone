@@ -1,3 +1,37 @@
+// export const MyJournalEntries = () => {
+//     const [journals, setJournals] = useState([]);
+  
+//     const localAppUser = localStorage.getItem("user");
+//     const AppUserObject = JSON.parse(localAppUser);
+//     const userId = AppUserObject.id;
+//   console.log(typeof(userId))//receiving appropriate id and type
+  
+//     useEffect(() => {
+//       GetJournalsByUser(userId).then((allJournals) => setJournals(allJournals)
+//       );
+//       console.log(journals)
+//     }, []);
+  
+  
+  
+//     return (
+//       <Container className="journal-container">
+//         <Row className="journal-list" mt-3>
+//           {journals.map((journal) => (
+//             <Col key={journal.id} xs={8}>
+//               <Card className="journal-card" style={{ width: '18rem' }}>
+//                 {/* sent journal as props to Journal */}
+//                 <Journal journalProp={journal} />
+//               </Card>
+//             </Col>
+//           ))}
+//         </Row>
+//       </Container>
+//     );
+//   };
+  
+
+
 // import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 
@@ -114,3 +148,31 @@
 //   );
 // }
 
+
+// register(user, password)
+// .then((response) => response.json())
+// .then((data) => {
+//     const userId = data.Id; // Assuming the response is a JSON object with the "Id" property
+//    console.log(userId);  
+
+
+// export const register = (userObject, password) => {
+//     return fetch(`${baseUrl}`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(userObject),
+//     })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok.");
+//       }
+//       return response.json();
+//     })
+//     .then((savedUser) => {
+//       // Save the user to local storage
+//       localStorage.setItem("user", JSON.stringify(savedUser));
+//       return savedUser; // Return the savedUser for further processing if needed
+//     });
+//   };

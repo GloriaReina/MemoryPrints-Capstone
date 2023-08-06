@@ -35,24 +35,46 @@ namespace MemoryPrints.Controllers
             return Ok(journal);
         }
 
+        //[HttpGet("user/{userId}")]
+        //public IActionResult GetByUserId(int userId)
+        //{
+        //   var journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate)
+        //.ToList(); 
+        //    if (journalList == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(journalList);
+        //}
+
         [HttpGet("user/{userId}")]
-        public IActionResult GetByUserId(int userId)
+        public IActionResult GetByUserId(string userIdString)
         {
-            List<Journal> journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate)
-        .ToList(); 
-            if (journalList == null)
+            if (int.TryParse(userIdString, out int userId))
             {
-                return NotFound();
+                var journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate).ToList();
+
+                if (journalList == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(journalList);
             }
-            return Ok(journalList);
+            else
+            {
+                // The userIdString is not a valid integer.
+                return BadRequest("Invalid userId parameter.");
+            }
         }
 
         [HttpPost]
         public IActionResult Add(Journal journal)
         {
             journal.CreationDate = DateTime.Now;
+            journal.IsApproved = false;
             _journalRepository.Add(journal);
-            return CreatedAtAction("Get", new { id = journal.Id }, journal);
+            return CreatedAtAction("GetByJournalId", new { id = journal.Id }, journal);
         }
 
         [HttpPut("{journalId}")]
