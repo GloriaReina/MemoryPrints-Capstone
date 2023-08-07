@@ -31,7 +31,7 @@ namespace MemoryPrints.Controllers
             // Register the user without kidUserId
             _userRepository.AddUser(user);
 
-            // Return the main user's ID in the response
+            // Return the user object in the response
             return CreatedAtAction("GetUserById", new { id = user.Id }, user);
         }
 

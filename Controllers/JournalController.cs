@@ -38,8 +38,8 @@ namespace MemoryPrints.Controllers
         [HttpGet("user/{userId}")]
         public IActionResult GetByUserId(int userId)
         {
-            List<Journal> journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate)
-        .ToList(); 
+            var journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate)
+         .ToList();
             if (journalList == null)
             {
                 return NotFound();
@@ -47,12 +47,15 @@ namespace MemoryPrints.Controllers
             return Ok(journalList);
         }
 
+
+
         [HttpPost]
         public IActionResult Add(Journal journal)
         {
             journal.CreationDate = DateTime.Now;
+            journal.IsApproved = false;
             _journalRepository.Add(journal);
-            return CreatedAtAction("Get", new { id = journal.Id }, journal);
+            return CreatedAtAction("GetByJournalId", new { id = journal.Id }, journal);
         }
 
         [HttpPut("{journalId}")]

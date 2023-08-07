@@ -1,8 +1,14 @@
 const baseUrl = "/api/Journal";
 
 
-export const GetJournalsByUser= (journalId)=> {
-    return fetch(`${baseUrl}/user?journalId=${journalId}`) 
+export const GetJournalsByUser= (userId)=> {
+    return fetch(`${baseUrl}/user/${userId}`) 
+      .then((res) => res.json())
+  };
+
+
+  export const GetAllJournals= ()=> {
+    return fetch(`${baseUrl}`) 
       .then((res) => res.json())
   };
 
