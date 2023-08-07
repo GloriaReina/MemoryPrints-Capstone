@@ -176,3 +176,136 @@
 //       return savedUser; // Return the savedUser for further processing if needed
 //     });
 //   };
+
+
+/*---------------------------- Prev Header code ----------------------------------------*/
+
+
+// import React, { useState } from 'react';
+// import { NavLink as RRNavLink } from "react-router-dom";
+// import { logout } from '../Managers/UserManagers';
+// import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+
+// export default function Header({ isLoggedIn, setIsLoggedIn }) {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const toggle = () => setIsOpen(!isOpen);
+
+//   return (
+//     <div>
+//       <Navbar bg="light" expand="md">
+//         <Navbar.Brand as={RRNavLink} to="/">MemoryPrints</Navbar.Brand>
+//         <Navbar.Toggle onClick={toggle} />
+//         <Navbar.Collapse isOpen={isOpen}>
+//           <Nav className="mr-auto">
+//             {isLoggedIn && (
+//               <>
+//                 <Nav.Link as={RRNavLink} to="/">Homepage</Nav.Link>
+//                 <Nav.Link as={RRNavLink} to="/journalentries">All Entries</Nav.Link>
+//               </>
+//             )}
+//           </Nav>
+//           <Nav>
+//             {isLoggedIn ? (
+//               <>
+//                 <Nav.Link as={RRNavLink} to="/userProfile">My Profile</Nav.Link>
+//                 <Nav.Link
+//                   aria-current="page"
+//                   style={{ cursor: "pointer" }}
+//                   onClick={() => {
+//                     logout()
+//                     setIsLoggedIn(false)
+//                   }}
+//                 >
+//                   Logout
+//                 </Nav.Link>
+//               </>
+//             ) : (
+//               <>
+//                 <Nav.Link as={RRNavLink} to="/login">Login</Nav.Link>
+//                 <Nav.Link as={RRNavLink} to="/register">Register</Nav.Link>
+//               </>
+//             )}
+//           </Nav>
+//         </Navbar.Collapse>
+//       </Navbar>
+//     </div>
+//   );
+// }
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { NavLink as RRNavLink } from "react-router-dom";
+// import { logout } from '../Managers/UserManagers';
+// import {
+//   Collapse,
+//   Navbar,
+//   NavbarToggler,
+//   NavbarBrand,
+//   Nav,
+//   NavItem,
+//   NavLink
+// } from 'reactstrap';
+
+// export default function Header({isLoggedIn, setIsLoggedIn}) {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const toggle = () => setIsOpen(!isOpen);
+
+//   return (
+//     <div>
+//       <Navbar color="light" light expand="md">
+//         <NavbarBrand tag={RRNavLink} to="/">MemoryPrints</NavbarBrand>
+//         <NavbarToggler onClick={toggle} />
+//         <Collapse isOpen={isOpen} navbar>
+//           <Nav className="mr-auto" navbar>
+//             { /* When isLoggedIn === true, we will render the Home link */ }
+//             {isLoggedIn &&
+//               <NavItem>
+//                 <NavLink tag={RRNavLink} to="/">Homepage</NavLink>
+                
+//               </NavItem>
+//             }
+//           </Nav>
+//           <Nav className="mr-auto" navbar>
+//             { /* When isLoggedIn === true, we will render the all entries link */ }
+//             {isLoggedIn &&
+//               <NavItem>
+//                 <NavLink tag={RRNavLink} to="/journalentries">All Entries</NavLink>
+//               </NavItem>
+//             }
+//           </Nav>
+//           <Nav navbar>
+//             {isLoggedIn &&
+//               <>
+//               <NavItem>
+//                 <NavLink tag={RRNavLink} to="/userProfile">My Profile</NavLink>
+//               </NavItem>
+//                 <NavItem>
+//                   <a aria-current="page" className="nav-link"
+//                     style={{ cursor: "pointer" }} onClick={() => {
+//                       logout()
+//                       setIsLoggedIn(false)
+//                     }}>Logout</a>
+//                 </NavItem>
+                
+//               </>
+//             }
+//             {!isLoggedIn &&
+//               <>
+//                 <NavItem>
+//                   <NavLink tag={RRNavLink} to="/login">Login</NavLink>
+//                 </NavItem>
+//                 <NavItem>
+//                   <NavLink tag={RRNavLink} to="/register">Register</NavLink>
+//                 </NavItem>
+//               </>
+//             }
+//           </Nav>
+          
+//         </Collapse>
+//       </Navbar>
+//     </div>
+//   );
+// }

@@ -2,7 +2,7 @@ const baseUrl = "/api/Journal";
 
 
 export const GetJournalsByUser= (userId)=> {
-    return fetch(`${baseUrl}/user?userId=${userId}`) 
+    return fetch(`${baseUrl}/user/${userId}`) 
       .then((res) => res.json())
   };
 

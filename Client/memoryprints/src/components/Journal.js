@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
+
 export const Journal = ({journalProp}) => {
     const createDateTime = new Date(journalProp.creationDate);
     const formattedCreationDate = createDateTime.toLocaleDateString();
@@ -10,10 +11,10 @@ export const Journal = ({journalProp}) => {
           <Card.Body>
             <Card.Title>
             <Link to={`/journals/${journalProp.id}`}>
-                  <strong className="journal-title">{journalProp.Title}</strong>
+                  <strong className="journal-title">{journalProp?.title}: ({formattedCreationDate})</strong>
                 </Link>
             </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">{journalProp.Category.Name}</Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted"><em>{journalProp?.category?.name}</em></Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted">Created: {formattedCreationDate}</Card.Subtitle>
 
             <Card.Text>

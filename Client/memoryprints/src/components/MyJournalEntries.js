@@ -3,13 +3,10 @@ import { GetJournalsByUser } from "../Managers/JournalManager";
 import { Journal } from "./Journal";
 import { AddJournalForm } from "./AddJournalForm";
 import {
-  Dropdown,
   Container,
   Card,
   Col,
-  Row,
-  Modal,
-  Button,
+  Row
 } from "react-bootstrap";
 
 export const MyJournalEntries = () => {
@@ -28,8 +25,7 @@ console.log(typeof(userId))//receiving appropriate id and type so why 400 error?
 
   const renderedJournals = journals.map((journal) => (
     <Col key={journal.id} xs={8}>
-      <Card className="journal-card" style={{ width: '18rem' }}>
-        {/* sent journal as props to Journal */}
+      <Card className="journal-card" style={{ width: '30rem', border: '1px solid lightblue' }} >
         <Journal journalProp={journal} />
       </Card>
     </Col>

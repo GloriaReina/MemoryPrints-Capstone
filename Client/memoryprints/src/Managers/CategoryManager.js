@@ -2,9 +2,11 @@ import React, { useState, createContext } from "react";
 
 const baseUrl = "/api/Category";
 
+//create a context
 export const CategoryContext = createContext();
 
-export const CategoryManager = (props) => {
+//create a provider for the context...better name CategoryProvider vs CategoryManager
+ const CategoryManager = (props) => {
   const [categories, setCategories] = useState([]);
 
   const getAllCategories = () => {
@@ -13,12 +15,12 @@ export const CategoryManager = (props) => {
       .then(setCategories);
   };
 
-   const GetCategoryById = (id) => {
+   const getCategoryById = (id) => {
     return fetch(`${baseUrl}/${id}`).then((res) => res.json());
   };
 
   //
-   const AddCategory = (singleCategory) => {
+   const addCategory = (singleCategory) => {
     return fetch(`${baseUrl}`, {
       method: "POST",
       headers: {
@@ -45,6 +47,7 @@ export const CategoryManager = (props) => {
   };
 
   return (
+    //values that will be shared with children components
     <CategoryContext.Provider 
     value={{ 
       categories, 
@@ -59,4 +62,4 @@ export const CategoryManager = (props) => {
   );
 };
 
-
+export default CategoryManager;

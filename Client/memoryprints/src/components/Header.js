@@ -1,73 +1,46 @@
-import React, { useState } from 'react';
-import { NavLink as RRNavLink } from "react-router-dom";
-import { logout } from '../Managers/UserManagers';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from 'reactstrap';
+import React from 'react';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-bootstrap';
+import './Header.css';
 
-export default function Header({isLoggedIn, setIsLoggedIn}) {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+export const Header = () => {
+    const navigate = useNavigate();
+    const isLoggedIn = localStorage.getItem("user");
 
-  return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">MemoryPrints</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Home link */ }
-            {isLoggedIn &&
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/">Homepage</NavLink>
-                
-              </NavItem>
-            }
-          </Nav>
-          <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the all entries link */ }
-            {isLoggedIn &&
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/journalentries">All Entries</NavLink>
-              </NavItem>
-            }
-          </Nav>
-          <Nav navbar>
-            {isLoggedIn &&
-              <>
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/userProfile">My Profile</NavLink>
-              </NavItem>
-                <NavItem>
-                  <a aria-current="page" className="nav-link"
-                    style={{ cursor: "pointer" }} onClick={() => {
-                      logout()
-                      setIsLoggedIn(false)
-                    }}>Logout</a>
-                </NavItem>
-                
-              </>
-            }
-            {!isLoggedIn &&
-              <>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/login">Login</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/register">Register</NavLink>
-                </NavItem>
-              </>
-            }
-          </Nav>
+    return (
+      <Navbar className='navbar' expand="lg" bg="navbar-background" variant="dark">
+      <Navbar.Brand href="/" bsPrefix="navbar-brand-custom">MemoryPrints</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ms-auto">
+          <NavLink href="/" bsPrefix="nav-link-custom">HomePage</NavLink>
+          <NavLink href="/journalentries" bsPrefix="nav-link-custom">All Entries</NavLink>
+          <NavLink href="/myprofile" bsPrefix="nav-link-custom">My Profile</NavLink>
           
-        </Collapse>
-      </Navbar>
-    </div>
-  );
-}
+          {/* Uncomment the following line when the 'Profile' link is available */}
+          {/* <NavLink href="/profile" bsPrefix="nav-link-custom">Profile</NavLink> */}
+          
+          {isLoggedIn ? (
+            <NavLink
+              bsPrefix="nav-link-custom"
+              onClick={() => {
+                localStorage.removeItem("app_user");
+                navigate("/login", { replace: true });
+              }}
+            >
+              Logout
+            </NavLink>
+          ) : (
+            <>
+              <NavLink href="/login" bsPrefix="nav-link-custom">Login</NavLink>
+              <NavLink href="/register" bsPrefix="nav-link-custom">Register</NavLink>
+            </>  
+          )}
+        </Nav>
+      </Navbar.Collapse>
+        </Navbar>
+    );
+};
+

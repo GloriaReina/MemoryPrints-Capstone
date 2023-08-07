@@ -35,38 +35,19 @@ namespace MemoryPrints.Controllers
             return Ok(journal);
         }
 
-        //[HttpGet("user/{userId}")]
-        //public IActionResult GetByUserId(int userId)
-        //{
-        //   var journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate)
-        //.ToList(); 
-        //    if (journalList == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(journalList);
-        //}
-
         [HttpGet("user/{userId}")]
-        public IActionResult GetByUserId(string userIdString)
+        public IActionResult GetByUserId(int userId)
         {
-            if (int.TryParse(userIdString, out int userId))
+            var journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate)
+         .ToList();
+            if (journalList == null)
             {
-                var journalList = _journalRepository.GetJournalsByUserId(userId).OrderByDescending(j => j.CreationDate).ToList();
-
-                if (journalList == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(journalList);
+                return NotFound();
             }
-            else
-            {
-                // The userIdString is not a valid integer.
-                return BadRequest("Invalid userId parameter.");
-            }
+            return Ok(journalList);
         }
+
+
 
         [HttpPost]
         public IActionResult Add(Journal journal)

@@ -58,7 +58,7 @@ export default function Register({ setIsLoggedIn }) {
        
         // Once the main user is registered, create a link with the selected childUserId
         if (childUserId) {
-          console.log(childUserId)//do i get the right type and an id? yes!
+          console.log(typeof(childUserId))//do i get the right type and an id? yes!
 
           const linkData = {
             UserId: userId,
