@@ -32,12 +32,29 @@ namespace MemoryPrints.Controllers
                 
             }
 
+        //[HttpPost]
+        //public IActionResult AddUserToKidUserProfilesLink(int userId, UserToKidUserProfilesLink userToKidUserProfilesLink)
+        //{
+        //    _userToKidUserProfilesLinkRepository.AddUserToKidUserProfilesLink(userId, userToKidUserProfilesLink);
+        //    return Ok();
+        //}
+
+
         [HttpPost]
-        public IActionResult AddUserToKidUserProfilesLink(int userId, UserToKidUserProfilesLink userToKidUserProfilesLink)
+        public IActionResult AddUserToKidUserProfilesLink(UserToKidUserProfilesLink userToKidUserProfilesLink)
         {
-            _userToKidUserProfilesLinkRepository.AddUserToKidUserProfilesLink(userId,userToKidUserProfilesLink);
+            _userToKidUserProfilesLinkRepository.AddUserToKidUserProfilesLink( userToKidUserProfilesLink);
             return Ok();
         }
+
+
+        //[HttpPost]
+        //public IActionResult AddUserToKidUserProfilesLink(int userId, int childUserId)
+        //{
+        //    _userToKidUserProfilesLinkRepository.AddUserToKidUserProfilesLink(userId, childUserId);
+        //    return Ok();
+        //}
+
 
         [HttpPut("{id}")]
             public IActionResult UpdateUserToKidUserProfilesLink(int id,UserToKidUserProfilesLink userToKidUserProfilesLink)

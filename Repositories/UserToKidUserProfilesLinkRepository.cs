@@ -69,7 +69,28 @@ namespace MemoryPrints.Repositories
         }
 
 
-        public void AddUserToKidUserProfilesLink(int userId, UserToKidUserProfilesLink userToKidUserProfilesLink)
+        //public void AddUserToKidUserProfilesLink(int userId, int childUserId)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"
+        //            INSERT INTO UserToKidUserProfilesLink (UserId, ChildUserId)
+        //            VALUES (@UserId, @ChildUserId)";
+
+        //            DbUtils.AddParameter(cmd, "@UserId", userId);
+        //            DbUtils.AddParameter(cmd, "@ChildUserId", childUserId);
+
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
+
+
+
+        public void AddUserToKidUserProfilesLink(UserToKidUserProfilesLink userToKidUserProfilesLink)
         {
             using (var conn = Connection)
             {
@@ -77,16 +98,17 @@ namespace MemoryPrints.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    INSERT INTO UserToKidUserProfilesLink (UserId, ChildUserId)
-                    VALUES (@UserId, @ChildUserId)";
+                INSERT INTO UserToKidUserProfilesLink (UserId, ChildUserId)
+                VALUES (@UserId, @ChildUserId)";
 
-                    DbUtils.AddParameter(cmd, "@UserId", userId);
+                    DbUtils.AddParameter(cmd, "@UserId", userToKidUserProfilesLink.UserId);
                     DbUtils.AddParameter(cmd, "@ChildUserId", userToKidUserProfilesLink.ChildUserId);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
 
         //public void AddUserToKidUserProfilesLink(UserToKidUserProfilesLink userToKidUserProfilesLink)
         //{

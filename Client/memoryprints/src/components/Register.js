@@ -28,7 +28,7 @@ export default function Register({ setIsLoggedIn }) {
     GetUserRoles().then((roles) => {
       setUserRolesList(roles);
     });
-  }, [userRolesList]);
+  }, []);
 
   useEffect(() => {
     // Fetch the list of kid users from the API
@@ -44,25 +44,27 @@ export default function Register({ setIsLoggedIn }) {
       alert("Passwords don't match. Do better.");
     } else {
       const user = {
-        firstName,
-        lastName,
-        displayName,
-        imageLocation,
-        email,
-        userRole,
-        relationship,
+        firstName: firstName,
+        lastName: lastName,
+        displayName: displayName,
+        imageLocation: imageLocation,
+        email: email,
+        userRoleId  : userRole,
+        relationShip: relationship,
+        password: password
       };
-      register(user, password).then((response) => {
-        const userId = response.Id;
+      register(user).then((response) => {
+        localStorage.setItem("user", JSON.stringify(response))
+        const userId = response.id;
         console.log(userId)
        
-        // Once the main user is registered, create a link with the selected childUserId
+       // Once the main user is registered, create a link with the selected childUserId
         if (childUserId) {
           console.log(typeof(childUserId))//do i get the right type and an id? yes!
 
           const linkData = {
             UserId: userId,
-            UserId: childUserId
+            ChildUserId: childUserId
           };
           addUserProfileLinks(linkData).then(() => {
             setIsLoggedIn(true);
@@ -74,6 +76,7 @@ export default function Register({ setIsLoggedIn }) {
         }
       });
     }
+      
   };
 
   return (
@@ -136,7 +139,7 @@ export default function Register({ setIsLoggedIn }) {
             id="userRole"
             as="select"
             value={userRole}
-            onChange={(e) => setUserRole(e.target.value)}
+            onChange={(e) => setUserRole(+e.target.value)}
           >
             <option value="" disabled>
               Select Role
@@ -171,7 +174,7 @@ export default function Register({ setIsLoggedIn }) {
             id="childUserId"
             as="select"
             value={childUserId}
-            onChange={(e) => setChildUserId(e.target.value)}
+            onChange={(e) => setChildUserId(+e.target.value)}
           >
             <option value="" disabled>
               Select Kid User
