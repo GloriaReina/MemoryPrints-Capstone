@@ -6,12 +6,14 @@ import CommentList from "./Comment/CommentList";
 import DeleteJournal from "./Journal/DeleteJournal";
 import { DeleteJournalById } from "../Managers/JournalManager";
 import { AddComment } from "./Comment/AddComment";
+import EditJournal from "./Journal/EditJournal";
 import { useNavigate } from "react-router-dom";
 
 
 export const JournalDetails = () => {
   const [journal, setJournal] = useState({});
   const [showComments, setShowComments] = useState(false);
+  const [showJournalEditForm, setShowJournalEditForm] = useState(false);
   const [showAddCommentForm, setShowAddCommentForm] = useState(false); 
 
   const navigate = useNavigate ()
@@ -30,8 +32,26 @@ export const JournalDetails = () => {
     return null;
   }
 
+  const handleEditButtonClick = () => {
+    setShowJournalEditForm(true);
+  };
+
+  const handleCancelEditButtonClick = () => {
+    setShowJournalEditForm(false);
+  };
+
+  const handleJournalEditRequest = () => {
+    // After editing is complete, refresh the journal data and close the form
+    getJournalById(id).then(setJournal);
+    setShowJournalEditForm(false);
+  };
+
+  if (!journal) {
+    return null;
+  }
+
   const handleDeleteJournal = () => {
-    DeleteJournalById(id)
+    DeleteJournalById(+id)
     .then(() => {
       // Journal deleted successfully, navigate to the homepage
       navigate("/homepage");
@@ -73,8 +93,6 @@ export const JournalDetails = () => {
             What will make today/tomorrow great: <em>{journal?.intention}</em>
           </Card.Subtitle>
           <br />
-          {/* <Card.Link href="#">edit button?Modal</Card.Link>
-                        <Card.Link href="#">Delete Button? Modal</Card.Link> */}
         </Card.Body>
         {showComments && <CommentList journalId={id} />}
         <Button onClick={toggleComments}>
@@ -83,6 +101,11 @@ export const JournalDetails = () => {
         <Button onClick={() => setShowAddCommentForm(true)}>Add Comment</Button> 
         {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} />}
         <DeleteJournal journalId={+id} handleDeleteJournal={handleDeleteJournal} />
+        {showJournalEditForm ? (
+          <EditJournal journal={journal} handleJournalEditRequest={handleJournalEditRequest} handleCancelEditButtonClick ={handleCancelEditButtonClick} />
+        ) : (
+          <Button onClick={handleEditButtonClick}>Edit Journal</Button>
+        )}
       </Card>
     </Col>
   );

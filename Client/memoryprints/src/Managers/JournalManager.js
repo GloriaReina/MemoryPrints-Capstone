@@ -16,6 +16,17 @@ export const GetJournalsByUser= (userId)=> {
       .then((res) => res.json())
   };
 
+  export const GetAllUnapprovedJournals= ()=> {
+    return fetch(`${baseUrl}/unapproved`) 
+      .then((res) => res.json())
+  };
+
+  export const ApproveJournal = (journalId) => {
+    return fetch(`/api/Journal/${journalId}/approve`, {
+      method: "PUT",
+    })
+  };
+
   export const addJournalEntry = (singleJournal) => { 
     return fetch(`${baseUrl}`, {
       method: "POST",
@@ -26,8 +37,8 @@ export const GetJournalsByUser= (userId)=> {
     });
   };
 
-  export const editJournalEntry = (journalId, updatedFields) => {
-    return fetch(`${baseUrl}/${journalId}`, {
+  export const editJournalEntry = (updatedFields) => {
+    return fetch(`${baseUrl}/${updatedFields.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

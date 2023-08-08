@@ -24,6 +24,12 @@ namespace MemoryPrints.Controllers
             return Ok(_journalRepository.GetAllJournals());
         }
 
+        [HttpGet("unapproved")]
+        public IActionResult GetAllUnapprovedJournals()
+        {
+            return Ok(_journalRepository.GetAllUnapprovedJournals());
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetByJournalId(int id)
         {
@@ -59,12 +65,9 @@ namespace MemoryPrints.Controllers
         }
 
         [HttpPut("{journalId}")]
-        public IActionResult Update(int journalId,Journal journal)
+        public IActionResult Update(Journal journal)
         {
-            if (journalId != journal.Id)
-            {
-                return BadRequest();
-            }
+           
             _journalRepository.Update(journal);
             return NoContent();
         }

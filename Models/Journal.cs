@@ -33,7 +33,7 @@ namespace MemoryPrints.Models
         public DateTime CreationDate { get; set; }
 
         //can access the list of comments, reactions,childprofiles associated or made by a particular user.
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }= new List<Comment>();
         //public List<JournalReaction> JournalReactions { get; set; }
         //public List<JournalEntryKidProfiles> JournalEntryKidProfiles { get; set; }
     }
