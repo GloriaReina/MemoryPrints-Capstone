@@ -72,6 +72,27 @@ namespace MemoryPrints.Controllers
             return NoContent();
         }
 
+
+        [HttpPut("{id}/approve")]
+        public IActionResult ApproveJournal(int id)
+        {
+            var journal = _journalRepository.GetJournalById(id);
+
+            if (journal == null)
+            {
+                return NotFound();
+            }
+
+            // Set IsApproved to true
+            journal.IsApproved = true;
+
+            // Update the journal
+            _journalRepository.Update(journal);
+
+            return NoContent();
+        }
+
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

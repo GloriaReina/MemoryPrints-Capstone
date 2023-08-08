@@ -69,6 +69,9 @@ export const Header = () => {
               <NavLink href="/journalentries" bsPrefix="nav-link-custom">
                 All Entries
               </NavLink>
+              <NavLink href="/unapprovedjournals" bsPrefix="nav-link-custom">
+                Unapproved Journals
+              </NavLink>
               <NavLink href="/myprofile" bsPrefix="nav-link-custom">
                 My Profile
               </NavLink>
