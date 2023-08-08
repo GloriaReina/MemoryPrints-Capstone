@@ -9,17 +9,28 @@ export const  GetCommentsByJournal = (journalId) => {
       .then((res) => res.json())
   };
 
+//   /api/Comment?journalId=1
 
-
-  export const addComment = (singleJournal) => { 
-    return fetch(`${baseUrl}`, {
+  export const addComment = (journalId, singleComment) => { 
+    return fetch(`${baseUrl}?journalId=${journalId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(singleJournal),
+      body: JSON.stringify({journalId,singleComment}), 
     });
   }; 
+
+//   export const addComment = (singleJournal) => { 
+//     return fetch(`${baseUrl}`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(singleJournal),
+//     });
+//   }; 
+
 
   export const editComment = (commentId, updatedFields) => {
     return fetch(`${baseUrl}/${commentId}`, {

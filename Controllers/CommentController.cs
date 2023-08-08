@@ -29,12 +29,30 @@ namespace MemoryPrints.Controllers
             return Ok(comment);
         }
 
+        //[HttpPost]
+        //public IActionResult AddComment(Comment comment)
+        //{
+        //    comment.CreationDate = DateTime.Now;
+        //    _commentRepository.Add(comment);
+
+        //    return NoContent();
+        //}
+
         [HttpPost]
-        public IActionResult AddComment(Comment comment)
+        public IActionResult AddComment(int journalId, Comment comment)
         {
             comment.CreationDate = DateTime.Now;
-            _commentRepository.Add(comment);
-           
+            _commentRepository.Add( journalId,comment);
+
+            return NoContent();
+        }
+
+
+
+        [HttpPut("{id}")]
+        public IActionResult EditComment(int id, Comment updateCommentValue)
+        {
+            _commentRepository.Update(id,updateCommentValue);
             return NoContent();
         }
 
@@ -45,16 +63,5 @@ namespace MemoryPrints.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult EditComment(int id, Comment updateCommentValue)
-        {
-            if (id != updateCommentValue.Id)
-            {
-                return BadRequest();
-            }
-
-            _commentRepository.Update(updateCommentValue);
-            return NoContent();
-        }
     }
 }
