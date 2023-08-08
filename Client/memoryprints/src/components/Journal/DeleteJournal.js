@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const DeleteJournal = ({ handleDeleteJournal }) => {
+const DeleteJournal = ({ journalId, handleDeleteJournal }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleDeleteButtonClick = () => {
-    handleDeleteJournal();
+    handleDeleteJournal(journalId);
     setConfirmDelete(false);
   };
 

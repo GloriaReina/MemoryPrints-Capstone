@@ -6,12 +6,15 @@ import CommentList from "./Comment/CommentList";
 import DeleteJournal from "./Journal/DeleteJournal";
 import { DeleteJournalById } from "../Managers/JournalManager";
 import { AddComment } from "./Comment/AddComment";
+import { useNavigate } from "react-router-dom";
+
 
 export const JournalDetails = () => {
   const [journal, setJournal] = useState({});
   const [showComments, setShowComments] = useState(false);
   const [showAddCommentForm, setShowAddCommentForm] = useState(false); 
 
+  const navigate = useNavigate ()
   const { id } = useParams();
 
   /* toggle function for controlling the visibility of the comment list:*/
@@ -29,6 +32,10 @@ export const JournalDetails = () => {
 
   const handleDeleteJournal = () => {
     DeleteJournalById(id)
+    .then(() => {
+      // Journal deleted successfully, navigate to the homepage
+      navigate("/homepage");
+    })
   }
 
 
@@ -75,7 +82,7 @@ export const JournalDetails = () => {
         </Button>
         <Button onClick={() => setShowAddCommentForm(true)}>Add Comment</Button> 
         {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} />}
-        <DeleteJournal handleDeleteJournal={handleDeleteJournal} />
+        <DeleteJournal journalId={+id} handleDeleteJournal={handleDeleteJournal} />
       </Card>
     </Col>
   );

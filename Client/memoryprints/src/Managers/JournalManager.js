@@ -36,7 +36,7 @@ export const GetJournalsByUser= (userId)=> {
     });
   };
   
-
+///api/Journal/14
   export const  DeleteJournalById = (id) => {
     return fetch(`${baseUrl}/${id}`, {
       method: "DELETE",

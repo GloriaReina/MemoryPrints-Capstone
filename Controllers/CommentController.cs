@@ -38,16 +38,6 @@ namespace MemoryPrints.Controllers
             return NoContent();
         }
 
-        //[HttpPost]
-        //public IActionResult AddComment(int journalId, Comment comment)
-        //{
-        //    comment.CreationDate = DateTime.Now;
-        //    _commentRepository.Add( journalId,comment);
-
-        //    return NoContent();
-        //}
-
-
 
         [HttpPut("{id}")]
         public IActionResult EditComment(int id, Comment updateCommentValue)

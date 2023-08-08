@@ -9,7 +9,6 @@ namespace MemoryPrints.Models
 
         [Required]
         public int JournalId { get; set; }
-        //public Journal? Journal { get; set; }
 
         [Required]
         [DisplayName("Author")]
