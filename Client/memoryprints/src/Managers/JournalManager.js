@@ -7,6 +7,10 @@ export const GetJournalsByUser= (userId)=> {
   };
 
 
+  export const getJournalById =(id) => {
+    return fetch (`${baseUrl}/${id}`).then((res)=> res.json())
+   };
+
   export const GetAllJournals= ()=> {
     return fetch(`${baseUrl}`) 
       .then((res) => res.json())

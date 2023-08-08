@@ -14,8 +14,9 @@ export const MyJournalEntries = () => {
 
   const localAppUser = localStorage.getItem("user");
   const AppUserObject = JSON.parse(localAppUser);
+  console.log(AppUserObject)
   const userId = AppUserObject.id;
-console.log(typeof(userId))//receiving appropriate id and type so why 400 error? works in swagger!
+
 
   useEffect(() => {
     GetJournalsByUser(userId).then((allJournals) => setJournals(allJournals)
@@ -31,7 +32,7 @@ console.log(typeof(userId))//receiving appropriate id and type so why 400 error?
     </Col>
   ));
 
-  console.log(renderedJournals) //why do i get an empty array...shouldnt it be populated after initial rendering?
+  console.log(renderedJournals) 
 
   return (
     <Container className="journal-container">

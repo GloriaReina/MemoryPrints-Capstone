@@ -24,7 +24,7 @@ export const logout = () => {
 
 
 
-export const register = (userObject,password) => {
+export const register = (userObject) => {
     return  fetch(`${baseUrl}`, {
       method: "POST",
       headers: {
@@ -33,9 +33,9 @@ export const register = (userObject,password) => {
       body: JSON.stringify(userObject),
     })
     .then((response) => response.json())
-      .then((savedUser) => {
-        localStorage.setItem("user", JSON.stringify(savedUser))
-      });
+      // .then((savedUser) => {
+      //   localStorage.setItem("user", JSON.stringify(savedUser))
+      // });
   };
 
 

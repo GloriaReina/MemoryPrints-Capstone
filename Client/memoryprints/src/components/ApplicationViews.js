@@ -10,7 +10,7 @@ export default function ApplicationViews() {
 
  return(
       <Routes>
-      <Route path="/" element={<HomePage />} /> 
+      <Route path="/homepage" element={<HomePage />} /> 
       <Route path="/journals/:id" element= {<JournalDetails/>} />
       {/* <Route path="/allentries" element= {<AllJournalEntries />} />
       <Route path="/myprofile" element= {<MyProfile />} /> */}

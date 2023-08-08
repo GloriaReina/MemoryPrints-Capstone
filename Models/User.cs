@@ -25,7 +25,7 @@ namespace MemoryPrints.Models
         [Required]
         public string Password { get; set; }
 
-        public DateTime CreateDateTime { get; set; }
+        public DateTime? CreateDateTime { get; set; }
 
         public string ImageLocation { get; set; }
 
