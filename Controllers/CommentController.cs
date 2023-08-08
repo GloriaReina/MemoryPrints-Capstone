@@ -29,23 +29,23 @@ namespace MemoryPrints.Controllers
             return Ok(comment);
         }
 
-        //[HttpPost]
-        //public IActionResult AddComment(Comment comment)
-        //{
-        //    comment.CreationDate = DateTime.Now;
-        //    _commentRepository.Add(comment);
-
-        //    return NoContent();
-        //}
-
         [HttpPost]
-        public IActionResult AddComment(int journalId, Comment comment)
+        public IActionResult AddComment(Comment comment)
         {
             comment.CreationDate = DateTime.Now;
-            _commentRepository.Add( journalId,comment);
+            _commentRepository.Add(comment);
 
             return NoContent();
         }
+
+        //[HttpPost]
+        //public IActionResult AddComment(int journalId, Comment comment)
+        //{
+        //    comment.CreationDate = DateTime.Now;
+        //    _commentRepository.Add( journalId,comment);
+
+        //    return NoContent();
+        //}
 
 
 

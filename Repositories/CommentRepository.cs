@@ -68,32 +68,7 @@ namespace MemoryPrints.Repositories
         }
 
 
-        public void Add(int journalId,Comment comment)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        INSERT INTO Comment (JournalId, UserId, Content, CreationDate)
-                        OUTPUT INSERTED.Id
-                        VALUES (@JournalId, @UserId, @Content, @CreationDate)";
-
-                    cmd.Parameters.AddWithValue("@JournalId", journalId);
-                    cmd.Parameters.AddWithValue("@UserId", comment.UserId);
-                    cmd.Parameters.AddWithValue("@Content", comment.Content);
-                    cmd.Parameters.AddWithValue("@CreationDate", comment.CreationDate); 
-
-
-
-                    comment.Id = (int)cmd.ExecuteScalar();
-                }
-            }
-        }
-
-
-        //public void Add(Comment comment)
+        //public void Add(int journalId,Comment comment)
         //{
         //    using (var conn = Connection)
         //    {
@@ -105,15 +80,40 @@ namespace MemoryPrints.Repositories
         //                OUTPUT INSERTED.Id
         //                VALUES (@JournalId, @UserId, @Content, @CreationDate)";
 
-        //            cmd.Parameters.AddWithValue("@JournalId", comment.JournalId);
+        //            cmd.Parameters.AddWithValue("@JournalId", journalId);
         //            cmd.Parameters.AddWithValue("@UserId", comment.UserId);
         //            cmd.Parameters.AddWithValue("@Content", comment.Content);
-        //            cmd.Parameters.AddWithValue("@CreationDate", comment.CreationDate);
+        //            cmd.Parameters.AddWithValue("@CreationDate", comment.CreationDate); 
+
+
 
         //            comment.Id = (int)cmd.ExecuteScalar();
         //        }
         //    }
         //}
+
+
+        public void Add(Comment comment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Comment (JournalId, UserId, Content, CreationDate)
+                        OUTPUT INSERTED.Id
+                        VALUES (@JournalId, @UserId, @Content, @CreationDate)";
+
+                    cmd.Parameters.AddWithValue("@JournalId", comment.JournalId);
+                    cmd.Parameters.AddWithValue("@UserId", comment.UserId);
+                    cmd.Parameters.AddWithValue("@Content", comment.Content);
+                    cmd.Parameters.AddWithValue("@CreationDate", comment.CreationDate);
+
+                    comment.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
 
         public void Update(int commentId, Comment comment)
         {

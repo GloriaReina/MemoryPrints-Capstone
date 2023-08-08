@@ -3,11 +3,15 @@ import { Card, Button, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { getJournalById } from "../Managers/JournalManager";
 import CommentList from "./Comment/CommentList";
+import DeleteJournal from "./Journal/DeleteJournal";
+import { DeleteJournalById } from "../Managers/JournalManager";
 import { AddComment } from "./Comment/AddComment";
 
 export const JournalDetails = () => {
   const [journal, setJournal] = useState({});
   const [showComments, setShowComments] = useState(false);
+  const [showAddCommentForm, setShowAddCommentForm] = useState(false); 
+
   const { id } = useParams();
 
   /* toggle function for controlling the visibility of the comment list:*/
@@ -22,6 +26,11 @@ export const JournalDetails = () => {
   if (!journal) {
     return null;
   }
+
+  const handleDeleteJournal = () => {
+    DeleteJournalById(id)
+  }
+
 
   const formattedCreationDate = new Date(
     journal.creationDate
@@ -64,7 +73,9 @@ export const JournalDetails = () => {
         <Button onClick={toggleComments}>
           {showComments ? "Hide Comments" : "View Comments"}
         </Button>
-        <AddComment journalId={id} />
+        <Button onClick={() => setShowAddCommentForm(true)}>Add Comment</Button> 
+        {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} />}
+        <DeleteJournal handleDeleteJournal={handleDeleteJournal} />
       </Card>
     </Col>
   );
