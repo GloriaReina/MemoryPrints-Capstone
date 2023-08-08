@@ -10,7 +10,6 @@ export const  GetCommentsByJournal = (journalId) => {
   };
 
 
-
   export const addComment = (singleJournal) => { 
     return fetch(`${baseUrl}`, {
       method: "POST",
@@ -20,6 +19,7 @@ export const  GetCommentsByJournal = (journalId) => {
       body: JSON.stringify(singleJournal),
     });
   }; 
+
 
   export const editComment = (commentId, updatedFields) => {
     return fetch(`${baseUrl}/${commentId}`, {

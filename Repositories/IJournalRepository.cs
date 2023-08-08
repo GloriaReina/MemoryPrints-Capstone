@@ -8,6 +8,7 @@ namespace MemoryPrints.Repositories
         void Add(Journal journal);
         void Delete(int id);
         List<Journal> GetAllJournals();
+        List<Journal> GetAllUnapprovedJournals();
         Journal GetJournalById(int id);
         List<Journal> GetJournalsByUserId(int userId);
         void Update(Journal journal);

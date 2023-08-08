@@ -7,6 +7,6 @@ namespace MemoryPrints.Repositories
         void Add(Comment comment);
         void Delete(int id);
         List<Comment> GetCommentsByJournalId(int journalId);
-        void Update(Comment comment);
+        void Update(int commentId, Comment comment);
     }
 }

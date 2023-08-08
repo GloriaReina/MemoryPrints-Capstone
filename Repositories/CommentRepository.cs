@@ -45,11 +45,11 @@ namespace MemoryPrints.Repositories
                             JournalId = DbUtils.GetInt(reader, "JournalId"),
                             CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
                             UserId = DbUtils.GetInt(reader, "UserId"),
-                            Journal = new Journal()
-                            {
+                            //Journal = new Journal()
+                            //{
 
-                                Title = DbUtils.GetString(reader, "Title"),
-                            },
+                            //    Title = DbUtils.GetString(reader, "Title"),
+                            //},
                             User = new User()
                             {
                                 Id = DbUtils.GetInt(reader, "UserId"),
@@ -89,6 +89,26 @@ namespace MemoryPrints.Repositories
             }
         }
 
+        public void Update(int commentId, Comment comment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Comment
+                        SET Content = @Content
+                        WHERE Id = @commentId";
+
+                    cmd.Parameters.AddWithValue("@Content", comment.Content);
+                    cmd.Parameters.AddWithValue("@commentId", commentId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void Delete(int id)
         {
             using (var conn = Connection)
@@ -98,32 +118,6 @@ namespace MemoryPrints.Repositories
                 {
                     cmd.CommandText = "DELETE FROM Comment WHERE Id = @Id";
                     cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void Update(Comment comment)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        UPDATE Comment
-                        SET JournalId = @JournalId,
-                            UserId = @UserId,
-                            Content = @Content,
-                            CreationDate = @CreationDate
-                        WHERE Id = @Id";
-
-                    cmd.Parameters.AddWithValue("@JournalId", comment.JournalId);
-                    cmd.Parameters.AddWithValue("@UserId", comment.UserId);
-                    cmd.Parameters.AddWithValue("@Content", comment.Content);
-                    cmd.Parameters.AddWithValue("@CreationDate", comment.CreationDate);
-                    cmd.Parameters.AddWithValue("@Id", comment.Id);
-
                     cmd.ExecuteNonQuery();
                 }
             }

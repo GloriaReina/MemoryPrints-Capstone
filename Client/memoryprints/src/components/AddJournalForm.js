@@ -54,6 +54,7 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
         Gratitude: journal.gratitude,
         Intention: journal.intention,
         CategoryId: journal.categoryId,
+        isApproved: false,
         Comments: []
       };
 
@@ -190,7 +191,7 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                 handleSubmitButtonClick(clickEvent);
               }}
             >
-              Submit Entry
+              Submit
             </Button>
           </Form>
         </Modal.Body>

@@ -34,7 +34,15 @@ namespace MemoryPrints.Controllers
         {
             comment.CreationDate = DateTime.Now;
             _commentRepository.Add(comment);
-           
+
+            return NoContent();
+        }
+
+
+        [HttpPut("{id}")]
+        public IActionResult EditComment(int id, Comment updateCommentValue)
+        {
+            _commentRepository.Update(id,updateCommentValue);
             return NoContent();
         }
 
@@ -45,16 +53,5 @@ namespace MemoryPrints.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult EditComment(int id, Comment updateCommentValue)
-        {
-            if (id != updateCommentValue.Id)
-            {
-                return BadRequest();
-            }
-
-            _commentRepository.Update(updateCommentValue);
-            return NoContent();
-        }
     }
 }
