@@ -1,3 +1,165 @@
+// import React, { useState, useEffect } from "react";
+// import { Card, Button, Col } from "react-bootstrap";
+// import { Link, useParams } from "react-router-dom";
+// import { getJournalById } from "../Managers/JournalManager";
+// import CommentList from "./Comment/CommentList";
+// import DeleteJournal from "./Journal/DeleteJournal";
+// import { DeleteJournalById } from "../Managers/JournalManager";
+// import { AddComment } from "./Comment/AddComment";
+// import EditJournal from "./Journal/EditJournal";
+// import { useNavigate } from "react-router-dom";
+// import { Picker } from "emoji-mart"; // Import emoji-mart components
+// // import "emoji-mart/css/emoji-mart.css"; // Import emoji-mart styles
+
+// export const JournalDetails = () => {
+//   const [journal, setJournal] = useState({});
+//   const [showComments, setShowComments] = useState(false);
+//   const [showJournalEditForm, setShowJournalEditForm] = useState(false);
+//   const [showAddCommentForm, setShowAddCommentForm] = useState(false);
+//   const [selectedEmoji, setSelectedEmoji] = useState(null); // State for selected emoji
+//   const [emojiCounts, setEmojiCounts] = useState({});
+
+//   const navigate = useNavigate();
+//   const { id } = useParams();
+
+//   /* toggle function for controlling the visibility of the comment list:*/
+//   const toggleComments = () => {
+//     setShowComments((prevState) => !prevState);
+//   };
+
+//   useEffect(() => {
+//     getJournalById(id).then(setJournal);
+//   }, []);
+
+//   if (!journal) {
+//     return null;
+//   }
+
+//   const handleEditButtonClick = () => {
+//     setShowJournalEditForm(true);
+//   };
+
+//   const handleCancelEditButtonClick = () => {
+//     setShowJournalEditForm(false);
+//   };
+
+//   const handleJournalEditRequest = () => {
+//     // After editing is complete, refresh the journal data and close the form
+//     getJournalById(id).then(setJournal);
+//     setShowJournalEditForm(false);
+//   };
+
+//   if (!journal) {
+//     return null;
+//   }
+
+//   const handleDeleteJournal = () => {
+//     DeleteJournalById(parseInt(id)).then(() => {
+//       // Journal deleted successfully, navigate to the homepage
+//       navigate("/homepage");
+//     });
+//   };
+
+//   const formattedCreationDate = new Date(
+//     journal.creationDate
+//   ).toLocaleDateString();
+
+//   const handleEmojiSelect = (emoji) => {
+//     const emojiCode = emoji.id; // Use emoji code as the key
+//     setEmojiCounts((prevCounts) => ({
+//       ...prevCounts,
+//       [emojiCode]: (prevCounts[emojiCode] || 0) + 1, // Increment count or initialize to 1
+//     }));
+//     setSelectedEmoji(emoji); // Set the selected emoji
+//   };
+
+//   const handleEmojiClick = (selectedEmoji) => {
+//     const updatedEmojiCounts = { ...emojiCounts }; // Copy existing emojiCounts
+//     if (selectedEmoji.id in updatedEmojiCounts) {
+//       updatedEmojiCounts[selectedEmoji.id]++;
+//     } else {
+//       updatedEmojiCounts[selectedEmoji.id] = 1;
+//     }
+  
+//     setEmojiCounts(updatedEmojiCounts);
+  
+//     handleEmojiClick(selectedEmoji, updatedEmojiCounts)
+       
+//   };
+
+//   return (
+//     <Col xs={8}>
+//       <Card
+//         className="journal-card"
+//         style={{ width: "30rem", border: "1px solid lightblue" }}
+//       >
+//         <Card.Body>
+//           <Card.Title>
+//             <Link to={`/homepage`}>
+//               <strong className="journal-title">
+//                 {journal?.title}: ({formattedCreationDate})
+//               </strong>
+//             </Link>
+//           </Card.Title>
+//           <Card.Subtitle className="mb-2 text-muted">
+//             <strong>{journal?.category?.name}</strong>
+//           </Card.Subtitle>
+//           <Card.Subtitle className="mb-2 text-muted">
+//             <em>{journal?.content}</em>
+//           </Card.Subtitle>{" "}
+//           <br />
+//           <Card.Subtitle className="mb-2 text-muted">
+//             {" "}
+//             Gratitude:<em>{journal?.gratitude}</em>
+//           </Card.Subtitle>{" "}
+//           <br />
+//           <Card.Subtitle className="mb-2 text-muted">
+//             What will make today/tomorrow great: <em>{journal?.intention}</em>
+//           </Card.Subtitle>
+//           <br />
+//         </Card.Body>
+//         {showComments && <CommentList journalId={id} />}
+//         <Button onClick={toggleComments}>
+//           {showComments ? "Hide Comments" : "View Comments"}
+//         </Button>
+//         <Button onClick={() => setShowAddCommentForm(true)}>Add Comment</Button>
+//         {showAddCommentForm && (
+//           <AddComment
+//             journalId={+id}
+//             setShowAddCommentForm={setShowAddCommentForm}
+//           />
+//         )}
+//         {/* Emoji Picker */}
+//         <Picker onSelect={handleEmojiSelect} /> {/* Display emoji picker */}
+//         {selectedEmoji && (
+//           <div>
+//             <p>Selected Emoji: {selectedEmoji.native}</p>
+//             {/* Display emoji count */}
+//             {emojiCounts[selectedEmoji.id] > 0 && (
+//               <p>Count: {emojiCounts[selectedEmoji.id]}</p>
+//             )}
+//                 <Button onClick={handleEmojiClick}>Submit Emoji</Button>
+//           </div>
+//         )}
+//         <DeleteJournal
+//           journalId={+id}
+//           handleDeleteJournal={handleDeleteJournal}
+//         />
+//         {showJournalEditForm ? (
+//           <EditJournal
+//             journal={journal}
+//             handleJournalEditRequest={handleJournalEditRequest}
+//             handleCancelEditButtonClick={handleCancelEditButtonClick}
+//           />
+//         ) : (
+//           <Button onClick={handleEditButtonClick}>Edit Journal</Button>
+//         )}
+//       </Card>
+//     </Col>
+//   );
+// };
+
+
 // export const MyJournalEntries = () => {
 //     const [journals, setJournals] = useState([]);
   

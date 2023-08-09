@@ -70,7 +70,7 @@ export const Header = () => {
                 All Entries
               </NavLink>
                {/** Conditionally render the Unapproved Journals link based on user's role */}
-               {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).role === "Administrator" && (
+               {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).userRoleId == 1 && (
                 <NavLink href="/unapprovedjournals" bsPrefix="nav-link-custom">
                   Unapproved Journals
                 </NavLink>
