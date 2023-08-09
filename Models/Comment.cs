@@ -5,10 +5,12 @@ namespace MemoryPrints.Models
 {
     public class Comment
     {
+
         public int Id { get; set; }
 
         [Required]
         public int JournalId { get; set; }
+        public Journal? Journal { get; set; }
 
         [Required]
         [DisplayName("Author")]

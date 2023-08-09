@@ -2,11 +2,16 @@ import { addJournalEntry } from "../Managers/JournalManager";
 import { useState, useEffect, useContext } from "react";
 import { Button, Form, Row, Col, Modal } from "react-bootstrap";
 import { CategoryContext } from "../Managers/CategoryManager";
+import { GetAllUsers } from "../Managers/UserManagers";
+import { SaveSharedEntry } from "../Managers/JournalSharingManager";
+import UserDropdown from "./Journal/UserDropdown";
 
 export const AddJournalForm = ({ GetJournalsByUser }) => {
   const { getAllCategories, categories } = useContext(CategoryContext);
   const [isFormValid, setIsFormValid] = useState(false);
   const [show, setShow] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [allUsers, setAllUsers] = useState([]);
 
   const [journal, update] = useState({
     userId: "",
@@ -40,10 +45,29 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
     }
   };
 
+  useEffect(() => {
+    // Fetch all users
+    GetAllUsers().then((userList) => {
+      setAllUsers(userList); // Set the list of all users
+    });
+  }, []);
+
+  console.log(allUsers) //yes im getting all users
+
+  const handleUserSelect = (event) => {
+    setSelectedUser(event.target.value);
+  };
+
+  //if true the user has a user role of 1 or 2, if false has a user role of 3(kid)
+  const shouldShowDropdown =
+    appUserObject &&
+    (appUserObject.userRole === 1 || appUserObject.userRole === 2);
+
+  const kidUsersList = allUsers.filter((user) => user.userRole === 3); // Filter kid users
+
   const handleSubmitButtonClick = (event) => {
     event.preventDefault();
 
-   
     validateForm();
     if (isFormValid) {
       // TODO: Create the object to be saved to the API
@@ -55,17 +79,28 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
         Intention: journal.intention,
         CategoryId: journal.categoryId,
         isApproved: false,
-        Comments: []
+        Comments: [],
       };
 
       // Perform fetch() to POST the object to the API
       addJournalEntry(journalToSendToAPI)
         .then((journal) => {
-          /*update user view with newly added journal */
+          // Update user view with newly added journal
           GetJournalsByUser(journal.UserId);
+
+          // If a user is selected for sharing, save shared entry details
+          if (selectedUser) {
+            const sharedEntry = {
+              JournalId: journal.Id, // Use the newly created journal's ID
+              ChildUserId: selectedUser,
+            };
+
+            // Perform API call to save shared entry details to my bridge table
+            SaveSharedEntry(sharedEntry); // Implement this function
+          }
         })
         .then(() => {
-          /* update function resets form fields to default values so user can submit another journal without having to manually clear the form */
+          // Reset form fields
           update({
             userId: "",
             title: "",
@@ -80,6 +115,7 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
         });
     }
   };
+
   return (
     <>
       <div className="add-new-journal-button d-grid mt-5">
@@ -121,7 +157,15 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                 </Form.Control>
               </Col>
             </Form.Group>
-
+            {/* Use the UserDropdown component */}
+            <UserDropdown
+              // users={shouldShowDropdown ? allUsers : kidUsersList}
+              selectedUser={selectedUser}
+              handleUserSelect={handleUserSelect}
+              shouldShowDropdown={shouldShowDropdown}
+              kidUsersList= {kidUsersList}
+              allUsers ={allUsers}
+            />
             <Form.Group as={Row} controlId="title">
               <Form.Label column sm={2}>
                 Title:
@@ -155,9 +199,7 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
               />
             </Form.Group>
             <Form.Group className="journal-form-group">
-              <Form.Label className="journal-form-label">
-                Gratitude:
-              </Form.Label>
+              <Form.Label className="journal-form-label">Gratitude:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="I'm grateful for..."

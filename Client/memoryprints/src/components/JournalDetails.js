@@ -8,7 +8,7 @@ import { DeleteJournalById } from "../Managers/JournalManager";
 import { AddComment } from "./Comment/AddComment";
 import EditJournal from "./Journal/EditJournal";
 import { useNavigate } from "react-router-dom";
-import JournalReactions from "./Journal/JournalReactions";
+// import JournalReactions from "./Journal/JournalReactions";
 
 export const JournalDetails = () => {
   const [journal, setJournal] = useState({});
@@ -107,7 +107,7 @@ export const JournalDetails = () => {
           <Button onClick={handleEditButtonClick}>Edit Journal</Button>
         )}
       </Card>
-      <JournalReactions journalId={id} />
+      {/* <JournalReactions journalId={id} /> */}
     </Col>
   );
 };

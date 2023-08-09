@@ -1,70 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { Picker } from 'emoji-mart';
-// import "emoji-mart/css/emoji-mart.css";
-import 'emoji-mart/dist/css/emoji-mart.css';
-import { getJournalReactions, addJournalReaction } from '../../Managers/JournalReactionManager';
+// import React, { useState, useEffect } from 'react';
+// import { Picker } from 'emoji-mart';
+// // import "emoji-mart/css/emoji-mart.css";
+// // import 'emoji-mart/dist/css/emoji-mart.css';
+// import { getJournalReactions, addJournalReaction } from '../../Managers/JournalReactionManager';
 
-const JournalReactions = ({ userId }) => {
-    const [reactions, setReactions] = useState([]);
-    const [emojiCounts, setEmojiCounts] = useState({});
+// const JournalReactions = ({ userId }) => {
+//     const [reactions, setReactions] = useState([]);
+//     const [emojiCounts, setEmojiCounts] = useState({});
   
-    useEffect(() => {
-      // Fetch reactions data from Web API
-      getJournalReactions(userId)
-        .then(response => {
-          setReactions(response);
-          // Count the occurrences of each emoji
-          const counts = {};
-          response.forEach(reaction => {
-            if (!counts[reaction.emojiId]) {
-              counts[reaction.emojiId] = 1;
-            } else {
-              counts[reaction.emojiId]++;
-            }
-          });
-          setEmojiCounts(counts);
-        })
-        .catch(error => {
-          console.error('Error fetching reactions:', error);
-        });
-    }, [userId]);
+//     useEffect(() => {
+//       // Fetch reactions data from Web API
+//       getJournalReactions(userId)
+//         .then(response => {
+//           setReactions(response);
+//           // Count the occurrences of each emoji
+//           const counts = {};
+//           response.forEach(reaction => {
+//             if (!counts[reaction.emojiId]) {
+//               counts[reaction.emojiId] = 1;
+//             } else {
+//               counts[reaction.emojiId]++;
+//             }
+//           });
+//           setEmojiCounts(counts);
+//         })
+//         .catch(error => {
+//           console.error('Error fetching reactions:', error);
+//         });
+//     }, [userId]);
   
-    const handleEmojiSelect = (selectedEmoji) => {
-      // Update UI with the selected emoji
-      const updatedCounts = { ...emojiCounts };
-      if (!updatedCounts[selectedEmoji.id]) {
-        updatedCounts[selectedEmoji.id] = 1;
-      } else {
-        updatedCounts[selectedEmoji.id]++;
-      }
-      setEmojiCounts(updatedCounts);
+//     const handleEmojiSelect = (selectedEmoji) => {
+//       // Update UI with the selected emoji
+//       const updatedCounts = { ...emojiCounts };
+//       if (!updatedCounts[selectedEmoji.id]) {
+//         updatedCounts[selectedEmoji.id] = 1;
+//       } else {
+//         updatedCounts[selectedEmoji.id]++;
+//       }
+//       setEmojiCounts(updatedCounts);
   
-      // Send a request to add the reaction to the API
-      addJournalReaction(selectedEmoji, updatedCounts)
-        .then(() => {
-          console.log('Reaction added successfully');
-        })
-        .catch(error => {
-          console.error('Error adding reaction:', error);
-        });
-    };
+//       // Send a request to add the reaction to the API
+//       addJournalReaction(selectedEmoji, updatedCounts)
+//         .then(() => {
+//           console.log('Reaction added successfully');
+//         })
+//         .catch(error => {
+//           console.error('Error adding reaction:', error);
+//         });
+//     };
   
-    return (
-      <div>
-        <h2>Emoji Reactions</h2>
-        <Picker set="apple" emojiSize={24} title="Pick an emoji" onSelect={handleEmojiSelect} />
-        <div>
-          {reactions.map(reaction => (
-            <div key={reaction.emojiId}>
-              {reaction.emojiId} - {emojiCounts[reaction.emojiId] || 0}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
+//     return (
+//       <div>
+//         <h2>Emoji Reactions</h2>
+//         <Picker set="apple" emojiSize={24} title="Pick an emoji" onSelect={handleEmojiSelect} />
+//         <div>
+//           {reactions.map(reaction => (
+//             <div key={reaction.emojiId}>
+//               {reaction.emojiId} - {emojiCounts[reaction.emojiId] || 0}
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     );
+//   };
 
-export default JournalReactions;
+// export default JournalReactions;
 
 
 
