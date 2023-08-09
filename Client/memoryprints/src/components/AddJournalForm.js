@@ -61,9 +61,11 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
   //if true the user has a user role of 1 or 2, if false has a user role of 3(kid)
   const shouldShowDropdown =
     appUserObject &&
-    (appUserObject.userRole === 1 || appUserObject.userRole === 2);
+    (appUserObject.userRoleId == 1 || appUserObject.userRoleId == 2);
 
-  const kidUsersList = allUsers.filter((user) => user.userRole === 3); // Filter kid users
+  const kidUsersList = allUsers.filter((user) => user.userRoleId == 3); // Filter kid users
+  console.log(kidUsersList) //empty array
+
 
   const handleSubmitButtonClick = (event) => {
     event.preventDefault();
@@ -86,17 +88,18 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
       addJournalEntry(journalToSendToAPI)
         .then((journal) => {
           // Update user view with newly added journal
-          GetJournalsByUser(journal.UserId);
+          const userId = journal.userId
+          GetJournalsByUser(userId);//why is it undefined? looks like i got a 201
 
           // If a user is selected for sharing, save shared entry details
           if (selectedUser) {
             const sharedEntry = {
-              JournalId: journal.Id, // Use the newly created journal's ID
-              ChildUserId: selectedUser,
+              JournalId: journal.id, // Use the newly created journal's ID....its undefined
+              ChildUserId: +selectedUser,
             };
 
             // Perform API call to save shared entry details to my bridge table
-            SaveSharedEntry(sharedEntry); // Implement this function
+            SaveSharedEntry(sharedEntry);
           }
         })
         .then(() => {

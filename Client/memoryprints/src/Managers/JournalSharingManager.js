@@ -1,4 +1,4 @@
-const baseUrl = "api/UserToKidUserProfilesLinks";
+const baseUrl = "api/JournalEntryChildProfiles";
 
 
 export const SaveSharedEntry = (sharedJournalObject) => {
@@ -7,6 +7,6 @@ export const SaveSharedEntry = (sharedJournalObject) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(sharedJournalObject),
+      body: JSON.stringify(sharedJournalObject)
     });
   };

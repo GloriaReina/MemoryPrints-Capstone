@@ -56,7 +56,6 @@ export default function Register({ setIsLoggedIn }) {
       register(user).then((response) => {
         localStorage.setItem("user", JSON.stringify(response))
         const userId = response.id;
-        console.log(userId)
        
        // Once the main user is registered, create a link with the selected childUserId
         if (childUserId) {
