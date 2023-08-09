@@ -14,8 +14,9 @@ namespace MemoryPrints.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                SELECT Id, JournalId, ChildUserId
-                FROM JournalEntryChildProfiles
+                SELECT je.Id, je.JournalId, je.ChildUserId, j.Title, j.Content, j.Gratitude, j.Intention, j.CreationDate, j.IsApproved
+                FROM JournalEntryChildProfiles je
+                LEFT JOIN journal j on j.Id = je.JournalId
                 WHERE JournalId = @JournalId";
 
                     cmd.Parameters.AddWithValue("@JournalId", journalId);
@@ -28,7 +29,17 @@ namespace MemoryPrints.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             JournalId = DbUtils.GetInt(reader, "JournalId"),
-                            ChildUserId = DbUtils.GetInt(reader, "ChildUserId")
+                            ChildUserId = DbUtils.GetInt(reader, "ChildUserId"),
+
+                            Journal = new Journal()
+                            {
+                                Title = DbUtils.GetString(reader, "Title"),
+                                Content = DbUtils.GetString(reader, "Content"),
+                                Gratitude = DbUtils.GetString(reader, "Gratitude"),
+                                Intention = DbUtils.GetString(reader, "Intention"),
+                                CreationDate = DbUtils.GetDateTime(reader, "CreationDate")
+                            }
+
                         });
                     }
 
@@ -45,8 +56,9 @@ namespace MemoryPrints.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                SELECT Id, JournalId, ChildUserId
-                FROM JournalEntryChildProfiles
+                SELECT je.Id, je.JournalId, je.ChildUserId, j.Title, j.Content, j.Gratitude, j.Intention, j.CreationDate, j.IsApproved
+                FROM JournalEntryChildProfiles je
+                LEFT JOIN journal j on j.Id = je.JournalId
                 WHERE ChildUserId = @ChildUserId";
 
                     cmd.Parameters.AddWithValue("@ChildUserId", childUserId);
@@ -59,7 +71,17 @@ namespace MemoryPrints.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             JournalId = DbUtils.GetInt(reader, "JournalId"),
-                            ChildUserId = DbUtils.GetInt(reader, "ChildUserId")
+                            ChildUserId = DbUtils.GetInt(reader, "ChildUserId"),
+
+
+                            Journal = new Journal()
+                            {
+                                Title = DbUtils.GetString(reader, "Title"),
+                                Content = DbUtils.GetString(reader, "Content"),
+                                Gratitude = DbUtils.GetString(reader, "Gratitude"),
+                                Intention = DbUtils.GetString(reader, "Intention"),
+                                CreationDate = DbUtils.GetDateTime(reader, "CreationDate")
+                            }
                         });
                     }
 

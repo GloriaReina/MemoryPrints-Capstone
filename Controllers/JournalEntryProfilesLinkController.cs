@@ -11,7 +11,7 @@ namespace MemoryPrints.Controllers
     {
         private readonly IJournalEntryChildProfilesLinkRepository _journalEntryChildProfilesLinkRepository;
 
-        public JournalEntryChildProfilesController(JournalEntryChildProfilesLinkRepository journalEntryChildProfilesLinkRepository)
+        public JournalEntryChildProfilesController(IJournalEntryChildProfilesLinkRepository journalEntryChildProfilesLinkRepository)
         {
             _journalEntryChildProfilesLinkRepository = journalEntryChildProfilesLinkRepository;
         }

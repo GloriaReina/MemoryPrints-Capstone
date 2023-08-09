@@ -14,7 +14,6 @@ export const MyJournalEntries = () => {
 
   const localAppUser = localStorage.getItem("user");
   const AppUserObject = JSON.parse(localAppUser);
-  console.log(AppUserObject)
   const userId = AppUserObject.id;
 
 
@@ -32,7 +31,6 @@ export const MyJournalEntries = () => {
     </Col>
   ));
 
-  console.log(renderedJournals) 
 
   return (
     <Container className="journal-container">

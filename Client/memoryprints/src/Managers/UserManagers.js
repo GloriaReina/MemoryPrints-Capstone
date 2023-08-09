@@ -45,3 +45,9 @@ export const GetListOfKidUsers= ()=> {
     return fetch(`${baseUrl}/users/kids`) 
       .then((res) => res.json())
   };
+
+  /*Retrieves a list of all users */
+export const GetAllUsers= ()=> {
+  return fetch(`${baseUrl}`) 
+    .then((res) => res.json())
+};

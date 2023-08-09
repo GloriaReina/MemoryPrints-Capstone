@@ -144,7 +144,7 @@ namespace MemoryPrints.Repositories
                         FROM Journal j
                         LEFT JOIN [User] u ON j.UserId = u.Id
                         LEFT JOIN Category c ON j.CategoryId = c.Id
-                        WHERE j.IsApproved = 1 AND j.CreationDate < SYSDATETIME() AND j.Id = @Id";
+                        WHERE j.CreationDate <= SYSDATETIME() AND j.Id = @Id";
 
                     cmd.Parameters.AddWithValue("@Id", id);
 
@@ -359,7 +359,7 @@ namespace MemoryPrints.Repositories
                             Category = new Category()
                             {
                                 Id = DbUtils.GetInt(reader, "CategoryId"),
-                                Name = DbUtils.GetString(reader, "CategoryName")
+                                Name = DbUtils.GetString(reader, "Name")
                             },
                         });
                     }
@@ -429,6 +429,7 @@ namespace MemoryPrints.Repositories
             var parameter = new SqlParameter("@Criterion", $"%{roleName}%");
             return FetchAndSortData(sqlQuery, parameter);
         }
+
         public List<Journal> SearchByUser(string searchValue, string searchType)
         {
             string columnName;
