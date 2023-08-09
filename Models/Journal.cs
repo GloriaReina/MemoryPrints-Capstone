@@ -34,7 +34,7 @@ namespace MemoryPrints.Models
 
         //can access the list of comments, reactions,childprofiles associated or made by a particular user.
         public List<Comment> Comments { get; set; }= new List<Comment>();
-        //public List<JournalReaction> JournalReactions { get; set; }
+        public List<JournalReaction> JournalReactions { get; set; }=new List<JournalReaction>();
         //public List<JournalEntryKidProfiles> JournalEntryKidProfiles { get; set; }
     }
 }
