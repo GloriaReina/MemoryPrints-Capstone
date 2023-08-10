@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { GetUserById, EditProfile } from "../Managers/UserManagers";
 import { Button, Modal, Form } from "react-bootstrap"; // Import Bootstrap components
+import "./MyProfile.css";
+
 
 export const MyProfile = () => {
   const [userProfile, setUserProfile] = useState({
@@ -44,7 +46,7 @@ export const MyProfile = () => {
   };
 
   return (
-    <div>
+    <div className="profileInfo">
       <h1>My Profile</h1>
       <div>
         <strong>{userProfile.displayName}</strong>
@@ -63,10 +65,10 @@ export const MyProfile = () => {
       </div>
 
       {/* Edit Profile Button */}
-      <Button variant="primary" onClick={() => setShowEditModal(true)}>
+      <Button className="modalBtn" variant="primary" onClick={() => setShowEditModal(true)}>
         Edit Profile
       </Button>
-
+<div className="modalFormContainer">
       {/* Edit Profile Modal */}
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}  centered
         dialogClassName="edit-profile-modal">
@@ -132,14 +134,15 @@ export const MyProfile = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-            Cancel
+          <Button className="closeBtn" variant="secondary" onClick={() => setShowEditModal(false)}>
+            X
           </Button>
-          <Button variant="primary" onClick={handleSaveClick}>
+          <Button className="saveBtn" variant="primary" onClick={handleSaveClick}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
+      </div>
     </div>
   );
 };

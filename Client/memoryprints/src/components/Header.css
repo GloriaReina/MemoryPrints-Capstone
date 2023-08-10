@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
 
+/* z index of 1 position above all other, -1 position bellow other element*/
+.navbar{
+     z-index: 1;
+}
+
 /* navbar background color */
 .bg-navbar-background {
     background: linear-gradient(79deg, rgb(197, 216, 220), rgb(109, 216, 109),48%, #24eeab);
