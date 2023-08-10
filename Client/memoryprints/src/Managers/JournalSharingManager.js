@@ -1,4 +1,4 @@
-const baseUrl = "api/JournalEntryChildProfiles";
+const baseUrl = "/api/JournalEntryChildProfiles";
 
 
 export const SaveSharedEntry = (sharedJournalObject) => {
@@ -9,4 +9,11 @@ export const SaveSharedEntry = (sharedJournalObject) => {
       },
       body: JSON.stringify(sharedJournalObject)
     });
+  };
+
+ 
+
+  export const GetAllSharedJournalsByKidUserId= (kidUserId)=> {
+    return fetch(`${baseUrl}/childuser/${kidUserId}`) 
+      .then((res) => res.json())
   };

@@ -63,7 +63,7 @@ export const GetJournalsByUser= (userId)=> {
   // }
  
   export const SearchJournalByDate = (searchDate) => {
-    return fetch(`${baseUrl}/searchbyterm?searchDate=${encodeURIComponent(searchDate)}`)
+    return fetch(`${baseUrl}/searchbydate?searchDate=${encodeURIComponent(searchDate)}`)
             .then((res) => res.json())         
   }
 

@@ -66,13 +66,21 @@ export const Header = () => {
               <NavLink href="/homepage" bsPrefix="nav-link-custom">
                 HomePage
               </NavLink>
-              <NavLink href="/journalentries" bsPrefix="nav-link-custom">
-                All Entries
-              </NavLink>
                {/** Conditionally render the Unapproved Journals link based on user's role */}
                {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).userRoleId == 1 && (
+                <>
+                <NavLink href="/alljournals" bsPrefix="nav-link-custom">
+                All Entries
+              </NavLink>
                 <NavLink href="/unapprovedjournals" bsPrefix="nav-link-custom">
                   Unapproved Journals
+                </NavLink>
+                </>
+              )}
+               {/** Conditionally render the shared Journals link based on user's role */}
+               {localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).userRoleId == 3 && (
+                <NavLink href="/sharedjournals" bsPrefix="nav-link-custom">
+                  Shared Journals
                 </NavLink>
               )}
               <NavLink href="/myprofile" bsPrefix="nav-link-custom">
