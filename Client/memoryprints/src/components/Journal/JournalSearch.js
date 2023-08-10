@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Col, Container, Row, Table } from "reactstrap";
 import { Alert } from "react-bootstrap";
 import { GetAllJournals, SearchJournals } from "../../Managers/JournalManager";
 import JournalCard from "./JournalCard";
+import { Journal } from "../Journal";
 
 export const JournalSearch = () => {
-  const navigate = useNavigate();
   const [journals, setJournals] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
 
   const getAllJournals = async () => {
-    try {
+   
       const allJournals = await GetAllJournals();
       setJournals(allJournals);
-    } catch (error) {
-      console.error("Error fetching journals:", error);
-    }
+    
   };
 
   useEffect(() => {
@@ -75,13 +73,12 @@ export const JournalSearch = () => {
                 value={searchQuery}
                 onChange={handleSearchInputChange}
               />
-              <Button onClick={handleSearchButtonClick} color="primary">
+              <Button onClick={handleSearchButtonClick} >
                 Search
               </Button>
               {/* Show cancel button when search query is not empty */}
               {searchQuery && (
-                <Button>
-                  <Link onClick={handleCancelSearch}>Cancel</Link>
+                <Button onClick={handleCancelSearch}>Cancel
                 </Button>
               )}
 
@@ -96,7 +93,7 @@ export const JournalSearch = () => {
               </div>
               <h3>Search Results:</h3>
               {searchResults.map((journal) => (
-                <JournalCard key={journal.id} journal={journal} />
+                <Journal key={journal.id} journalProp={journal} />
               ))}
             </div>
           )}
@@ -106,7 +103,7 @@ export const JournalSearch = () => {
             <div>
               <h3>All Journals:</h3>
               {journals.map((journal) => (
-                <JournalCard key={journal.id} journal={journal} />
+                <Journal key={journal.id} journalProp={journal} />
               ))}
             </div>
           )}

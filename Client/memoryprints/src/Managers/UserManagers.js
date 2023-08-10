@@ -1,5 +1,12 @@
 const baseUrl = "/api/User";
 
+
+export const GetUserById =(id) => {
+  return fetch (`${baseUrl}/users/${id}`).then((res)=> res.json())
+ };
+
+
+
 export const login = (userObject) => {
   return fetch(
     `${baseUrl}/authenticate?email=${userObject.email}&password=${userObject.password}`

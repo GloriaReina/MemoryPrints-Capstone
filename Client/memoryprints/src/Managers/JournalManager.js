@@ -57,9 +57,9 @@ export const GetJournalsByUser= (userId)=> {
         "Content-Type": "application/json",
       },}) 
   };
-
+  
   export const SearchJournals = (searchTerm) => {
-    return fetch(`${baseUrl}/searchbyterm?searchTerm=${encodeURIComponent(searchTerm)}`)
+    return fetch(`${baseUrl}/search?q=${encodeURIComponent(searchTerm)}`)
             .then((res) => res.json())         
   }
 
