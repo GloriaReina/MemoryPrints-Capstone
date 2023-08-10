@@ -1,5 +1,10 @@
 const baseUrl = "/api/Journal";
 
+//Gets all approved journals
+export const GetAllJournals= ()=> {
+  return fetch(`${baseUrl}`) 
+    .then((res) => res.json())
+};
 
 export const GetJournalsByUser= (userId)=> {
     return fetch(`${baseUrl}/user/${userId}`) 
@@ -11,10 +16,7 @@ export const GetJournalsByUser= (userId)=> {
     return fetch (`${baseUrl}/${id}`).then((res)=> res.json())
    };
 
-  export const GetAllJournals= ()=> {
-    return fetch(`${baseUrl}`) 
-      .then((res) => res.json())
-  };
+
 
   export const GetAllUnapprovedJournals= ()=> {
     return fetch(`${baseUrl}/unapproved`) 

@@ -100,34 +100,42 @@ namespace MemoryPrints.Controllers
             return NoContent();
         }
 
-        [HttpGet("searchbyterm")]
-        public IActionResult SearchByTerm(string searchTerm)
+
+        [HttpGet("search")]
+        public IActionResult Search(string q)
         {
-            return Ok(_journalRepository.SearchByTerm(searchTerm));
+            return Ok(_journalRepository.Search(q));
         }
 
-        [HttpGet("searchbydate")]
-        public IActionResult SearchByDate(DateTime searchDate)
-        {
-            return Ok(_journalRepository.SearchByDate(searchDate));
-        }
 
-        [HttpGet("searchbycategory")]
-        public IActionResult SearchByCategory(string categoryName)
-        {
-            return Ok(_journalRepository.SearchByCategory(categoryName));
-        }
+        //[HttpGet("searchbyterm")]
+        //public IActionResult SearchByTerm(string searchTerm)
+        //{
+        //    return Ok(_journalRepository.SearchByTerm(searchTerm));
+        //}
 
-        [HttpGet("searchbyuserrole")]
-        public IActionResult SearchByUserRole(string roleName)
-        {
-            return Ok(_journalRepository.SearchByUserRole(roleName));
-        }
+        //[HttpGet("searchbydate")]
+        //public IActionResult SearchByDate(DateTime searchDate)
+        //{
+        //    return Ok(_journalRepository.SearchByDate(searchDate));
+        //}
 
-        [HttpGet("searchbyuser")]
-        public IActionResult SearchByUser(string searchValue, string searchType)
-        {
-            return Ok(_journalRepository.SearchByUser(searchValue, searchType));
-        }
+        //[HttpGet("searchbycategory")]
+        //public IActionResult SearchByCategory(string categoryName)
+        //{
+        //    return Ok(_journalRepository.SearchByCategory(categoryName));
+        //}
+
+        //[HttpGet("searchbyuserrole")]
+        //public IActionResult SearchByUserRole(string roleName)
+        //{
+        //    return Ok(_journalRepository.SearchByUserRole(roleName));
+        //}
+
+        //[HttpGet("searchbyuser")]
+        //public IActionResult SearchByUser(string searchValue, string searchType)
+        //{
+        //    return Ok(_journalRepository.SearchByUser(searchValue, searchType));
+        //}
     }
 }
