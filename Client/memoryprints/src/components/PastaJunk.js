@@ -1,4 +1,138 @@
-import React, { useState, useEffect } from 'react';
+//my profile component without the modal
+// import React, { useState, useEffect } from "react";
+// import { GetUserById,EditProfile  } from "../Managers/UserManagers"
+
+
+// export const MyProfile = () => {
+//   const [userProfile, setUserProfile] = useState({
+//     imageLocation: "",
+//     displayName: "",
+//     firstName: "",
+//     lastName: "",
+//     relationShip:"",
+//     createDateTime:""
+//   });
+
+//   const [isEditing, setIsEditing] = useState(false); 
+
+//   const createDateTime = new Date(userProfile.createDateTime);
+//   const formattedCreationDate = createDateTime.toLocaleDateString();
+
+
+//   const localAppUser = localStorage.getItem("user");
+//   const AppUserObject = JSON.parse(localAppUser);
+//   const userId = AppUserObject.id;
+
+//   useEffect(() => {
+//     GetUserById(userId)
+//       .then((userProfile) => setUserProfile(userProfile))
+//   }, [userId]); 
+
+//   const handleSaveClick = () => {
+//     EditProfile(userProfile) 
+//       .then(() => {
+//         // Fetch the updated profile after editing
+//         GetUserById(userId)
+//           .then((updatedProfile) => {
+//             setUserProfile(updatedProfile);
+//             setIsEditing(false); 
+//           })
+//       })
+      
+//   };
+
+//   return (
+//     <div>
+//       <h1>{isEditing ? "Edit Profile" : "My Profile"}</h1>
+//       {isEditing ? (
+//         <form>
+//           <div>
+//             <label>Display Name:</label>
+//             <input
+//               type="text"
+//               value={userProfile.displayName}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, displayName: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>First Name:</label>
+//             <input
+//               type="text"
+//               value={userProfile.firstName}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, firstName: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>Last Name:</label>
+//             <input
+//               type="text"
+//               value={userProfile.lastName}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, lastName: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>Image Location:</label>
+//             <input
+//               type="text"
+//               value={userProfile.imageLocation}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, imageLocation: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>Relationship:</label>
+//             <input
+//               type="text"
+//               value={userProfile.relationShip}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, relationShip: e.target.value })
+//               }
+//             />
+//           </div>
+
+//           <button type="button" onClick={handleSaveClick}>
+//             Save
+//           </button>
+//           <button type="button" onClick={() => setIsEditing(false)}>
+//             Cancel
+//           </button>
+//         </form>
+//       ) : (
+//         <>
+//           <div>
+//             <strong>{userProfile.displayName}</strong>
+//           </div>
+//           <div>
+//             <img src={userProfile.imageLocation} alt="User Profile" />
+//           </div>
+//           <div>
+//             <strong>First Name:</strong> {userProfile.firstName}
+//           </div>
+//           <div>
+//             <strong>Last Name:</strong> {userProfile.lastName}
+//           </div>
+//           <div>
+//             <strong>Relationship:</strong> {userProfile.relationShip}
+//           </div>
+//           <button type="button" onClick={() => setIsEditing(true)}>
+//              Edit Profile
+//           </button>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+
+
+// import React, { useState, useEffect } from 'react';
 
 // export const JournalSearch = () => {
 //   const [searchTerm, setSearchTerm] = useState('');

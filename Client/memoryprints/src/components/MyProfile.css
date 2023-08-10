@@ -1,0 +1,28 @@
+
+/* Style the overlay effect for the modal */
+.edit-profile-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  }
+  
+  /* Style the modal content */
+  .edit-profile-modal .modal-content {
+    width: 80%; /* Adjust the width as needed */
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the modal title */
+  .edit-profile-modal .modal-title {
+    margin-bottom: 20px;
+  }
+  
+  /* Style the modal form fields */
+  .edit-profile-modal .form-group {
+    margin-bottom: 15px;
+  }
+  

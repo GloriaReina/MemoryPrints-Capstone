@@ -5,6 +5,16 @@ export const GetUserById =(id) => {
   return fetch (`${baseUrl}/users/${id}`).then((res)=> res.json())
  };
 
+ export const EditProfile = (updatedFields) => {
+  return fetch(`${baseUrl}/user/${updatedFields.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedFields),
+  });
+};
+
 
 
 export const login = (userObject) => {
