@@ -12,7 +12,7 @@ const JournalCard = ({ journal }) => {
         <div className="card mb-3">
             <div className="card-body">
                 <h5 className="card-title">
-                    <Link to={`/journals/${journal.id}`}>
+                    <Link to={`/journals/${journal.journalId}`}>
                         <strong className="journal-title">
                             {journal?.journal?.title}: ({formattedCreationDate})
                         </strong>
