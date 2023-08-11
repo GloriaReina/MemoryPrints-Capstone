@@ -1,12 +1,13 @@
 import React, { useState, useEffect,useContext } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { editJournalEntry } from "../../Managers/JournalManager";
 import { CategoryContext } from "../../Managers/CategoryManager";
-
+import "./EditJournal.css"
 
 const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButtonClick }) => {
   const { getAllCategories, categories } = useContext(CategoryContext);
-
+  const [canEdit, setCanEdit] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const [editedJournal, setEditedJournal] = useState({
     id:journal.id,
     title: journal.title,
@@ -19,7 +20,16 @@ const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButton
 
   useEffect(() => {
     getAllCategories();
+
+     // Check if the current user is the creator of the journal
+     if (appUserObject && appUserObject.id === journal.userId) {
+      setCanEdit(true);
+    } else {
+      setShowAlert(true); // Show the alert if user doesn't have permission
+    }
   }, []);
+
+
 
   const localAppUser = localStorage.getItem("user");
   const appUserObject = JSON.parse(localAppUser);
@@ -48,6 +58,8 @@ const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButton
 
   return (
     <Form className="edit-journal-form">
+      {canEdit ? (
+      <>
       <h2 className="edit-journal-form-title">Edit Journal</h2>
       <Form.Group className="journal-form-group">
         <Form.Label className="journal-form-label">Title:</Form.Label>
@@ -64,6 +76,7 @@ const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButton
         <Form.Label className="journal-form-label">Content:</Form.Label>
         <Form.Control
           as="textarea"
+          rows={8}
           required
           value={editedJournal.content}
           onChange={(event) =>
@@ -134,6 +147,22 @@ const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButton
       >
         Cancel
       </Button> 
+      </>
+        ) : (
+          <Modal className="deniedModal" show={showAlert} onHide={() => setShowAlert(false)}>
+          <Modal.Header >
+            <Modal.Title>Permission Denied</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            You don't have permission to edit this journal.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button className= "deniedCloseBtn"variant="secondary" onClick={() => setShowAlert(false)}>
+              X
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </Form>
   );
 };

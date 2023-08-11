@@ -10,7 +10,7 @@ import EditJournal from "./Journal/EditJournal";
 import { useNavigate } from "react-router-dom";
 // import JournalReactions from "./Journal/JournalReactions";
 
-export const JournalDetails = () => {
+  const JournalDetails = () => {
   const [journal, setJournal] = useState({});
   const [showComments, setShowComments] = useState(false);
   const [showJournalEditForm, setShowJournalEditForm] = useState(false);
@@ -112,6 +112,7 @@ export const JournalDetails = () => {
   );
 };
 
+export default JournalDetails
 
 
 // import React from "react";

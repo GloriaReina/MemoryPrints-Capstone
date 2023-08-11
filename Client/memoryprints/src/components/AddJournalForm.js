@@ -1,10 +1,11 @@
 import { addJournalEntry } from "../Managers/JournalManager";
 import { useState, useEffect, useContext } from "react";
-import { Button, Form, Row, Col, Modal } from "react-bootstrap";
+import { Button, Form, Row, Col, Modal, ModalFooter } from "react-bootstrap";
 import { CategoryContext } from "../Managers/CategoryManager";
 import { GetAllUsers } from "../Managers/UserManagers";
 import { SaveSharedEntry } from "../Managers/JournalSharingManager";
 import UserDropdown from "./Journal/UserDropdown";
+import "./AddJournalForm.css"
 
 export const AddJournalForm = ({ GetJournalsByUser }) => {
   const { getAllCategories, categories } = useContext(CategoryContext);
@@ -128,11 +129,10 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
           size="sm"
           onClick={handleShow}
         >
-          <strong> + New Entry </strong>
+          <strong> + </strong>
         </Button>
       </div>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group as={Row} controlId="category">
@@ -147,7 +147,6 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                   onChange={(evt) => {
                     const copy = { ...journal };
                     copy.categoryId = parseInt(evt.target.value);
-                    /*reset fields to default setting*/
                     update(copy);
                   }}
                 >
@@ -162,12 +161,15 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
             </Form.Group>
             {/* Use the UserDropdown component */}
             <UserDropdown
-              // users={shouldShowDropdown ? allUsers : kidUsersList}
               selectedUser={selectedUser}
               handleUserSelect={handleUserSelect}
-              shouldShowDropdown={shouldShowDropdown}
-              kidUsersList= {kidUsersList}
-              allUsers ={allUsers}
+              shouldShowDropdown={
+                appUserObject &&
+                (appUserObject.userRoleId === 1 ||
+                  appUserObject.userRoleId === 2)
+              }
+              kidUsersList={allUsers.filter((user) => user.userRoleId === 3)}
+              allUsers={allUsers}
             />
             <Form.Group as={Row} controlId="title">
               <Form.Label column sm={2}>
@@ -184,13 +186,14 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                     copy.title = evt.target.value;
                     update(copy);
                   }}
-                ></Form.Control>
+                />
               </Col>
             </Form.Group>
-            <Form.Group className="journal-form-group">
+            <Form.Group>
               <Form.Label className="journal-form-label">Content:</Form.Label>
               <Form.Control
-                type="text"
+                 as="textarea"
+                 rows={8}
                 placeholder="Write Away!"
                 value={journal.content}
                 required
@@ -201,7 +204,7 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="journal-form-group">
+            <Form.Group>
               <Form.Label className="journal-form-label">Gratitude:</Form.Label>
               <Form.Control
                 type="text"
@@ -215,11 +218,11 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="journal-form-group">
+            <Form.Group>
               <Form.Label className="journal-form-label">Intention:</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="How I will make today/tomorrow great ... "
+                placeholder="How I will make today/tomorrow great ..."
                 value={journal.intention}
                 onChange={(evt) => {
                   const copy = { ...journal };
@@ -228,16 +231,25 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
                 }}
               />
             </Form.Group>
-            <Button
-              type="submit"
-              variant="success"
-              bsPrefix="submit-journal-button"
-              onClick={(clickEvent) => {
-                handleSubmitButtonClick(clickEvent);
-              }}
-            >
-              Submit
-            </Button>
+            <ModalFooter>
+              <Button
+                type="submit"
+                variant="success"
+                className="submit-journal-button"
+                onClick={(clickEvent) => {
+                  handleSubmitButtonClick(clickEvent);
+                }}
+              >
+                Submit
+              </Button>
+              <Button
+                variant="success"
+                className="closeBtn-addEntry"
+                onClick={() => setShow(false)}
+              >
+                X
+              </Button>
+            </ModalFooter>
           </Form>
         </Modal.Body>
       </Modal>

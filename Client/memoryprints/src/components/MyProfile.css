@@ -1,0 +1,97 @@
+/* .profileInfo{
+    padding: 12px 24px;
+
+} */
+
+/* .modalFormContainer{
+} */
+.closeBtn{
+  position: absolute;
+  top: 16%;
+  right: 9%;
+  background-color:rgb(109, 216, 109);
+  border-radius: 3px;
+
+
+}
+.closeBtn:hover {
+  background-color: #1fe0b9;
+}
+
+.saveBtn{
+  background-color: rgb(109, 216, 109);
+  border-radius: 3px;
+}
+
+.saveBtn:hover {
+  background-color: #1fe0b9;
+}
+.saveButtonPosition{
+  margin-top: 10px;
+ display: flex;
+ justify-content: center;
+
+}
+
+/* Style the overlay effect for the modal */
+.edit-profile-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 100%;
+    width:70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.97;
+    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent overlay */
+  }
+  
+  /* Style the modal content */
+  .edit-profile-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 80%; 
+    background-color: #e9f3eb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the modal title */
+  .edit-profile-modal .modal-title {
+    margin-bottom: 5px;
+  }
+  
+  /* Style the modal form fields */
+  .edit-profile-modal .form-group {
+    margin-bottom: 20px;
+ 
+  }
+
+  /* Style the labels */
+.label {
+  display: inline-block;
+  width: 150px; 
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* Style the input fields */
+.inputField{
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+ 
+img{
+  width: 250px;
+  object-fit: cover;
+  box-shadow: 0 3px 4px rgba(100, 173, 11, 0.9);
+  border-radius: 10px;
+}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
-
+import "./Journal.css"
 
 export const Journal = ({journalProp}) => {
     const createDateTime = new Date(journalProp.creationDate);
@@ -19,6 +19,9 @@ export const Journal = ({journalProp}) => {
 
             <Card.Text>
             {journalProp.Gratitude}
+            </Card.Text>
+            <Card.Text>
+            {journalProp.Intention}
             </Card.Text>
             {/* <Card.Link href="#">edit button?Modal</Card.Link>
             <Card.Link href="#">Delete Button? Modal</Card.Link> */}

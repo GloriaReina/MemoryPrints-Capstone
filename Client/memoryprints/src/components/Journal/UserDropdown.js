@@ -2,8 +2,6 @@ import React from "react";
 import { Form, Row, Col } from "react-bootstrap";
 
 const UserDropdown = ({ kidUsersList,allUsers, selectedUser, handleUserSelect, shouldShowDropdown }) => {
-//   console.log(allUsers)
-//   console.log(kidUsersList)
 
     return (
     <Form.Group as={Row} controlId="shareWithUser">

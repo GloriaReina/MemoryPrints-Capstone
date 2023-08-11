@@ -1,3 +1,290 @@
+//my profile component without the modal
+// import React, { useState, useEffect } from "react";
+// import { GetUserById,EditProfile  } from "../Managers/UserManagers"
+
+
+// export const MyProfile = () => {
+//   const [userProfile, setUserProfile] = useState({
+//     imageLocation: "",
+//     displayName: "",
+//     firstName: "",
+//     lastName: "",
+//     relationShip:"",
+//     createDateTime:""
+//   });
+
+//   const [isEditing, setIsEditing] = useState(false); 
+
+//   const createDateTime = new Date(userProfile.createDateTime);
+//   const formattedCreationDate = createDateTime.toLocaleDateString();
+
+
+//   const localAppUser = localStorage.getItem("user");
+//   const AppUserObject = JSON.parse(localAppUser);
+//   const userId = AppUserObject.id;
+
+//   useEffect(() => {
+//     GetUserById(userId)
+//       .then((userProfile) => setUserProfile(userProfile))
+//   }, [userId]); 
+
+//   const handleSaveClick = () => {
+//     EditProfile(userProfile) 
+//       .then(() => {
+//         // Fetch the updated profile after editing
+//         GetUserById(userId)
+//           .then((updatedProfile) => {
+//             setUserProfile(updatedProfile);
+//             setIsEditing(false); 
+//           })
+//       })
+      
+//   };
+
+//   return (
+//     <div>
+//       <h1>{isEditing ? "Edit Profile" : "My Profile"}</h1>
+//       {isEditing ? (
+//         <form>
+//           <div>
+//             <label>Display Name:</label>
+//             <input
+//               type="text"
+//               value={userProfile.displayName}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, displayName: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>First Name:</label>
+//             <input
+//               type="text"
+//               value={userProfile.firstName}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, firstName: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>Last Name:</label>
+//             <input
+//               type="text"
+//               value={userProfile.lastName}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, lastName: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>Image Location:</label>
+//             <input
+//               type="text"
+//               value={userProfile.imageLocation}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, imageLocation: e.target.value })
+//               }
+//             />
+//           </div>
+//           <div>
+//             <label>Relationship:</label>
+//             <input
+//               type="text"
+//               value={userProfile.relationShip}
+//               onChange={(e) =>
+//                 setUserProfile({ ...userProfile, relationShip: e.target.value })
+//               }
+//             />
+//           </div>
+
+//           <button type="button" onClick={handleSaveClick}>
+//             Save
+//           </button>
+//           <button type="button" onClick={() => setIsEditing(false)}>
+//             Cancel
+//           </button>
+//         </form>
+//       ) : (
+//         <>
+//           <div>
+//             <strong>{userProfile.displayName}</strong>
+//           </div>
+//           <div>
+//             <img src={userProfile.imageLocation} alt="User Profile" />
+//           </div>
+//           <div>
+//             <strong>First Name:</strong> {userProfile.firstName}
+//           </div>
+//           <div>
+//             <strong>Last Name:</strong> {userProfile.lastName}
+//           </div>
+//           <div>
+//             <strong>Relationship:</strong> {userProfile.relationShip}
+//           </div>
+//           <button type="button" onClick={() => setIsEditing(true)}>
+//              Edit Profile
+//           </button>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+
+
+// import React, { useState, useEffect } from 'react';
+
+// export const JournalSearch = () => {
+//   const [searchTerm, setSearchTerm] = useState('');
+//   const [searchDate, setSearchDate] = useState('');
+//   const [searchCategory, setSearchCategory] = useState('');
+// //   const [searchUser, setSearchUser] = useState('');
+//   const [searchUserRole, setSearchUserRole] = useState('');
+//   const [searchType, setSearchType] = useState('Date'); // Default to Date
+//   const [searchResults, setSearchResults] = useState([]);
+
+//   useEffect(() => {
+//     handleSearchButtonClick();
+//   }, []);
+
+//   const handleSearchButtonClick = () => {
+//     let baseUrl = '/api/journal/';
+
+//     if (searchType === 'Date') {
+//       baseUrl += `searchbydate?searchDate=${encodeURIComponent(searchDate)}`;
+//     } else if (searchType === 'Term') {
+//       baseUrl += `searchbyterm?searchTerm=${encodeURIComponent(searchTerm)}`;
+//     } else if (searchType === 'Category') {
+//       baseUrl += `searchbycategory?categoryName=${encodeURIComponent(searchCategory)}`;
+//     } else if (searchType === 'UserRole') {
+//       baseUrl += `searchbyuserrole?roleName=${encodeURIComponent(searchUserRole)}`;
+//     } 
+//     // else if (searchType === 'User') {
+//     //   baseUrl += `searchbyuser?searchValue=${encodeURIComponent(searchUser)}&searchType=${searchUserRole}`;
+//     // }
+
+//     fetch(baseUrl)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         setSearchResults(data);
+//       })
+//   };
+
+//   return (
+//     <div>
+//       <h1>Journal Search</h1>
+//       <div>
+//         <input
+//           type="text"
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//           placeholder="Search by term"
+//         />
+//         <input
+//           type="date"
+//           value={searchDate}
+//           onChange={(e) => setSearchDate(e.target.value)}
+//           placeholder="Search by date"
+//         />
+//         <input
+//           type="text"
+//           value={searchCategory}
+//           onChange={(e) => setSearchCategory(e.target.value)}
+//           placeholder="Search by category"
+//         />
+//         {/* <input
+//           type="text"
+//           value={searchUser}
+//           onChange={(e) => setSearchUser(e.target.value)}
+//           placeholder="Search by user"
+//         /> */}
+//         <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+//           <option value="Date">Date</option>
+//           <option value="Term">Term</option>
+//           <option value="Category">Category</option>
+//           {/* <option value="User">User</option> */}
+//           <option value="UserRole">User Role</option>
+//         </select>
+//         <button onClick={handleSearchButtonClick}>Search</button>
+//       </div>
+//       <div>
+//         {searchResults.map((journal) => (
+//         <JournalCard key={journal.id} journal={journal} />
+
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+// import { SearchJournalByTerms } from '../../Managers/JournalManager';
+// export const JournalSearch = () => {
+//   const [searchTerm, setSearchTerm] = useState('');
+// //   const [searchDate, setSearchDate] = useState('');
+// //   const [searchCategory, setSearchCategory] = useState('');
+// //   const [searchUser, setSearchUser] = useState('');
+// //   const [searchUserRole, setSearchUserRole] = useState('');
+// //   const [searchType, setSearchType] = useState('Date'); // Default to Date
+//   const [searchResults, setSearchResults] = useState([]);
+
+//   useEffect(() => {
+//     handleSearchButtonClick();
+//   }, []);
+
+//   const handleSearchInput = (event) => {
+//     setSearchTerm(event.target.value)
+// };
+
+// const handleSearchButtonClick = (event) => {
+//     event.preventDefault();
+
+//     SearchJournalByTerms(searchTerm)
+//     .then((res) => {
+//         setSearchResults(res);
+//     })
+
+//     return (
+//         <div>
+
+//             <Form className="journal-form">
+//                 <FormGroup>
+//                     <Label for="searchTerm">Search:</Label>
+//                     <Input
+//                         type="text"
+//                         id="searchTerm"
+//                         value={searchTerm}
+//                         onChange={handleSearchInput}
+//                     />
+//                 </FormGroup>
+
+//                 <Button onClick={handleSearchButtonClick} color="primary">
+//                     Search
+//                 </Button>
+//             </Form>
+//             {searchResults.length > 0 && (
+//                 <div>
+//                     <h3>Search Results:</h3>
+//                     <div>
+//                         {searchResults.map((journal) => (
+//                             <div key={journal.id}>
+//                                 <h4>{journal.title}</h4>
+//                                 <h4>{journal.content}</h4>
+//                                 <h4>{journal.gratitude}</h4>
+//                                 <h4>{journal.intention}</h4>
+//                                 <p>Caption: {journal?.category?.name}</p>
+//                             </div>
+//                         ))}
+//                     </div>
+//                 </div>
+//             )}
+//         </div>
+//     )
+
+
 // import React, { useState, useEffect } from "react";
 // import { Card, Button, Col } from "react-bootstrap";
 // import { Link, useParams } from "react-router-dom";

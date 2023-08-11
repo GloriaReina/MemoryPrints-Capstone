@@ -62,7 +62,6 @@ namespace MemoryPrints.Repositories
                     RelationShip = @RelationShip,
                     Email = @Email,
                     Password = @Password,
-                    CreateDateTime = @CreateDateTime,
                     ImageLocation = @ImageLocation,
                     UserRoleId = @UserRoleId
                 WHERE Id = @Id";
@@ -73,7 +72,6 @@ namespace MemoryPrints.Repositories
                     cmd.Parameters.AddWithValue("@RelationShip", user.RelationShip);
                     cmd.Parameters.AddWithValue("@Email", user.Email);
                     cmd.Parameters.AddWithValue("@Password", user.Password);
-                    cmd.Parameters.AddWithValue("@CreateDateTime", user.CreateDateTime);
                     cmd.Parameters.AddWithValue("@ImageLocation", user.ImageLocation);
                     cmd.Parameters.AddWithValue("@UserRoleId", user.UserRoleId);
                     cmd.Parameters.AddWithValue("@Id", user.Id);
