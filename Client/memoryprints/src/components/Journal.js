@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
-
+import "./Journal.css"
 
 export const Journal = ({journalProp}) => {
     const createDateTime = new Date(journalProp.creationDate);

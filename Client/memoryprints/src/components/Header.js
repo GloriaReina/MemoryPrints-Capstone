@@ -20,7 +20,6 @@ export const Header = () => {
       <Navbar.Brand href="/" bsPrefix="navbar-brand-custom">
         MemoryPrints
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
           {isLoggedIn ? (
@@ -46,7 +45,7 @@ export const Header = () => {
                 </NavLink>
               )}
               <NavLink href="/myprofile" bsPrefix="nav-link-custom">
-                My Profile
+                Profile
               </NavLink>
               <NavLink bsPrefix="nav-link-custom" onClick={handleLogout}>
                 Logout

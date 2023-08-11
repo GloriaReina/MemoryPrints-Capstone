@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { GetJournalsByUser } from "../Managers/JournalManager";
 import { Journal } from "./Journal";
 import { AddJournalForm } from "./AddJournalForm";
+import "./MyJournalEntries.css"
 import {
   Container,
   Card,
@@ -25,7 +26,7 @@ export const MyJournalEntries = () => {
 
   const renderedJournals = journals.map((journal) => (
     <Col key={journal.id} xs={8}>
-      <Card className="journal-card" style={{ width: '30rem', border: '1px solid lightblue' }} >
+      <Card className="journal-card" style={{ width: '25rem', border: '1px solid lightblue' }} >
         <Journal journalProp={journal} />
       </Card>
     </Col>

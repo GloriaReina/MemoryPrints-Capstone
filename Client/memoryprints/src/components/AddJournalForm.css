@@ -1,0 +1,107 @@
+/* Style the "New Entry" button */
+.add-new-journal-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .new-journal {
+    border: 2px solid #1cdb78;
+    color: #1cdb78;
+  }
+  
+  /* Style the modal overlay */
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 100%;
+    width:70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.97;
+    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent overlay */
+  }
+  
+  /* Style the modal content */
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 80%; 
+    background-color: #e9f3eb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the modal header */
+  .modal-header {
+    border: none;
+  }
+  
+  /* Style the modal body */
+  .modal-body {
+    padding: 20px;
+  }
+  
+  /* Style the form labels */
+  .form-label {
+    text-align: right;
+    margin-right: 15px;
+  }
+  
+  /* Style the form input fields */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* .closeBtn {
+    position: fixed;
+    top: 160px;
+    right: 17%;
+    background-color:#1cdb78;
+    border-radius: 3px;
+    border: none;
+    color: #111010;
+  } */
+
+  .closeBtn-addEntry {
+    position: fixed;
+    top: 2%;
+    right: 18%;
+    background-color:rgb(109, 216, 109);
+    border-radius: 3px;
+  
+  
+  }
+
+  .closeBtn-addEntry:hover {
+    background-color: #1fe0b9;
+  }
+
+  /* Style the submit button */
+  .submit-journal-button {
+    background-color: #1cdb78;
+    border: none;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: #111010;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-journal-button:hover {
+    background-color: #1fe0b9;
+  }
+  
+ 
+  

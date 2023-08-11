@@ -1,0 +1,9 @@
+.card{
+    margin-top: 20px;
+}
+
+.journal-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;}

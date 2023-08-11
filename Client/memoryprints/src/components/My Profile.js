@@ -12,6 +12,8 @@ export const MyProfile = () => {
     lastName: "",
     relationShip: "",
     createDateTime: "",
+    email:"",
+    password:""
   });
 
   const localAppUser = localStorage.getItem("user");
@@ -63,24 +65,28 @@ export const MyProfile = () => {
       <div>
         <strong>Relationship:</strong> {userProfile.relationShip}
       </div>
+      <div>
+        <strong>Email:</strong> {userProfile.email}
+      </div>
+      <div>
+        <strong>password:</strong> {userProfile.password}
+      </div>
+      
 
-      {/* Edit Profile Button */}
+     
       <Button className="modalBtn" variant="primary" onClick={() => setShowEditModal(true)}>
         Edit Profile
       </Button>
-<div className="modalFormContainer">
+<div className="modalFormContainer" >
       {/* Edit Profile Modal */}
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}  centered
-        dialogClassName="edit-profile-modal">
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Profile</Modal.Title>
-        </Modal.Header>
+        dialogClassName="edit-profile-modal" >
         <Modal.Body>
           <Form>
             {/* form fields for editing */}
             <Form.Group>
-              <Form.Label>Display Name:</Form.Label>
-              <Form.Control
+              <Form.Label className="label">Display Name:</Form.Label>
+              <Form.Control className="inputField"
                 type="text"
                 value={userProfile.displayName}
                 onChange={(e) =>
@@ -89,8 +95,8 @@ export const MyProfile = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>First Name:</Form.Label>
-              <Form.Control
+              <Form.Label className="label">First Name:</Form.Label>
+              <Form.Control className="inputField"
                 type="text"
                 value={userProfile.firstName}
                 onChange={(e) =>
@@ -99,8 +105,8 @@ export const MyProfile = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Last Name:</Form.Label>
-              <Form.Control
+              <Form.Label className="label">Last Name:</Form.Label>
+              <Form.Control className="inputField"
                 type="text"
                 value={userProfile.lastName}
                 onChange={(e) =>
@@ -109,8 +115,8 @@ export const MyProfile = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Image Location:</Form.Label>
-              <Form.Control
+              <Form.Label className="label">Image Location:</Form.Label>
+              <Form.Control className="inputField"
                 type="text"
                 value={userProfile.imageLocation}
                 onChange={(e) =>
@@ -122,12 +128,32 @@ export const MyProfile = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Relationship:</Form.Label>
-              <Form.Control
+              <Form.Label className="label">Relationship:</Form.Label>
+              <Form.Control className="inputField"
                 type="text"
                 value={userProfile.relationShip}
                 onChange={(e) =>
                   setUserProfile({ ...userProfile, relationShip: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="label">Email:</Form.Label>
+              <Form.Control className="inputField"
+                type="text"
+                value={userProfile.email}
+                onChange={(e) =>
+                  setUserProfile({ ...userProfile, email: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="label">Password:</Form.Label>
+              <Form.Control className="inputField"
+                type="text"
+                value={userProfile.password}
+                onChange={(e) =>
+                  setUserProfile({ ...userProfile, password: e.target.value })
                 }
               />
             </Form.Group>
@@ -137,9 +163,11 @@ export const MyProfile = () => {
           <Button className="closeBtn" variant="secondary" onClick={() => setShowEditModal(false)}>
             X
           </Button>
+          <div className="saveButtonPosition">
           <Button className="saveBtn" variant="primary" onClick={handleSaveClick}>
             Save Changes
           </Button>
+          </div>
         </Modal.Footer>
       </Modal>
       </div>

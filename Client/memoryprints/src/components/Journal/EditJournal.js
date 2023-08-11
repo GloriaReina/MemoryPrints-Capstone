@@ -64,6 +64,7 @@ const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButton
         <Form.Label className="journal-form-label">Content:</Form.Label>
         <Form.Control
           as="textarea"
+          rows={8}
           required
           value={editedJournal.content}
           onChange={(event) =>
