@@ -30,6 +30,7 @@ export const SharedJournals = () => {
     </Col>
   ));
 
+  console.log(renderedJournals)
 
   return (
     <Container className="journal-container">

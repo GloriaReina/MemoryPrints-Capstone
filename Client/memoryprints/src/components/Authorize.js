@@ -8,10 +8,10 @@ export default function Authorize({setIsLoggedIn}) {
 /* render the components and pass the setIsLoggedIn. Allows Login/Register component to update the logged-in status of the user after successful registration or login.*/
     return(
        <Routes>
-         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+         <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
          <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn}/>} />
   
-         <Route path="*" element={<Navigate to="/login" />} />
+         <Route path="*" element={<Navigate to="/" />} />
           </Routes>
       );
     

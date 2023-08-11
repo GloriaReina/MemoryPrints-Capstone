@@ -8,7 +8,7 @@ const CommentList = ({journalId}) => {
   const [comments, setComments] = useState([]);
 
 
-  const fetchCommentsByJournal = () => {
+   const fetchCommentsByJournal = () => {
     GetCommentsByJournal(journalId)
       .then((allComments) => setComments(allComments))
       .catch((error) => console.error("Error fetching comments:", error));

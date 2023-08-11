@@ -38,9 +38,9 @@ export default function Login({setIsLoggedIn}) {
         <FormGroup>
           <Button>Login</Button>
         </FormGroup>
-        <em>
+        {/* <em>
           Not registered? <Link to="/register">Register</Link>
-        </em>
+        </em> */}
       </fieldset>
     </Form>
   );

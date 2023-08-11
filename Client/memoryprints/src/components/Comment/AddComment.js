@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { addComment } from "../../Managers/CommentManager";
 
-
-
 export const AddComment = ({ journalId, setShowAddCommentForm }) => {
   const [comment, setComment] = useState({
     content: "",

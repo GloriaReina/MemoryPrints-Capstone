@@ -99,7 +99,7 @@ import { useNavigate } from "react-router-dom";
           {showComments ? "Hide Comments" : "View Comments"}
         </Button>
         <Button onClick={() => setShowAddCommentForm(true)}>Add Comment</Button> 
-        {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} />}
+        {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} toggleComments ={toggleComments } />}
         <DeleteJournal journalId={+id} handleDeleteJournal={handleDeleteJournal} />
         {showJournalEditForm ? (
           <EditJournal journal={journal} handleJournalEditRequest={handleJournalEditRequest} handleCancelEditButtonClick ={handleCancelEditButtonClick} />

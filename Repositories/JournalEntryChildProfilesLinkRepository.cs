@@ -59,7 +59,8 @@ namespace MemoryPrints.Repositories
                 SELECT je.Id, je.JournalId, je.ChildUserId, j.Title, j.Content, j.Gratitude, j.Intention, j.CreationDate, j.IsApproved
                 FROM JournalEntryChildProfiles je
                 LEFT JOIN journal j on j.Id = je.JournalId
-                WHERE ChildUserId = @ChildUserId";
+                WHERE ChildUserId = @ChildUserId
+                ORDER BY j.CreationDate DESC";
 
                     cmd.Parameters.AddWithValue("@ChildUserId", childUserId);
                     var reader = cmd.ExecuteReader();

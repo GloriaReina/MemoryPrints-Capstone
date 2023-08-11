@@ -12,7 +12,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    navigate('/login', { replace: true });
+    navigate('/', { replace: true });
   };
 
   return (
@@ -53,7 +53,7 @@ export const Header = () => {
             </>
           ) : (
             <>
-              <NavLink href="/login" bsPrefix="nav-link-custom">
+              <NavLink href="/" bsPrefix="nav-link-custom">
                 Login
               </NavLink>
               <NavLink href="/register" bsPrefix="nav-link-custom">
