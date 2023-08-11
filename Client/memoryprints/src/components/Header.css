@@ -56,3 +56,20 @@
     border: 3px solid #fff !important;
     margin-right: 20px;
 }
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+  }
+  
+  .navbar-left {
+    flex: 1;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
