@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./Homepage";
 import { MyProfile } from "./My Profile";
-import { JournalDetails } from "./JournalDetails";
+import JournalDetails from "./JournalDetails";
 import { UnapprovedJournals } from "./Journal/UnapprovedJournals";
 import { SharedJournals } from "./Journal/SharedJournals";
 import { AllJournalEntries } from "./AllJournalEntries";

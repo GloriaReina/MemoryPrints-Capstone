@@ -23,7 +23,11 @@ export const Comment = ({ comment,handleDeleteCommentFnc, fetchCommentsByJournal
   };
 
 const createDateTime = new Date(comment.creationDate);
-    const formattedCreationDate = createDateTime.toLocaleDateString();
+const formattedCreationDate = createDateTime.toLocaleDateString();
+
+const localAppUser = localStorage.getItem("user");
+const appUserObject = JSON.parse(localAppUser);
+
 
   return (
     <Card className="m-4" key={comment.id}>
@@ -36,21 +40,27 @@ const createDateTime = new Date(comment.creationDate);
         </p>
         <p>Content: {comment?.content}</p>
         <p>Creation date: {formattedCreationDate}</p>
-        <DeleteComment handleDeleteCommentFnc ={handleDeleteCommentFnc} />
-         {showEditForm ? (
-        <EditComment
-          comment={comment}
-          handleSaveEdit = {handleSaveEdit}
-          handleCancelEdit = {handleCancelEdit}
-        />
-      ) : (
-        <button onClick={handleEditButtonClick}>Edit Comment</button>
-      )}
+        {appUserObject && appUserObject.id === comment.userId && (
+          <>
+            <DeleteComment
+              handleDeleteCommentFnc={handleDeleteCommentFnc}
+              comment={comment}
+            />
+            {showEditForm ? (
+              <EditComment
+                comment={comment}
+                handleSaveEdit={handleSaveEdit}
+                handleCancelEdit={handleCancelEdit}
+              />
+            ) : (
+              <button onClick={handleEditButtonClick}>Edit Comment</button>
+            )}
+          </>
+        )}
       </CardBody>
     </Card>
   );
 };
-
 
  {/* <DeleteButton handleDeleteCommentFnc ={handleDeleteCommentFnc} /> */}
         {/* {showEditForm ? (
