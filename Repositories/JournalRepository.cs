@@ -282,12 +282,47 @@ namespace MemoryPrints.Repositories
             }
         }
 
+        //method to check if journal to be deleted is used as foreign key in other tables
+        public bool HasReferences(int journalId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT COUNT(*) FROM JournalReaction WHERE JournalId = @Id
+                        UNION ALL
+                    SELECT COUNT(*) FROM JournalEntryChildProfiles WHERE JournalId = @Id
+                        UNION ALL
+                    SELECT COUNT(*) FROM Comment WHERE JournalId = @Id
+                ";
+                    cmd.Parameters.AddWithValue("@Id", journalId);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (reader.GetInt32(0) > 0)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public void Delete(int id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
+
                 {
                     cmd.CommandText = "DELETE FROM Journal WHERE Id = @Id";
                     cmd.Parameters.AddWithValue("@Id", id);

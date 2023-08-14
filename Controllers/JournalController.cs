@@ -13,9 +13,15 @@ namespace MemoryPrints.Controllers
     public class JournalController : ControllerBase
     {
         private readonly IJournalRepository _journalRepository;
-        public JournalController(IJournalRepository journalRepository)
+        private readonly IJournalReactionRepository _journalReactionRepository;
+        private readonly ICommentRepository _commentRepository;
+        private readonly IJournalEntryChildProfilesLinkRepository _journalEntryChildProfilesLinkRepository;
+        public JournalController(IJournalRepository journalRepository, IJournalReactionRepository journalReactionRepository, ICommentRepository commentRepository, IJournalEntryChildProfilesLinkRepository journalEntryChildProfilesLinkRepository)
         {
             _journalRepository = journalRepository;
+            _journalReactionRepository= journalReactionRepository;
+            _commentRepository= commentRepository;
+            _journalEntryChildProfilesLinkRepository= journalEntryChildProfilesLinkRepository;
         }
 
         [HttpGet]
@@ -96,6 +102,18 @@ namespace MemoryPrints.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            if (_journalRepository.HasReferences(id))
+            {
+                // Delete references from related tables
+                _commentRepository.Delete(id);
+                _journalReactionRepository.DeleteJournalReaction(id);
+                            _journalEntryChildProfilesLinkRepository.DeleteJournalEntryKidProfile(id);
+               
+            }
+
+           
+
+            // Delete the journal itself
             _journalRepository.Delete(id);
             return NoContent();
         }

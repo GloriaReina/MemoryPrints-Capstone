@@ -6,6 +6,7 @@ namespace MemoryPrints.Repositories
     public interface IJournalRepository
     {
         void Add(Journal journal);
+        bool HasReferences(int journalId);
         void Delete(int id);
         List<Journal> GetAllJournals();
         List<Journal> GetAllUnapprovedJournals();
