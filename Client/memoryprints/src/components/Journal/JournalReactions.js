@@ -1,3 +1,32 @@
+import EmojiPicker from "@emoji-mart/react";
+import { Data, Picker } from "emoji-mart";
+
+export const JournalReactions = ()=>{
+    const [reaction, setReaction] = useState([]);
+//     const [emojiCounts, setEmojiCounts] = useState({});
+const [isPickerVisible, setPickerVisible] = useState(false);
+
+return(
+    <div className="d-flex flex-column align-items-center">
+        <h1 className="mt-5 mb-5">{reaction || 'select Emoji'}</h1>
+        <button 
+        className="btn btn-primary"
+        onClick={()=>setPickerVisible(!isPickerVisible)}
+        >Open Emoji Picker</button>
+        <div className={isPickerVisible? 'd-block':'d-none'}>
+            <Picker data={data} previewPosition='none' onEmojiSelect={(e)=>{
+                setReaction(e.native);
+                setPickerVisible(!isPickerVisible)
+            }}
+            />
+        </div>
+    </div>
+)
+}
+
+
+
+
 // import React, { useState, useEffect } from 'react';
 // import { Picker } from 'emoji-mart';
 // // import "emoji-mart/css/emoji-mart.css";

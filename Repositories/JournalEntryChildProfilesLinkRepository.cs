@@ -56,9 +56,10 @@ namespace MemoryPrints.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                SELECT je.Id, je.JournalId, je.ChildUserId, j.Title, j.Content, j.Gratitude, j.Intention, j.CreationDate, j.IsApproved
+                SELECT je.Id, je.JournalId, je.ChildUserId, j.Title, j.Content, j.Gratitude, j.Intention, j.CreationDate, j.IsApproved,c.[Name] AS CategoryName
                 FROM JournalEntryChildProfiles je
                 LEFT JOIN journal j on j.Id = je.JournalId
+                LEFT JOIN Category c ON j.CategoryId = c.Id
                 WHERE ChildUserId = @ChildUserId
                 ORDER BY j.CreationDate DESC";
 
@@ -81,7 +82,12 @@ namespace MemoryPrints.Repositories
                                 Content = DbUtils.GetString(reader, "Content"),
                                 Gratitude = DbUtils.GetString(reader, "Gratitude"),
                                 Intention = DbUtils.GetString(reader, "Intention"),
-                                CreationDate = DbUtils.GetDateTime(reader, "CreationDate")
+                                CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
+                                Category = new Category()
+                                {
+                                    
+                                    Name = DbUtils.GetString(reader, "CategoryName")
+                                }
                             }
                         });
                     }
