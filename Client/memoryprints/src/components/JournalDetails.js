@@ -8,6 +8,7 @@ import { DeleteJournalById } from "../Managers/JournalManager";
 import { AddComment } from "./Comment/AddComment";
 import EditJournal from "./Journal/EditJournal";
 import { useNavigate } from "react-router-dom";
+import "./JournalDetails.css"
 // import JournalReactions from "./Journal/JournalReactions";
 
   const JournalDetails = () => {
@@ -67,31 +68,33 @@ import { useNavigate } from "react-router-dom";
     <Col xs={8}>
       <Card
         className="journal-card"
-        style={{ width: "30rem", border: "1px solid lightblue" }}
+        style={{ width: "25rem", border: "1px solid lightblue" }}
       >
         <Card.Body>
           <Card.Title>
-            <Link to={`/homepage`}>
+           
               <strong className="journal-title">
-                {journal?.title}: ({formattedCreationDate})
+                {journal?.title}
               </strong>
-            </Link>
-          </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
+           
+          </Card.Title> <br />
+          {/* <Card.Subtitle className="mb-2 text-muted">
             <strong>{journal?.category?.name}</strong>
-          </Card.Subtitle>
+          </Card.Subtitle> */}
           <Card.Subtitle className="mb-2 text-muted">
             <em>{journal?.content}</em>
           </Card.Subtitle>{" "}
           <br />
           <Card.Subtitle className="mb-2 text-muted">
             {" "}
-            Gratitude:<em>{journal?.gratitude}</em>
+            Gratitude: <em>{journal?.gratitude}</em>
           </Card.Subtitle>{" "}
           <br />
           <Card.Subtitle className="mb-2 text-muted">
             What will make today/tomorrow great: <em>{journal?.intention}</em>
-          </Card.Subtitle>
+          </Card.Subtitle><br />
+          <Card.Subtitle className="mb-2 text-muted"> Created On:<em>{formattedCreationDate}</em> </Card.Subtitle>
+
           <br />
         </Card.Body>
         {showComments && <CommentList journalId={id} />}

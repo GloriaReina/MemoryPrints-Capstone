@@ -1,41 +1,81 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Button, Col, Container, Row, Table } from "reactstrap";
-import { Alert } from "react-bootstrap";
-import { GetAllJournals, SearchJournals } from "../../Managers/JournalManager";
-import JournalCard from "./JournalCard";
 import { Journal } from "../Journal";
+import React, { useState, useEffect } from "react";
+import { Button, Container, Row, Col, Alert } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
+import { GetAllJournals, SearchJournals } from "../../Managers/JournalManager";
+import JournalCard from "./JournalCard"; 
 
 export const JournalSearch = () => {
   const [journals, setJournals] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryQuery, setCategoryQuery] = useState("");
+  const [userRoleQuery, setUserRoleQuery] = useState("");
+  const [creationDateQuery, setCreationDateQuery] = useState("");
+  const [userNameQuery, setUserNameQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
 
   const getAllJournals = async () => {
    
-      const allJournals = await GetAllJournals();
-      setJournals(allJournals);
+          const allJournals = await GetAllJournals();
+          setJournals(allJournals);
+        
+      };
     
-  };
+      useEffect(() => {
+        getAllJournals();
+      }, []);
 
-  useEffect(() => {
-    getAllJournals();
-  }, []);
-
-  const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
-    setShowAlert(false);
-  };
-
-  const handleSearchButtonClick = async (event) => {
-    event.preventDefault();
-
-    if (searchQuery.trim() === "") {
+  const handleCategorySearch = async () => {
+    if (categoryQuery.trim() === "") {
       setShowAlert(true);
     } else {
       try {
-        const response = await SearchJournals(searchQuery);
+        const response = await SearchJournals(categoryQuery);
+        setSearchResults(response);
+        setShowAlert(false);
+      } catch (error) {
+        console.error("Error searching journals:", error);
+      }
+    }
+  };
+
+  const handleUserRoleSearch = async () => {
+    if (userRoleQuery.trim() === "") {
+      setShowAlert(true);
+    } else {
+      try {
+        const response = await SearchJournals(userRoleQuery);
+        setSearchResults(response);
+        setShowAlert(false);
+      } catch (error) {
+        console.error("Error searching journals:", error);
+      }
+    }
+  };
+
+  // const handleCreationDateSearch = async () => {
+  //   if (creationDateQuery.trim() === "") {
+  //     setShowAlert(true);
+  //   } else {
+  //     try {
+  //       // Format the date in ISO-8601 format
+  //       const isoDate = new Date(creationDateQuery).toISOString();
+  //       const response = await SearchJournals(isoDate); // Pass the ISO-8601 formatted date
+  //       setSearchResults(response);
+  //       setShowAlert(false);
+  //     } catch (error) {
+  //       console.error("Error searching journals:", error);
+  //     }
+  //   }
+  // };
+
+  const handleUserNameSearch = async () => {
+    if (userNameQuery.trim() === "") {
+      setShowAlert(true);
+    } else {
+      try {
+        const response = await SearchJournals(userNameQuery);
         setSearchResults(response);
         setShowAlert(false);
       } catch (error) {
@@ -45,7 +85,10 @@ export const JournalSearch = () => {
   };
 
   const handleCancelSearch = () => {
-    setSearchQuery("");
+    setCategoryQuery("");
+    setUserRoleQuery("");
+    // setCreationDateQuery("");
+    setUserNameQuery("");
     setSearchResults([]);
     setShowAlert(false);
   };
@@ -61,6 +104,7 @@ export const JournalSearch = () => {
     );
   };
 
+  
   return (
     <Container fluid className="journal-list">
       <Row>
@@ -69,37 +113,89 @@ export const JournalSearch = () => {
             <form className="journal-search-form">
               <input
                 type="text"
-                id="searchQuery"
-                value={searchQuery}
-                onChange={handleSearchInputChange}
+                id="categoryQuery"
+                value={categoryQuery}
+                onChange={(e) => setCategoryQuery(e.target.value)}
+                placeholder="Search by Category"
               />
-              <Button onClick={handleSearchButtonClick} >
-                Search
-              </Button>
-              {/* Show cancel button when search query is not empty */}
-              {searchQuery && (
-                <Button onClick={handleCancelSearch}>Cancel
-                </Button>
+              <Button onClick={handleCategorySearch}>Search by Category</Button>
+              {categoryQuery && (
+                <Button onClick={handleCancelSearch}>Cancel</Button>
               )}
-
-              {showAlert && emptySearchAlert()}
             </form>
           </div>
 
-          {searchResults.length > 0 && (
-            <div>
-              <div>
-                <Link onClick={handleCancelSearch}>Cancel</Link>
-              </div>
-              <h3>Search Results:</h3>
-              {searchResults.map((journal) => (
-                <Journal key={journal.id} journalProp={journal} />
-              ))}
-            </div>
-          )}
+          <div>
+            <form className="journal-search-form">
+              <input
+                type="text"
+                id="userRoleQuery"
+                value={userRoleQuery}
+                onChange={(e) => setUserRoleQuery(e.target.value)}
+                placeholder="Search by User Role"
+              />
+              <Button onClick={handleUserRoleSearch}>Search by User Role</Button>
+              {userRoleQuery && (
+                <Button onClick={handleCancelSearch}>Cancel</Button>
+              )}
+            </form>
+          </div>
 
-          {/* Display all journals when searchResults is empty */}
-          {searchResults.length === 0 && (
+          {/* <div>
+            <form className="journal-search-form">
+              <input
+                type="text"
+                id="creationDateQuery"
+                value={creationDateQuery}
+                onChange={(e) => setCreationDateQuery(e.target.value)}
+                placeholder="Search by Creation Date"
+              />
+              <Button onClick={handleCreationDateSearch}>Search by Creation Date</Button>
+              {creationDateQuery && (
+                <Button onClick={handleCancelSearch}>Cancel</Button>
+              )}
+            </form>
+          </div> */}
+
+          <div>
+            <form className="journal-search-form">
+              <input
+                type="text"
+                id="userNameQuery"
+                value={userNameQuery}
+                onChange={(e) => setUserNameQuery(e.target.value)}
+                placeholder="Search by User's Name"
+              />
+              <Button onClick={handleUserNameSearch}>Search by User's Name</Button>
+              {userNameQuery && (
+                <Button onClick={handleCancelSearch}>Cancel</Button>
+              )}
+            </form>
+          </div>
+          {searchResults.length > 0 && (
+  <div>
+    <h3>Search Results:</h3>
+    {searchResults.map((journal) => (
+      <Card key={journal.id} style={{ width: '25rem' }}>
+        <Card.Body>
+          <Card.Title>
+            <Link to={`/journals/${journal.id}`}>
+              <strong className="journal-title">{journal?.title}</strong>
+            </Link>
+          </Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            <em>{journal?.category?.name}</em>
+          </Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted">
+            Created: {new Date(journal?.creationDate).toLocaleDateString()}
+          </Card.Subtitle>
+        </Card.Body>
+      </Card>
+    ))}
+  </div>
+)}
+          {/*Display all journals when searchResults is empty */}
+           {searchResults.length === 0 && (
             <div>
               <h3>All Journals:</h3>
               {journals.map((journal) => (
@@ -113,91 +209,6 @@ export const JournalSearch = () => {
   );
 };
 
-// import React, { useState, useEffect } from 'react';
-// import JournalCard from './JournalCard';
 
-// export const JournalSearch = () => {
-//   const [searchTerm, setSearchTerm] = useState('');
-//   const [searchDate, setSearchDate] = useState('');
-//   const [searchCategory, setSearchCategory] = useState('');
-//   const [searchUserRole, setSearchUserRole] = useState('');
-//   const [searchType, setSearchType] = useState('Date'); // Default to Date
-//   const [searchResults, setSearchResults] = useState([]);
 
-//   useEffect(() => {
-//     handleSearchButtonClick();
-//   }, []);
 
-//   const handleSearchButtonClick = () => {
-//     let baseUrl = '/api/journal/';
-
-//     switch (searchType) {
-//       case 'Date':
-//         baseUrl += `searchbydate?searchDate=${encodeURIComponent(searchDate)}`;
-//         break;
-//       case 'Term':
-//         baseUrl += `searchbyterm?searchTerm=${encodeURIComponent(searchTerm)}`;
-//         break;
-//       case 'Category':
-//         baseUrl += `searchbycategory?categoryName=${encodeURIComponent(searchCategory)}`;
-//         break;
-//       case 'UserRole':
-//         baseUrl += `searchbyuserrole?roleName=${encodeURIComponent(searchUserRole)}`;
-//         break;
-//       default:
-//         break;
-//     }
-
-//     fetch(baseUrl)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         setSearchResults(data);
-//       });
-//   };
-
-//   console.log('searchResults:', searchResults);
-
-//   return (
-//     <div>
-//       <h1>Journal Search</h1>
-//       <div>
-//         <input
-//           type="text"
-//           value={searchTerm}
-//           onChange={(e) => setSearchTerm(e.target.value)}
-//           placeholder="Search by term"
-//         />
-//         <input
-//           type="date"
-//           value={searchDate}
-//           onChange={(e) => setSearchDate(e.target.value)}
-//           placeholder="Search by date"
-//         />
-//         <input
-//           type="text"
-//           value={searchCategory}
-//           onChange={(e) => setSearchCategory(e.target.value)}
-//           placeholder="Search by category"
-//         />
-//         <input
-//           type="text"
-//           value={searchUserRole}
-//           onChange={(e) => setSearchUserRole(e.target.value)}
-//           placeholder="Search by user role"
-//         />
-//         <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
-//           <option value="Date">Date</option>
-//           <option value="Term">Term</option>
-//           <option value="Category">Category</option>
-//           <option value="UserRole">User Role</option>
-//         </select>
-//         <button onClick={handleSearchButtonClick}>Search</button>
-//       </div>
-//       <div>
-//         {searchResults.map((journal) => (
-//           <JournalCard key={journal.id} journal={journal} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Globalization;
 
 namespace MemoryPrints.Repositories
 {
@@ -145,7 +146,8 @@ namespace MemoryPrints.Repositories
                         FROM Journal j
                         LEFT JOIN [User] u ON j.UserId = u.Id
                         LEFT JOIN Category c ON j.CategoryId = c.Id
-                        WHERE j.CreationDate <= SYSDATETIME() AND j.Id = @Id";
+                        WHERE j.CreationDate <= SYSDATETIME() AND j.Id = @Id
+                        ORDER BY j.CreationDate DESC";
 
                     cmd.Parameters.AddWithValue("@Id", id);
 
@@ -326,6 +328,77 @@ namespace MemoryPrints.Repositories
             }
         }
 
+
+        //public List<Journal> Search(string criterion)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            var sql = @"
+        //        SELECT j.Id, j.UserId,
+        //        j.CategoryId, j.IsApproved,  j.CreationDate,
+        //        c.[Name] AS CategoryName,u.FirstName, ur.[Name] AS RoleName
+        //        FROM Journal j
+        //        LEFT JOIN Category c ON j.CategoryId = c.Id
+        //        LEFT JOIN [User] u ON j.UserId = u.Id
+        //        LEFT JOIN UserRole ur ON U.UserRoleId = ur.Id
+        //        WHERE  ur.Name LIKE @Criterion OR  u.FirstName LIKE @Criterion OR
+        //              c.Name LIKE @Criterion OR j.CreationDate >= @Criterion ";
+
+        //            cmd.CommandText = sql;
+        //            if (DateTime.TryParse(criterion, out var parsedDate)) // Parse ISO-8601 formatted date
+        //            {
+        //                DbUtils.AddParameter(cmd, "@Criterion", parsedDate);
+        //            }
+        //            else
+        //            {
+        //                DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+        //            }
+
+        //            var reader = cmd.ExecuteReader();
+
+        //            var journals = new List<Journal>();
+        //            while (reader.Read())
+        //            {
+        //                journals.Add(new Journal()
+        //                {
+        //                    Id = DbUtils.GetInt(reader, "Id"),
+        //                    UserId = DbUtils.GetInt(reader, "UserId"),
+        //                    CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
+        //                    CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+        //                    IsApproved = DbUtils.GetBool(reader, "IsApproved"),
+        //                    Category = new Category()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "CategoryId"),
+        //                        Name = DbUtils.GetString(reader, "CategoryName")
+        //                    },
+
+        //                    User = new User()
+        //                    {
+        //                        FirstName = DbUtils.GetString(reader,"FirstName"),
+        //                        UserRole = new UserRole()
+        //                        {
+        //                            Name = DbUtils.GetString(reader, "RoleName")
+        //                        }
+
+
+        //                    }
+        //                });
+        //            }
+
+        //            reader.Close();
+
+        //            // Sort the journals in descending order based on CreationDate
+        //            journals.Sort((a, b) => b.CreationDate.CompareTo(a.CreationDate));
+
+        //            return journals;
+        //        }
+        //    }
+        //}
+
+
         public List<Journal> Search(string criterion)
         {
             using (var conn = Connection)
@@ -334,16 +407,14 @@ namespace MemoryPrints.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     var sql = @"
-                        SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
-                        j.CategoryId, j.IsApproved, 
+                        SELECT j.Id AS JournalId, j.UserId, j.Title, j.Content, j.Gratitude,
+                        j.Intention, j.CategoryId, j.IsApproved, j.CreationDate,u.FirstName, 
                         c.[Name] AS CategoryName, ur.[Name] AS RoleName
                         FROM Journal j
                         LEFT JOIN Category c ON j.CategoryId = c.Id
                         LEFT JOIN [User] u ON j.UserId = u.Id
                         LEFT JOIN UserRole ur ON U.UserRoleId = ur.Id
-                        WHERE j.Title LIKE @Criterion OR 
-                              j.Content LIKE @Criterion OR 
-                              ur.Name LIKE @Criterion OR
+                        WHERE ur.Name LIKE @Criterion OR u.FirstName LIKE @Criterion OR
                               c.Name LIKE @Criterion";
 
                     cmd.CommandText = sql;
@@ -355,9 +426,10 @@ namespace MemoryPrints.Repositories
                     {
                         journals.Add(new Journal()
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
+                            Id = DbUtils.GetInt(reader, "JournalId"),
                             UserId = DbUtils.GetInt(reader, "UserId"),
                             Title = DbUtils.GetString(reader, "Title"),
+                            CreationDate = DbUtils.GetDateTime(reader, "CreationDate"),
                             Content = DbUtils.GetString(reader, "Content"),
                             Gratitude = DbUtils.GetString(reader, "Gratitude"),
                             Intention = DbUtils.GetString(reader, "Intention"),
@@ -371,6 +443,7 @@ namespace MemoryPrints.Repositories
 
                             User = new User()
                             {
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
                                 UserRole = new UserRole()
                                 {
                                     Name = DbUtils.GetString(reader, "RoleName")
@@ -390,6 +463,75 @@ namespace MemoryPrints.Repositories
                 }
             }
         }
+
+
+
+
+        //Working code but kid gets me extra journal with kid in title
+        //public List<Journal> Search(string criterion)
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            var sql = @"
+        //                SELECT j.Id, j.UserId, j.Title, j.Content, j.Gratitude, j.Intention, 
+        //                j.CategoryId, j.IsApproved, 
+        //                c.[Name] AS CategoryName, ur.[Name] AS RoleName
+        //                FROM Journal j
+        //                LEFT JOIN Category c ON j.CategoryId = c.Id
+        //                LEFT JOIN [User] u ON j.UserId = u.Id
+        //                LEFT JOIN UserRole ur ON U.UserRoleId = ur.Id
+        //                WHERE j.Title LIKE @Criterion OR 
+        //                      j.Content LIKE @Criterion OR 
+        //                      ur.Name LIKE @Criterion OR
+        //                      c.Name LIKE @Criterion";
+
+        //            cmd.CommandText = sql;
+        //            DbUtils.AddParameter(cmd, "@Criterion", $"%{criterion}%");
+        //            var reader = cmd.ExecuteReader();
+
+        //            var journals = new List<Journal>();
+        //            while (reader.Read())
+        //            {
+        //                journals.Add(new Journal()
+        //                {
+        //                    Id = DbUtils.GetInt(reader, "Id"),
+        //                    UserId = DbUtils.GetInt(reader, "UserId"),
+        //                    Title = DbUtils.GetString(reader, "Title"),
+        //                    Content = DbUtils.GetString(reader, "Content"),
+        //                    Gratitude = DbUtils.GetString(reader, "Gratitude"),
+        //                    Intention = DbUtils.GetString(reader, "Intention"),
+        //                    CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+        //                    IsApproved = DbUtils.GetBool(reader, "IsApproved"),
+        //                    Category = new Category()
+        //                    {
+        //                        Id = DbUtils.GetInt(reader, "CategoryId"),
+        //                        Name = DbUtils.GetString(reader, "CategoryName")
+        //                    },
+
+        //                    User = new User()
+        //                    {
+        //                        UserRole = new UserRole()
+        //                        {
+        //                            Name = DbUtils.GetString(reader, "RoleName")
+        //                        }
+
+
+        //                    }
+        //                });
+        //            }
+
+        //            reader.Close();
+
+        //            // Sort the journals in descending order based on CreationDate
+        //            journals.Sort((a, b) => b.CreationDate.CompareTo(a.CreationDate));
+
+        //            return journals;
+        //        }
+        //    }
+        //}
 
 
 
