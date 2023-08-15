@@ -10,6 +10,7 @@ import {
   Row
 } from "react-bootstrap";
 
+
 export const MyJournalEntries = () => {
   const [journals, setJournals] = useState([]);
 

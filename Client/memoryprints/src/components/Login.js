@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../Managers/UserManagers";
+import "./Login.css"
+
 
 export default function Login({setIsLoggedIn}) {
   
@@ -25,6 +27,12 @@ export default function Login({setIsLoggedIn}) {
   };
 
   return (
+    <>
+    <div className='hero-container'>
+      <video src='/video/video-1.mp4' autoPlay loop muted />
+      <h4> THE JOURNEY AWAITS</h4>
+      <h3>What are you waiting for?</h3>
+      <div className="login-container">
     <Form onSubmit={loginSubmit}>
       <fieldset>
         <FormGroup>
@@ -38,10 +46,10 @@ export default function Login({setIsLoggedIn}) {
         <FormGroup>
           <Button>Login</Button>
         </FormGroup>
-        {/* <em>
-          Not registered? <Link to="/register">Register</Link>
-        </em> */}
       </fieldset>
     </Form>
+    </div>
+    </div>
+    </>
   );
 }

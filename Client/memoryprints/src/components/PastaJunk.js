@@ -1,67 +1,74 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-export const Navbar=()=>{
-const [click, setClick]= useState (false);
-const handleClick= ()=>setClick(!click);
-const closeMobileMenu= ()=>setClick(false)
 return (
-<>
-    <nav className="navbar">
-        <div className="navbar-container">
-            <Link to ="/" className="navbar-logo">
-            <FontAwesomeIcon icon={faFingerprint} />MemoryPrints
-            </Link>
-            <div className="menu-icons" onClick={handleClick}>
-                <i className={click ? 'fas fa-times': 'fas fa-bars'} />
-            </div>
-            <ul className={click ? 'nav-menu active': 'nav-menu '}>
-            <li className="nav-items">
-            <Link to ="/Homepage" className="nav-links" onClick={closeMobileMenu}>
-            Home
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/alljournals" className="nav-links" onClick={closeMobileMenu}>
-            All Entries
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/unapprovedjournals" className="nav-links" onClick={closeMobileMenu}>
-            Unapproved Entries
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/sharedjournals" className="nav-links" onClick={closeMobileMenu}>
-            Shared Entries
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/myprofile" className="nav-links" onClick={closeMobileMenu}>
-            Profile
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/" className="nav-links" onClick={closeMobileMenu}>
-            Logout
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/login" className="nav-links" onClick={closeMobileMenu}>
-            Login
-            </Link>
-            </li>
-            <li className="nav-items">
-            <Link to ="/register" className="nav-links-mobile " onClick={closeMobileMenu}>
-            Register
-            </Link>
-            </li>
-            </ul>
+    <>
+      <Navbar className="navbar" expand="lg" bg="navbar-background" variant="dark">
+        <Navbar.Brand as={Link} to="/" className='navbar-logo' onClick={closeMobileMenu}>
+          <FontAwesomeIcon icon={faFingerprint} />
+          MemoryPrints
+        </Navbar.Brand>
+        <div className='menu-icon' onClick={handleClick}>
+          <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
-    </nav>
+        <Navbar.Collapse id="basic-navbar-nav">
+  {isLoggedIn ? (
+    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Home
+        </NavLink>
+      </li>
+      {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 1 || userRoleId === 2)) && (
+        <>
+          <li className='nav-item'>
+            <NavLink as={Link} to="/alljournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+              All Entries
+            </NavLink>
+          </li>
+          {userRoleId === 1 && (
+            <li className='nav-item'>
+              <NavLink as={Link} to="/unapprovedjournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+                Unapproved Journals
+              </NavLink>
+            </li>
+          )}
+        </>
+      )}
+      {userRoleId === 3 && (
+        <li className='nav-item'>
+          <NavLink as={Link} to="/sharedjournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+            Shared Journals
+          </NavLink>
+        </li>
+      )}
+      <li className='nav-item'>
+        <NavLink as={Link} to="/myprofile" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Profile
+        </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink bsPrefix="nav-link-custom" onClick={handleLogout}>
+          Logout
+        </NavLink>
+      </li>
+    </ul>
+  ) : (
+    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/login" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Login
+        </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/register" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Register
+        </NavLink>
+      </li>
+    </ul>
+  )}
+</Navbar.Collapse>
+      </Navbar>
     </>
-)
-}
+  );
+
 
 
 

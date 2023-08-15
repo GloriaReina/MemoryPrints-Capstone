@@ -13,7 +13,7 @@ export default function ApplicationViews() {
 
  return(
       <Routes>
-      <Route path="/homepage" element={<HomePage />} /> 
+      <Route path="/" element={<HomePage />} /> 
       <Route path="/journals/:id" element= {<JournalDetails/>} />
       <Route path="/unapprovedjournals" element= {<UnapprovedJournals/>} />
       <Route path="/sharedjournals" element= {<SharedJournals />} />

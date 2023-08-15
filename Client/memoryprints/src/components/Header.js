@@ -20,7 +20,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    navigate('/', { replace: true });
+    navigate('/login', { replace: true });
   };
 
   useEffect(() => {
@@ -40,73 +40,72 @@ export const Header = () => {
   return (
     <>
       <Navbar className="navbar" expand="lg" bg="navbar-background" variant="dark">
+      <div className='navbar-container'>
         <Navbar.Brand as={Link} to="/" className='navbar-logo' onClick={closeMobileMenu}>
-          <FontAwesomeIcon icon={faFingerprint} />
+          <FontAwesomeIcon className='icon' icon={faFingerprint} />
           MemoryPrints
         </Navbar.Brand>
         <div className='menu-icon' onClick={handleClick}>
           <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+  {isLoggedIn ? (
+    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Home
+        </NavLink>
+      </li>
+      {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 1 || (localStorage.getItem("user")).userRoleId === 2)) && (
+        <>
+          <li className='nav-item'>
+            <NavLink as={Link} to="/alljournals" className='nav-links'bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+              All Entries
+            </NavLink>
+          </li>
+        </>
+      )}
+      {(localStorage.getItem("user")).userRoleId === 1 && (
             <li className='nav-item'>
-              <NavLink as={Link} to="/homepage" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                Home
+              <NavLink as={Link} to="/unapprovedjournals" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+                Unapproved Journals
               </NavLink>
             </li>
-            {isLoggedIn && JSON.parse(localStorage.getItem("user")).userRoleId === 1 && (
-              <>
-                <li className='nav-item'>
-                  <NavLink as={Link} to="/alljournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                    All Entries
-                  </NavLink>
-                </li>
-                <li className='nav-item'>
-                  <NavLink as={Link} to="/unapprovedjournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                    Unapproved Journals
-                  </NavLink>
-                </li>
-              </>
-            )}
-            {isLoggedIn && JSON.parse(localStorage.getItem("user")).userRoleId === 3 && (
-              <li className='nav-item'>
-                <NavLink as={Link} to="/sharedjournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                  Shared Journals
-                </NavLink>
-              </li>
-            )}
-            <li className='nav-item'>
-              <NavLink as={Link} to="/myprofile" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                Profile
-              </NavLink>
-            </li>
-            {isLoggedIn ? (
-              <li className='nav-item'>
-                <NavLink bsPrefix="nav-link-custom" onClick={handleLogout}>
-                  Logout
-                </NavLink>
-              </li>
-            ) : (
-              <>
-                <li className='nav-item'>
-                  <NavLink as={Link} to="/" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                    Login
-                  </NavLink>
-                </li>
-                <li className='nav-item'>
-                  <NavLink as={Link} to="/register" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                    Register
-                  </NavLink>
-                </li>
-              </>
-            )}
-          </ul>
-        </Navbar.Collapse>
-        {button && (
-          <Button buttonStyle='btn--outline' as={Link} to="/sign-up">
-            SIGN UP
-          </Button>
-        )}
+          )}
+      {(localStorage.getItem("user")).userRoleId === 3 && (
+        <li className='nav-item'>
+          <NavLink as={Link} to="/sharedjournals" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+            Shared Journals
+          </NavLink>
+        </li>
+      )}
+      <li className='nav-item'>
+        <NavLink as={Link} to="/myprofile" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Profile
+        </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink className='nav-links' bsPrefix="nav-link-custom" onClick={handleLogout}>
+          Logout
+        </NavLink>
+      </li>
+    </ul>
+  ) : (
+    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/login" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Login
+        </NavLink>
+      </li>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/register" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          Register
+        </NavLink>
+      </li>
+    </ul>
+  )}
+</Navbar.Collapse>
+</div>
       </Navbar>
     </>
   );
