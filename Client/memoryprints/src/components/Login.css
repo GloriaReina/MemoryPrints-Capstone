@@ -25,9 +25,9 @@
   }
 
   .login-container Button {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    display: block;
+    margin: 0 auto; /* Horizontally center the button */
+    padding: 10px;
     width: 50%;
     margin-top: 20px;
     color: rgb(19, 76, 95);
