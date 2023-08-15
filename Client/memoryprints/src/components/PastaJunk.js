@@ -1,3 +1,71 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+export const Navbar=()=>{
+const [click, setClick]= useState (false);
+const handleClick= ()=>setClick(!click);
+const closeMobileMenu= ()=>setClick(false)
+return (
+<>
+    <nav className="navbar">
+        <div className="navbar-container">
+            <Link to ="/" className="navbar-logo">
+            <FontAwesomeIcon icon={faFingerprint} />MemoryPrints
+            </Link>
+            <div className="menu-icons" onClick={handleClick}>
+                <i className={click ? 'fas fa-times': 'fas fa-bars'} />
+            </div>
+            <ul className={click ? 'nav-menu active': 'nav-menu '}>
+            <li className="nav-items">
+            <Link to ="/Homepage" className="nav-links" onClick={closeMobileMenu}>
+            Home
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/alljournals" className="nav-links" onClick={closeMobileMenu}>
+            All Entries
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/unapprovedjournals" className="nav-links" onClick={closeMobileMenu}>
+            Unapproved Entries
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/sharedjournals" className="nav-links" onClick={closeMobileMenu}>
+            Shared Entries
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/myprofile" className="nav-links" onClick={closeMobileMenu}>
+            Profile
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/" className="nav-links" onClick={closeMobileMenu}>
+            Logout
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/login" className="nav-links" onClick={closeMobileMenu}>
+            Login
+            </Link>
+            </li>
+            <li className="nav-items">
+            <Link to ="/register" className="nav-links-mobile " onClick={closeMobileMenu}>
+            Register
+            </Link>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    </>
+)
+}
+
+
+
+
 
 
 // import React, { useState, useEffect } from "react";

@@ -1,4 +1,5 @@
-import EmojiPicker from "@emoji-mart/react";
+import { useState } from "react";
+// import EmojiPicker from "@emoji-mart/react";
 import { Data, Picker } from "emoji-mart";
 
 export const JournalReactions = ()=>{
@@ -14,7 +15,7 @@ return(
         onClick={()=>setPickerVisible(!isPickerVisible)}
         >Open Emoji Picker</button>
         <div className={isPickerVisible? 'd-block':'d-none'}>
-            <Picker data={data} previewPosition='none' onEmojiSelect={(e)=>{
+            <Picker data={Data} previewPosition='none' onEmojiSelect={(e)=>{
                 setReaction(e.native);
                 setPickerVisible(!isPickerVisible)
             }}
@@ -33,7 +34,7 @@ return(
 // // import 'emoji-mart/dist/css/emoji-mart.css';
 // import { getJournalReactions, addJournalReaction } from '../../Managers/JournalReactionManager';
 
-// const JournalReactions = ({ userId }) => {
+// export const JournalReactions = ({ userId }) => {
 //     const [reactions, setReactions] = useState([]);
 //     const [emojiCounts, setEmojiCounts] = useState({});
   
@@ -93,7 +94,7 @@ return(
 //     );
 //   };
 
-// export default JournalReactions;
+
 
 
 

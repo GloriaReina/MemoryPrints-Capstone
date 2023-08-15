@@ -17,6 +17,8 @@ export const UnapprovedJournals = () => {
     });
   };
 
+  console.log(unapprovedJournals)
+
   const handleApproveClick = (journalId) => {
     ApproveJournal(journalId).then(() => {
       fetchUnapprovedJournals();
