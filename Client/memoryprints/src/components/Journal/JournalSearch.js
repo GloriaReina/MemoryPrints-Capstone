@@ -179,14 +179,14 @@ export const JournalSearch = () => {
       <Card key={journal.id} style={{ width: '25rem' }}>
         <Card.Body>
           <Card.Title>
-            <Link to={`/journals/${journal.id}`}>
-              <strong className="journal-title">{journal?.title}</strong>
+            <Link to={`/journals/${journal.id}`} className="journal-title">
+              <strong >{journal?.title}</strong>
             </Link>
           </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
+          <Card.Subtitle className="subtitle">
             <em>{journal?.category?.name}</em>
           </Card.Subtitle>
-          <Card.Subtitle className="mb-2 text-muted">
+          <Card.Subtitle className="subtitle">
             Created: {new Date(journal?.creationDate).toLocaleDateString()}
           </Card.Subtitle>
         </Card.Body>
