@@ -11,7 +11,7 @@ export const Journal = ({journalProp}) => {
 
     
     return (
-        <Card style={{ width: '25rem' }}>
+        <Card style={{ width: '25rem', border: '1px solid lightblue' }} >
           <Card.Body>
             <Card.Title>
             <Link to={`/journals/${journalProp.id}`} className="journal-title">

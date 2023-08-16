@@ -19,7 +19,7 @@ const DeleteJournal = ({ journalId, handleDeleteJournal }) => {
   }
 
   return (
-    <button onClick={() => setConfirmDelete(true)}>Delete Journal</button>
+    <button  className='btn--outline' onClick={() => setConfirmDelete(true)}>Delete Journal</button>
   );
 };
 

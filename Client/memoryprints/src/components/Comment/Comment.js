@@ -3,7 +3,7 @@ import { Card, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
-
+import "./Comment.css"
 
 export const Comment = ({ comment,handleDeleteCommentFnc, fetchCommentsByJournal}) => {
   const [showEditForm, setShowEditForm] = useState(false);

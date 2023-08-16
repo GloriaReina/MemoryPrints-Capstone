@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GetCommentsByJournal } from "../../Managers/CommentManager";
 import { DeleteCommentsById } from "../../Managers/CommentManager";
 import {Comment} from "./Comment";
-
+import "./CommentList.css"
 //receive journalId from Journal Details
 const CommentList = ({journalId}) => {
   const [comments, setComments] = useState([]);
@@ -27,8 +27,6 @@ const CommentList = ({journalId}) => {
         fetchCommentsByJournal();
       })
   };
-
-  console.log(comments);
 
 
   return (

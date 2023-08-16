@@ -44,7 +44,7 @@ export default function Login({setIsLoggedIn}) {
           <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Button>Login</Button>
+          <Button className='btn--outline'>Login</Button>
         </FormGroup>
       </fieldset>
     </Form>

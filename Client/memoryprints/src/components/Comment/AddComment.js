@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { addComment } from "../../Managers/CommentManager";
 
-export const AddComment = ({ journalId, setShowAddCommentForm }) => {
+export const AddComment = ({ journalId, setShowAddCommentForm}) => {
   const [comment, setComment] = useState({
     content: "",
     journal:"",
@@ -52,12 +52,12 @@ export const AddComment = ({ journalId, setShowAddCommentForm }) => {
           />
         </div>
       </fieldset>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="journal-button">
         Submit
       </button>
       <button
         type="button"
-        className="btn btn-secondary"
+        className="journal-button"
         onClick={handleCancel}
       >
         Cancel

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { GetAllJournals, SearchJournals } from "../../Managers/JournalManager";
 import JournalCard from "./JournalCard"; 
+import "./JournalSearch.css"
 
 export const JournalSearch = () => {
   const [journals, setJournals] = useState([]);
@@ -93,20 +94,9 @@ export const JournalSearch = () => {
     setShowAlert(false);
   };
 
-  const emptySearchAlert = () => {
-    return (
-      <Alert variant="danger" key={"danger"}>
-        <div>
-          Please enter a search value.{" "}
-          <Link onClick={() => setShowAlert(false)}>clear</Link>
-        </div>
-      </Alert>
-    );
-  };
-
   
   return (
-    <Container fluid className="journal-list">
+    <Container fluid className="container-master">
       <Row>
         <Col>
           <div>
@@ -118,9 +108,9 @@ export const JournalSearch = () => {
                 onChange={(e) => setCategoryQuery(e.target.value)}
                 placeholder="Search by Category"
               />
-              <Button onClick={handleCategorySearch}>Search by Category</Button>
+              <Button className='btn--outline' onClick={handleCategorySearch}>Search</Button>
               {categoryQuery && (
-                <Button onClick={handleCancelSearch}>Cancel</Button>
+                <Button className='btn--outline'onClick={handleCancelSearch}>Cancel</Button>
               )}
             </form>
           </div>
@@ -134,9 +124,9 @@ export const JournalSearch = () => {
                 onChange={(e) => setUserRoleQuery(e.target.value)}
                 placeholder="Search by User Role"
               />
-              <Button onClick={handleUserRoleSearch}>Search by User Role</Button>
+              <Button className='btn--outline' onClick={handleUserRoleSearch}>Search</Button>
               {userRoleQuery && (
-                <Button onClick={handleCancelSearch}>Cancel</Button>
+                <Button className='btn--outline' onClick={handleCancelSearch}>Cancel</Button>
               )}
             </form>
           </div>
@@ -164,19 +154,19 @@ export const JournalSearch = () => {
                 id="userNameQuery"
                 value={userNameQuery}
                 onChange={(e) => setUserNameQuery(e.target.value)}
-                placeholder="Search by User's Name"
+                placeholder="Search by Firstname"
               />
-              <Button onClick={handleUserNameSearch}>Search by User's Name</Button>
+              <Button className='btn--outline'onClick={handleUserNameSearch}>Search</Button>
               {userNameQuery && (
-                <Button onClick={handleCancelSearch}>Cancel</Button>
+                <Button className='btn--outline' onClick={handleCancelSearch}>Cancel</Button>
               )}
             </form>
           </div>
           {searchResults.length > 0 && (
-  <div>
-    <h3>Search Results:</h3>
+     <div>
+    <h3>Results:</h3>
     {searchResults.map((journal) => (
-      <Card key={journal.id} style={{ width: '25rem' }}>
+      <Card key={journal.id} style={{ width: '25rem', border: '1px solid lightblue' }} >
         <Card.Body>
           <Card.Title>
             <Link to={`/journals/${journal.id}`} className="journal-title">
@@ -197,7 +187,7 @@ export const JournalSearch = () => {
           {/*Display all journals when searchResults is empty */}
            {searchResults.length === 0 && (
             <div>
-              <h3>All Journals:</h3>
+              {/* <h3>Journals</h3> */}
               {journals.map((journal) => (
                 <Journal key={journal.id} journalProp={journal} />
               ))}
@@ -206,6 +196,7 @@ export const JournalSearch = () => {
         </Col>
       </Row>
     </Container>
+   
   );
 };
 

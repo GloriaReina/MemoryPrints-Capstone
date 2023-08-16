@@ -1,12 +1,12 @@
 import { JournalSearch } from "./Journal/JournalSearch";
+import "./AllJournalEntries.css"
 
 export const AllJournalEntries= ()=> {
     return (
-      <>
-      <h1>Journals</h1>
-      <JournalSearch />
+    
       
-      </>
+      <JournalSearch />
+     
       
     )
   };

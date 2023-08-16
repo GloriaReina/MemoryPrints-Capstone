@@ -1,72 +1,62 @@
-return (
-    <>
-      <Navbar className="navbar" expand="lg" bg="navbar-background" variant="dark">
-        <Navbar.Brand as={Link} to="/" className='navbar-logo' onClick={closeMobileMenu}>
-          <FontAwesomeIcon icon={faFingerprint} />
-          MemoryPrints
-        </Navbar.Brand>
-        <div className='menu-icon' onClick={handleClick}>
-          <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-        </div>
-        <Navbar.Collapse id="basic-navbar-nav">
-  {isLoggedIn ? (
-    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-      <li className='nav-item'>
-        <NavLink as={Link} to="/" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-          Home
-        </NavLink>
-      </li>
-      {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 1 || userRoleId === 2)) && (
-        <>
-          <li className='nav-item'>
-            <NavLink as={Link} to="/alljournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-              All Entries
-            </NavLink>
-          </li>
-          {userRoleId === 1 && (
-            <li className='nav-item'>
-              <NavLink as={Link} to="/unapprovedjournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-                Unapproved Journals
-              </NavLink>
-            </li>
-          )}
-        </>
-      )}
-      {userRoleId === 3 && (
-        <li className='nav-item'>
-          <NavLink as={Link} to="/sharedjournals" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-            Shared Journals
-          </NavLink>
-        </li>
-      )}
-      <li className='nav-item'>
-        <NavLink as={Link} to="/myprofile" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-          Profile
-        </NavLink>
-      </li>
-      <li className='nav-item'>
-        <NavLink bsPrefix="nav-link-custom" onClick={handleLogout}>
-          Logout
-        </NavLink>
-      </li>
-    </ul>
-  ) : (
-    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-      <li className='nav-item'>
-        <NavLink as={Link} to="/login" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-          Login
-        </NavLink>
-      </li>
-      <li className='nav-item'>
-        <NavLink as={Link} to="/register" bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-          Register
-        </NavLink>
-      </li>
-    </ul>
-  )}
-</Navbar.Collapse>
-      </Navbar>
-    </>
+  return  (
+    <div className="details-container">
+      <Col xs={8}>
+        <Card className="journal-card">
+          <Card.Body>
+            <Card.Title>
+              <strong className="journal-title">{journal.title}</strong>
+            </Card.Title>
+            <Card.Subtitle className="subtitle">
+              <em>{journal.content}</em>
+            </Card.Subtitle>
+            <Card.Subtitle className="subtitle">
+              Gratitude: <em>{journal.gratitude}</em>
+            </Card.Subtitle>
+            <Card.Subtitle className="subtitle">
+              What will make today/tomorrow great:{" "}
+              <em>{journal.intention}</em>
+            </Card.Subtitle>
+            <Card.Subtitle className="subtitle">
+              Created On: <em>{formattedCreationDate}</em>
+            </Card.Subtitle>
+          </Card.Body>
+          <div className="button-container">
+            <div className="button-group-left">
+            {showComments && <CommentList journalId={id} />}
+        <Button  className="journal-button" onClick={toggleComments}>
+          {showComments ? "Hide Comments" : "View Comments"}
+        </Button>
+        <Button className="journal-button" onClick={() => setShowAddCommentForm(true)}>Add Comment
+           {showAddCommentForm && 
+            <AddComment journalId={+id} toggleAddCommentForm={toggleAddCommentForm} setShowAddCommentForm={setShowAddCommentForm} toggleComments ={toggleComments } />}
+             </Button> 
+            </div>
+            <div className="button-group-right">
+              <DeleteJournal
+                journalId={+id}
+                handleDeleteJournal={handleDeleteJournal}
+              />
+              {showJournalEditForm ? (
+                <EditJournal
+                  journal={journal}
+                  handleJournalEditRequest={handleJournalEditRequest}
+                  handleCancelEditButtonClick={
+                    handleCancelEditButtonClick
+                  }
+                />
+              ) : (
+                <button
+                  className="journal-button"
+                  onClick={handleEditButtonClick}
+                >
+                  Edit Journal
+                </button>
+              )}
+            </div>
+          </div>
+        </Card>
+      </Col>
+    </div>
   );
 
 

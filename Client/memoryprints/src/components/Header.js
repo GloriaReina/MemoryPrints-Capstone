@@ -65,20 +65,20 @@ export const Header = () => {
           </li>
         </>
       )}
-      {(localStorage.getItem("user")).userRoleId === 1 && (
+      {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 1 && (
             <li className='nav-item'>
               <NavLink as={Link} to="/unapprovedjournals" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
                 Unapproved Journals
               </NavLink>
             </li>
-          )}
-      {(localStorage.getItem("user")).userRoleId === 3 && (
+          )))}
+      {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 3 && (
         <li className='nav-item'>
           <NavLink as={Link} to="/sharedjournals" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
             Shared Journals
           </NavLink>
         </li>
-      )}
+      )))}
       <li className='nav-item'>
         <NavLink as={Link} to="/myprofile" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
           Profile
