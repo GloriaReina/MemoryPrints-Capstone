@@ -2,7 +2,7 @@
     background-color: #838e830d;
 } */
 body .container-master{
-    background: url('images/img-3.jpg') center center/cover no-repeat;
+    background: url('images/img-3.jpg');
     display: flex;
     align-items: center;
     justify-content: center;

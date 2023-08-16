@@ -107,7 +107,7 @@ namespace MemoryPrints.Controllers
                 // Delete references from related tables
                 _commentRepository.Delete(id);
                 _journalReactionRepository.DeleteJournalReaction(id);
-                            _journalEntryChildProfilesLinkRepository.DeleteJournalEntryKidProfile(id);
+                _journalEntryChildProfilesLinkRepository.DeleteJournalEntryKidProfile(id);
                
             }
 

@@ -71,7 +71,7 @@ const JournalDetails = () => {
     <Col xs={8}>
       <Card
         className="journal-card"
-        style={{ width: "25rem", border: "1px solid lightblue" }}
+        style={{ width: "60rem", border: "1px solid lightblue" }}
       >
         <Card.Body>
           <Card.Title>

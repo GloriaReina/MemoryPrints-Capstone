@@ -8,7 +8,7 @@ import { faFingerprint } from '@fortawesome/free-solid-svg-icons';
 import { Button } from './Button';
 import './Header.css';
 
-export const Header = () => {
+export const Header = ({setIsLoggedIn}) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -20,6 +20,7 @@ export const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    setIsLoggedIn(false)
     navigate('/login', { replace: true });
   };
 
