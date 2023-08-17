@@ -126,7 +126,7 @@ const EditJournal = ({ journal, handleJournalEditRequest, handleCancelEditButton
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" className="save-journal-button" onClick={handleSaveClick}>
+        <Button variant="success" className="save-edit-button" onClick={handleSaveClick}>
           Save
         </Button>
         <Button variant="success" className="cancel-edit-button" onClick={handleCancelEditButtonClick}>

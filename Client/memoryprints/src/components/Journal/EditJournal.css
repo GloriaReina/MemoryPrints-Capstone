@@ -62,7 +62,7 @@
 .cancel-edit-button {
   position: absolute;
   top: 2%;
-  right: 16%;
+  right: 18%;
   background-color:#d7e8d6;
   border-radius: 3px;
 
@@ -84,34 +84,9 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-right: 5px;
 }
 
 .save-edit-button:hover {
   background-color: #1fe0b9;
 }
-
-/* 
-.deniedModal {
-    position:absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 50%;
-    width:70%;
-  }
-
-.deniedCloseBtn{
-    position: absolute;
-    top: 1%;
-    right: 17%;
-    background-color:rgb(109, 216, 109);
-    border-radius: 3px;
-  
-  
-  }
-  .deniedCloseBtn:hover {
-    background-color: #1fe0b9;
-  } */

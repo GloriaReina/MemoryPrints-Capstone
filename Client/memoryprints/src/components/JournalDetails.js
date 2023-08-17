@@ -133,6 +133,7 @@ const JournalDetails = () => {
       <DeleteJournal
         journalId={+id}
         handleDeleteJournal={handleDeleteJournal}
+        journal= {journal}
       />
       {showJournalEditForm ? (
         <EditJournal
