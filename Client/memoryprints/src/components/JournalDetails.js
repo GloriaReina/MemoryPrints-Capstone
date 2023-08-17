@@ -67,67 +67,154 @@ const JournalDetails = () => {
   ).toLocaleDateString();
 
   return (
-    <div className="master-container">
+   <>
     <div className="details-container">
     <Col xs={8}>
-      <Card
-        className="journal-card"
-        style={{ width: "60rem"}}
-      >
+      <Card className="journal-card" style={{ width: "60rem" }}>
         <Card.Body>
           <Card.Title>
-           
-              <strong className="journal-title standout-text">
-                {journal?.title}
-              </strong>
-           
+            <strong className="journal-title-details standout-text">
+              {journal?.title}
+            </strong>
           </Card.Title> <br />
-          {/* <Card.Subtitle className="subtitle">
-            <strong>{journal?.category?.name}</strong>
-          </Card.Subtitle> */}
           <Card.Subtitle className="subtitle">
             <em>{journal?.content}</em>
           </Card.Subtitle>{" "}
           <br />
           <Card.Subtitle className="subtitle">
-            {" "}
-          <strong className="label-text  standout-text">  Gratitude: </strong><em>{journal?.gratitude}</em>
+            <strong className="label-text standout-text">Gratitude: </strong>
+            <em>{journal?.gratitude}</em>
           </Card.Subtitle>{" "}
           <br />
           <Card.Subtitle className="subtitle">
-          <strong  className="label-text  standout-text"> What will make today/tomorrow great: </strong><em>{journal?.intention}</em>
-          </Card.Subtitle><br />
-          <Card.Subtitle className="subtitle"> <strong className="label-text">Created On:</strong><em>{formattedCreationDate}</em> </Card.Subtitle>
-
+            <strong className="label-text standout-text">
+              What will make today/tomorrow great:{" "}
+            </strong>
+            <em>{journal?.intention}</em>
+          </Card.Subtitle>
+          <br />
+          <Card.Subtitle className="subtitle">
+            <strong className="label-text">Written On: </strong>
+            <em>{formattedCreationDate}</em>
+          </Card.Subtitle>
           <br />
         </Card.Body>
-        <div className="button-style-container">
-        <div className="button-group-left">
-        {showComments && <CommentList journalId={id} />}
-        <Button className='btn--outline' onClick={toggleComments}>
-          {showComments ? "Hide Comments" : "View Comments"}
-        </Button>
-        <Button className='btn--outline' onClick={() => setShowAddCommentForm(true)}>Add Comment</Button> 
-        {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} toggleComments ={toggleComments } />}
-        </div>
-        <div className="button-group-right">
-        <DeleteJournal journalId={+id} handleDeleteJournal={handleDeleteJournal} />
-        {showJournalEditForm ? (
-          <EditJournal journal={journal} handleEditButtonClick={handleEditButtonClick}handleJournalEditRequest={handleJournalEditRequest} handleCancelEditButtonClick ={handleCancelEditButtonClick} />
-        ) : (
-          <Button className='btn--outline' onClick={handleEditButtonClick}>Edit Journal</Button>
-        )}
-        </div>
-        </div>
       </Card>
-      {/* <JournalReactions journalId={id} /> */}
     </Col>
+  </div>
+  
+  <div className="centered-content">
+  {showComments && (
+    <div className="comment-list-container">
+      <CommentList journalId={id} />
     </div>
+  )}
+  <div className="button-style-container">
+    <div className="button-group-left">
+      <Button className="btn--outline" onClick={toggleComments}>
+        
+        {showComments ? "Hide Comments" : "View Comments"}
+      </Button>
+      <Button
+        className="btn--outline"
+        onClick={() => setShowAddCommentForm(true)}
+      >
+        Add Comment
+      </Button>
+      {showAddCommentForm && (
+        <AddComment
+          journalId={+id}
+          setShowAddCommentForm={setShowAddCommentForm}
+          toggleComments={toggleComments}
+        />
+      )}
     </div>
+    <div className="button-group-right">
+      <DeleteJournal
+        journalId={+id}
+        handleDeleteJournal={handleDeleteJournal}
+      />
+      {showJournalEditForm ? (
+        <EditJournal
+          journal={journal}
+          handleEditButtonClick={handleEditButtonClick}
+          handleJournalEditRequest={handleJournalEditRequest}
+          handleCancelEditButtonClick={handleCancelEditButtonClick}
+        />
+      ) : (
+        <Button className="btn--outline" onClick={handleEditButtonClick}>
+          Edit Journal
+        </Button>
+      )}
+    </div>
+  </div>
+  </div>
+</>  
   );
 };
 
 export default JournalDetails
+
+/*working code before separating the button container*/
+// return (
+   
+//   <div className="details-container">
+//   <Col xs={8}>
+//     <Card
+//       className="journal-card"
+//       style={{ width: "60rem"}}
+//     >
+//       <Card.Body>
+//         <Card.Title>
+         
+//             <strong className="journal-title-details standout-text">
+//               {journal?.title}
+//             </strong>
+         
+//         </Card.Title> <br />
+//         {/* <Card.Subtitle className="subtitle">
+//           <strong>{journal?.category?.name}</strong>
+//         </Card.Subtitle> */}
+//         <Card.Subtitle className="subtitle">
+//           <em>{journal?.content}</em>
+//         </Card.Subtitle>{" "}
+//         <br />
+//         <Card.Subtitle className="subtitle">
+//           {" "}
+//         <strong className="label-text  standout-text">  Gratitude: </strong><em>{journal?.gratitude}</em>
+//         </Card.Subtitle>{" "}
+//         <br />
+//         <Card.Subtitle className="subtitle">
+//         <strong  className="label-text  standout-text"> What will make today/tomorrow great: </strong><em>{journal?.intention}</em>
+//         </Card.Subtitle><br />
+//         <Card.Subtitle className="subtitle"> <strong className="label-text">Written On: </strong><em>{formattedCreationDate}</em> </Card.Subtitle>
+
+//         <br />
+//       </Card.Body>
+//       <div className="button-style-container">
+//       <div className="button-group-left">
+//       {showComments && <CommentList journalId={id} />}
+//       <Button className='btn--outline' onClick={toggleComments}>
+//         {showComments ? "Hide Comments" : "View Comments"}
+//       </Button>
+//       <Button className='btn--outline' onClick={() => setShowAddCommentForm(true)}>Add Comment</Button> 
+//       {showAddCommentForm && <AddComment journalId={+id} setShowAddCommentForm={setShowAddCommentForm} toggleComments ={toggleComments } />}
+//       </div>
+//       <div className="button-group-right">
+//       <DeleteJournal journalId={+id} handleDeleteJournal={handleDeleteJournal} />
+//       {showJournalEditForm ? (
+//         <EditJournal journal={journal} handleEditButtonClick={handleEditButtonClick}handleJournalEditRequest={handleJournalEditRequest} handleCancelEditButtonClick ={handleCancelEditButtonClick} />
+//       ) : (
+//         <Button className='btn--outline' onClick={handleEditButtonClick}>Edit Journal</Button>
+//       )}
+//       </div>
+//       </div>
+//     </Card>
+//     {/* <JournalReactions journalId={id} /> */}
+//   </Col>
+//   </div>
+// );
+
 
 
 /*workin code before styling button*/

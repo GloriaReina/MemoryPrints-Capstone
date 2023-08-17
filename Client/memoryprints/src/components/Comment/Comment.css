@@ -1,4 +1,18 @@
 p{
     color: azure;
+    text-align: center; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
 }
+
+.btn--outline {
+    margin-right: 10px; 
+  }
+
+  .center-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; 
+  }
 

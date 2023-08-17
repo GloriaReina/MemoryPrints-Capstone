@@ -36,7 +36,7 @@ const CommentList = ({journalId}) => {
           {comments.map((comment) => (
             <>
             <Comment 
-            key={comment.id}  // Add the 'key' prop with a unique value (e.g., comment.id)
+            key={comment.id} className="comment-item" // Add the 'key' prop with a unique value (e.g., comment.id)
             comment={comment}
             handleDeleteCommentFnc={() => handleDeleteComment(comment.id)} // If had used syntax:  onDelete={handleDeleteComment(comment.id)} would be  function will be called immediately when the Comment component renders, and the return value (which is expected to be a function) will be passed as the onDelete prop vs  function is invoked only when the onDelete event occurs (i.e., when the "Delete" button is clicked).
             fetchCommentsByJournal = {() =>fetchCommentsByJournal ()}
