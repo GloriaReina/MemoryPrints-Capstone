@@ -9,6 +9,22 @@
   background-attachment: fixed;
 }
 
+.button-style-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.button-group-left {
+  display: flex;
+  align-items: center;
+}
+
+.button-group-right {
+  display: flex;
+  align-items: center;
+}
 
 
 /* .journal-card {

@@ -30,8 +30,8 @@ export default function Login({setIsLoggedIn}) {
     <>
     <div className='hero-container'>
       <video src='/video/video-1.mp4' autoPlay loop muted />
-      <h4> THE JOURNEY AWAITS</h4>
-      <h3>What are you waiting for?</h3>
+      <h4> DOCUMENTING LIFE'S JOURNEY</h4>
+      <h3>Chronicle, Share, Connect</h3>
       <div className="login-container">
     <Form onSubmit={loginSubmit}>
       <fieldset>

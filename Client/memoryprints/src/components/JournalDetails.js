@@ -71,7 +71,7 @@ const JournalDetails = () => {
     <Col xs={8}>
       <Card
         className="journal-card"
-        style={{ width: "60rem", border: "1px solid lightblue" }}
+        style={{ width: "60rem"}}
       >
         <Card.Body>
           <Card.Title>
@@ -100,6 +100,7 @@ const JournalDetails = () => {
 
           <br />
         </Card.Body>
+        <div className="button-style-container">
         <div className="button-group-left">
         {showComments && <CommentList journalId={id} />}
         <Button className='btn--outline' onClick={toggleComments}>
@@ -115,6 +116,7 @@ const JournalDetails = () => {
         ) : (
           <Button className='btn--outline' onClick={handleEditButtonClick}>Edit Journal</Button>
         )}
+        </div>
         </div>
       </Card>
       {/* <JournalReactions journalId={id} /> */}
