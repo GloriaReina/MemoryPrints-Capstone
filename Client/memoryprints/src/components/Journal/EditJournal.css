@@ -1,24 +1,92 @@
-.deniedModal {
-    position:absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 50%;
-    width:70%;
-  }
 
-.deniedCloseBtn{
-    position: absolute;
-    top: 1%;
-    right: 17%;
-    background-color:rgb(109, 216, 109);
-    border-radius: 3px;
-  
-  
-  }
-  .deniedCloseBtn:hover {
-    background-color: #1fe0b9;
-  }
+.modal-container {
+  display: block;
+  margin: 0 auto;
+  justify-content: center;
+  justify-items: center;
+}
+
+/* Style the modal overlay */
+.modal {
+  position: fixed;
+  top: 18%;
+  left: 28%;
+  width: 50%;
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.96;
+  z-index: 9999;
+}
+
+/* Style the modal content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 80%; 
+  background-color: #e9f3eb;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the modal header */
+.modal-header {
+  border: none;
+}
+
+/* Style the modal body */
+.modal-body {
+  padding: 20px;
+}
+
+/* Style the form labels */
+.form-label {
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* Style the form input fields */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cancel-edit-button {
+  position: absolute;
+  top: 2%;
+  right: 18%;
+  background-color:#d7e8d6;
+  border-radius: 3px;
+
+
+}
+
+.cancel-edit-button:hover {
+  background-color: #1fe0b9;
+}
+
+/* Style the submit button */
+.save-edit-button {
+  background-color: #d7e8d6;
+  border: none;
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  color: #111010;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
+}
+
+.save-edit-button:hover {
+  background-color: #1fe0b9;
+}

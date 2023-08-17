@@ -11,15 +11,15 @@ export const Journal = ({journalProp}) => {
 
     
     return (
-        <Card style={{ width: '25rem' }}>
+        <Card style={{ width: '25rem', border: '1px solid lightblue' }} >
           <Card.Body>
             <Card.Title>
-            <Link to={`/journals/${journalProp.id}`}>
-                  <strong className="journal-title">{journalProp?.title}</strong>
+            <Link to={`/journals/${journalProp.id}`} className="journal-title">
+                  <strong >{journalProp?.title}</strong>
                 </Link>
             </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted"><em>{journalProp?.category?.name}</em></Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted">Created On: {formattedCreationDate}</Card.Subtitle>
+            <Card.Subtitle className="subtitle"><em>{journalProp?.category?.name}</em></Card.Subtitle>
+            <Card.Subtitle className="subtitle"> Written On: {formattedCreationDate}</Card.Subtitle>
 
             <Card.Text>
             {journalProp.Gratitude}

@@ -122,7 +122,7 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
 
   return (
     <>
-      <div className="add-new-journal-button d-grid mt-5">
+    <div className="add-new-journal-button d-grid mt-5">
         <Button
           className="new-journal "
           variant="outline-warning"
@@ -132,6 +132,8 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
           <strong> + </strong>
         </Button>
       </div>
+  <div className="modal-overlay">
+  <div className="modal-container">
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>
           <Form>
@@ -253,6 +255,10 @@ export const AddJournalForm = ({ GetJournalsByUser }) => {
           </Form>
         </Modal.Body>
       </Modal>
+      </div>
+      </div>
+
     </>
   );
 };
+

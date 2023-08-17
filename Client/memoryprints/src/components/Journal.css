@@ -2,14 +2,9 @@ journal-title {
     text-decoration: none;
 }
 
-/* .card{
-    width: 100px;
-} */
-
-.card:hover{
-    box-shadow: 5px 10px 20px 1px rgba (0, 0, 0, 0.253)!important;
-}
-
+.card:hover {
+    box-shadow: 2px 2px 6px rgba(202, 240, 242, 0.879); /* Adjust the values as needed */
+  }
 .card-body{
 margin: 10px;
 padding: 10px;
@@ -18,4 +13,16 @@ padding: 10px;
 card-text{
     font-size: 0.9rem;
     padding: 0.4rem 1.9rem;
+    color: azure;
+}
+
+.journal-title{
+    color: #d7e8d6;
+    text-decoration: none;
+    
+}
+
+.subtitle{
+    color: azure;
+
 }

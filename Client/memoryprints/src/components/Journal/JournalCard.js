@@ -13,12 +13,12 @@ const JournalCard = ({ journal }) => {
         // <Card style={{ width: '18rem' }}>
           <Card.Body>
             <Card.Title>
-            <Link to={`/journals/${journal?.journalId}`}>
-                  <strong className="journal-title">{journal?.journal?.title}</strong>
+            <Link to={`/journals/${journal?.journalId}`} className="journal-title">
+                  <strong >{journal?.journal?.title}</strong>
                 </Link>
             </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted"><em>{journal?.journal?.category?.name}</em></Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted"> Created: {formattedCreationDate}</Card.Subtitle>
+            <Card.Subtitle className="subtitle"><em>{journal?.journal?.category?.name}</em></Card.Subtitle>
+            <Card.Subtitle className="subtitle"> Written On: {formattedCreationDate}</Card.Subtitle>
           </Card.Body>
         //   </Card>
       );
@@ -33,10 +33,10 @@ const JournalCard = ({ journal }) => {
     //                     </strong>
     //                 </Link>
     //             </h5>
-    //             <h6 className="card-subtitle mb-2 text-muted">
+    //             <h6 className="card-subtitle subtitle">
     //                 <em>{journal?.journal?.category?.name}</em>
     //             </h6>
-    //             <h6 className="card-subtitle mb-2 text-muted">
+    //             <h6 className="card-subtitle subtitle">
     //                 Created: {formattedCreationDate}
     //             </h6>
                

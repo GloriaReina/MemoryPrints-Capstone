@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
 import { GetAllUnapprovedJournals, ApproveJournal } from "../../Managers/JournalManager";
-
+import "./UnapprovedJournals.css"
 
 
 export const UnapprovedJournals = () => {
@@ -24,9 +24,9 @@ export const UnapprovedJournals = () => {
   };
 
   return (
-    <div>
-      <h2>Unapproved Journals</h2>
-      <Table striped bordered hover>
+    <div className="unapproved-journals-container">
+      <h2 className="page-title">Unapproved Journals</h2>
+      <Table striped bordered hover className="journals-table">
         <thead>
           <tr>
             <th>Title</th>
@@ -58,5 +58,4 @@ export const UnapprovedJournals = () => {
     </div>
   );
 };
-
 

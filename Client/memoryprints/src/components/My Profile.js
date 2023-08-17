@@ -50,31 +50,29 @@ export const MyProfile = () => {
   return (
     <div className="profileInfo">
       <h1>My Profile</h1>
-      <div>
+      <div className="non-modal-labels">
         <strong>{userProfile.displayName}</strong>
       </div>
-      <div>
+      <div className="non-modal-labels">
         <img src={userProfile.imageLocation} alt="User Profile" />
       </div>
-      <div>
+      <div className="non-modal-labels">
         <strong>First Name:</strong> {userProfile.firstName}
       </div>
-      <div>
+      <div className="non-modal-labels">
         <strong>Last Name:</strong> {userProfile.lastName}
       </div>
-      <div>
+      <div className="non-modal-labels">
         <strong>Relationship:</strong> {userProfile.relationShip}
       </div>
-      <div>
+      <div className="non-modal-labels">
         <strong>Email:</strong> {userProfile.email}
       </div>
-      <div>
-        <strong>password:</strong> {userProfile.password}
-      </div>
+      
       
 
      
-      <Button className="modalBtn" variant="primary" onClick={() => setShowEditModal(true)}>
+      <Button className='btn--outline' variant="primary" onClick={() => setShowEditModal(true)}>
         Edit Profile
       </Button>
 <div className="modalFormContainer" >
@@ -150,7 +148,7 @@ export const MyProfile = () => {
             <Form.Group>
               <Form.Label className="label">Password:</Form.Label>
               <Form.Control className="inputField"
-                type="text"
+                type="password"
                 value={userProfile.password}
                 onChange={(e) =>
                   setUserProfile({ ...userProfile, password: e.target.value })

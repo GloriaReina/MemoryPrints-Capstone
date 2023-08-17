@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import { editComment } from "../../Managers/CommentManager";
 import { GetCommentsByJournal } from "../../Managers/CommentManager";
+
 
 
 
@@ -27,7 +28,43 @@ const EditComment = ({ comment, handleSaveEdit, handleCancelEdit}) => {
   };
 
   return (
-    <Form className="edit-comment-form">
+    <Modal show={true} onHide={handleCancelClick}>
+    <Modal.Header >
+      <Modal.Title>Edit Comment</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Form>
+        <Form.Group>
+          <Form.Label>Content:</Form.Label>
+          <Form.Control
+            type="text"
+            required
+            value={editedComment.content}
+            onChange={(event) =>
+              setEditedComment({
+                ...editedComment,
+                content: event.target.value,
+              })
+            }
+          />
+        </Form.Group>
+      </Form>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="success" className="save-edit-button" onClick={handleSaveButtonClick}>
+        Save
+      </Button>
+      <Button variant="success" className="cancel-edit-button" onClick={handleCancelClick}>
+          X
+        </Button>
+    </Modal.Footer>
+  </Modal>
+  );
+};
+
+export default EditComment;
+
+{/* <Form className="edit-comment-form">
       <h4 className="edit-comment-form-title">Edit Comment</h4>
       <Form.Group className="comment-form-group">
         <Form.Label className="comment-form-label">Content:</Form.Label>
@@ -53,8 +90,4 @@ const EditComment = ({ comment, handleSaveEdit, handleCancelEdit}) => {
       >
         Cancel
       </Button> 
-    </Form>
-  );
-};
-
-export default EditComment;
+    </Form> */}

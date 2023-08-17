@@ -8,20 +8,27 @@
     border: 2px solid #1cdb78;
     color: #1cdb78;
   }
+
+  .modal-container {
+    display: block;
+    margin: 0 auto;
+    justify-content: center;
+    justify-items: center;
+  }
   
   /* Style the modal overlay */
   .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    height: 100%;
-    width:70%;
+    position: fixed;
+    top: 18%;
+    left: 28%;
+    width: 50%;
+    height: 40%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.97;
-    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent overlay */
+    opacity: 0.96;
+    z-index: 9999;
   }
   
   /* Style the modal content */
@@ -73,10 +80,10 @@
   } */
 
   .closeBtn-addEntry {
-    position: fixed;
+    position: absolute;
     top: 2%;
     right: 18%;
-    background-color:rgb(109, 216, 109);
+    background-color:#d7e8d6;
     border-radius: 3px;
   
   
@@ -88,7 +95,7 @@
 
   /* Style the submit button */
   .submit-journal-button {
-    background-color: #1cdb78;
+    background-color: #d7e8d6;
     border: none;
     margin-top: 15px;
     padding: 10px 20px;

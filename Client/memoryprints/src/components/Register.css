@@ -1,0 +1,49 @@
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+body{
+background-color: #f2f2f2;
+
+}
+
+.register-container  {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 50%; 
+    padding: 10px;
+    background-image:#54e64c;;
+    color: #07054b;
+  }
+
+  .register-container Form {
+    width: 80%; 
+    max-width: 600px; 
+    padding: 20px;
+    padding-right: 45px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .register-container Button {
+    display: block;
+    margin: 0 auto; /* Horizontally center the button */
+    padding: 10px;
+    width: 50%;
+    margin-top: 20px; 
+    color: rgb(19, 76, 95);
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid rgb(19, 76, 95);
+  }
+  
+
+  

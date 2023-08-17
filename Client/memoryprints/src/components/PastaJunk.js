@@ -1,3 +1,120 @@
+return (
+  <div className="modal-overlay">
+  <div className="modal-container">
+  <Form className="edit-journal-form">
+    {canEdit ? (
+    <>
+    <h2 className="edit-journal-form-title">Edit Journal</h2>
+    <Form.Group className="journal-form-group">
+      <Form.Label className="journal-form-label">Title:</Form.Label>
+      <Form.Control
+        type="text"
+        required
+        value={editedJournal.title}
+        onChange={(event) =>
+          setEditedJournal({ ...editedJournal, title: event.target.value })
+        }
+      />
+    </Form.Group>
+    <Form.Group className="journal-form-group">
+      <Form.Label className="journal-form-label">Content:</Form.Label>
+      <Form.Control
+        as="textarea"
+        rows={8}
+        required
+        value={editedJournal.content}
+        onChange={(event) =>
+          setEditedJournal({ ...editedJournal, content: event.target.value })
+        }
+      />
+    </Form.Group>
+    <Form.Group className="journal-form-group">
+      <Form.Label className="journal-form-label">Gratitude:</Form.Label>
+      <Form.Control
+        type="text"
+        required
+        value={editedJournal.gratitude}
+        onChange={(event) =>
+          setEditedJournal({
+            ...editedJournal,
+            gratitude: event.target.value,
+          })
+        }
+      />
+    </Form.Group>
+    <Form.Group className="journal-form-group">
+      <Form.Label className="journal-form-label">Intention:</Form.Label>
+      <Form.Control
+        type="text"
+        required
+        value={editedJournal.intention}
+        onChange={(event) =>
+          setEditedJournal({
+            ...editedJournal,
+            intention: event.target.value,
+          })
+        }
+      />
+    </Form.Group>
+    <Form.Group className="journal-form-group">
+      <Form.Label className="journal-form-label">Category:</Form.Label>
+      <Form.Control
+        as="select"
+        required
+        value={editedJournal.categoryId}
+        onChange={(event) =>
+          setEditedJournal({
+            ...editedJournal,
+            categoryId: parseInt(event.target.value),
+          })
+        }
+      >
+        <option value="">-- Select Category --</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.id || ""}>
+            {category.name}
+          </option>
+        ))}
+      </Form.Control>
+    </Form.Group>
+    <Button
+      variant="success"
+      className="save-journal-button"
+      onClick={handleSaveClick}
+    >
+      Save 
+    </Button>
+    <Button
+      variant="success"
+      className="cancel-edit-button"
+      onClick={handleCancelEditButtonClick}
+    >
+      Cancel
+    </Button> 
+
+    </>
+      ) : (
+        <Modal className="deniedModal" show={showAlert} onHide={() => setShowAlert(false)}>
+        <Modal.Header >
+          <Modal.Title>Permission Denied</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          You don't have permission to edit this journal.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className= "deniedCloseBtn"variant="secondary" onClick={() => setShowAlert(false)}>
+            X
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    )}
+  </Form>
+);
+
+
+
+
+
 
 
 // import React, { useState, useEffect } from "react";

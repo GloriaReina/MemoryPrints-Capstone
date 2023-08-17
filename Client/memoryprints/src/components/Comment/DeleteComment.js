@@ -1,25 +1,32 @@
 import React, { useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+
 
 const DeleteComment = ({ handleDeleteCommentFnc }) => {
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleDeleteButtonClick = () => {
     handleDeleteCommentFnc();
-    setConfirmDelete(false);
+    setShowModal(false);
   };
 
-  if (confirmDelete) {
-    return (
-      <div>
-        <p>Are you sure you want to delete this comment?</p>
-        <button onClick={handleDeleteButtonClick}>Delete</button>
-        <button onClick={() => setConfirmDelete(false)}>Cancel</button>
-      </div>
-    );
-  }
-
   return (
-    <button onClick={() => setConfirmDelete(true)}>Delete Comment</button>
+    <>
+      <Button className='btn--outline' onClick={() => setShowModal(true)}>Delete Comment</Button>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header >
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this comment?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" className="delete-comment-button" onClick={() => setShowModal(false)}>Delete</Button>
+          <Button variant="success" className="cancel-edit-button" onClick={handleDeleteButtonClick}>
+          X
+        </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

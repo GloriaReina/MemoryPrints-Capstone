@@ -5,6 +5,7 @@ import { register } from "../Managers/UserManagers";
 import { GetUserRoles } from "../Managers/UserRoleManager";
 import { GetListOfKidUsers } from "../Managers/UserManagers";
 import { addUserProfileLinks } from "../Managers/UserToKidUserLinksManager";
+import "./Register.css"
 
 export default function Register({ setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -79,6 +80,8 @@ export default function Register({ setIsLoggedIn }) {
   };
 
   return (
+    <div className="register-page">
+    <div className="register-container">
     <Form onSubmit={registerClick}>
       <FormGroup as={Row} className="mb-3" >
         <FormLabel column sm="2">
@@ -226,6 +229,8 @@ export default function Register({ setIsLoggedIn }) {
         <Button type="submit">Register</Button>
       </FormGroup>
     </Form>
+    </div>
+    </div>
   );
 };
 

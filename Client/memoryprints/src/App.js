@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Header } from './components/Header';
 import Authorize from './components/Authorize';
 import CategoryManager from './Managers/CategoryManager';
+import './App.css';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(true);

@@ -3,7 +3,7 @@ import { Card, CardBody, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
-
+import "./Comment.css"
 
 export const Comment = ({ comment,handleDeleteCommentFnc, fetchCommentsByJournal}) => {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -36,27 +36,27 @@ const appUserObject = JSON.parse(localAppUser);
       </p>
       <CardBody>
         <p>
-          Author:<em> {comment?.user?.displayName}</em>
+          <strong><em> {comment?.user?.displayName}</em></strong>
         </p>
-        <p>Content: {comment?.content}</p>
-        <p>Creation date: {formattedCreationDate}</p>
+        <p>{comment?.content}</p>
+        <p>Written On: {formattedCreationDate}</p>
         {appUserObject && appUserObject.id === comment.userId && (
-          <>
-            <DeleteComment
-              handleDeleteCommentFnc={handleDeleteCommentFnc}
+        <div className="center-buttons">
+          <DeleteComment
+            handleDeleteCommentFnc={handleDeleteCommentFnc}
+            comment={comment}
+          />
+          {showEditForm ? (
+            <EditComment
               comment={comment}
+              handleSaveEdit={handleSaveEdit}
+              handleCancelEdit={handleCancelEdit}
             />
-            {showEditForm ? (
-              <EditComment
-                comment={comment}
-                handleSaveEdit={handleSaveEdit}
-                handleCancelEdit={handleCancelEdit}
-              />
-            ) : (
-              <button onClick={handleEditButtonClick}>Edit Comment</button>
-            )}
-          </>
-        )}
+          ) : (
+            <button className='btn--outline' onClick={handleEditButtonClick}>Edit Comment</button>
+          )}
+        </div>
+      )}
       </CardBody>
     </Card>
   );
