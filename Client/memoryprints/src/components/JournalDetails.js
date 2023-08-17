@@ -67,6 +67,7 @@ const JournalDetails = () => {
   ).toLocaleDateString();
 
   return (
+    <div className="master-container">
     <div className="details-container">
     <Col xs={8}>
       <Card
@@ -76,7 +77,7 @@ const JournalDetails = () => {
         <Card.Body>
           <Card.Title>
            
-              <strong className="journal-title">
+              <strong className="journal-title standout-text">
                 {journal?.title}
               </strong>
            
@@ -90,13 +91,13 @@ const JournalDetails = () => {
           <br />
           <Card.Subtitle className="subtitle">
             {" "}
-            Gratitude: <em>{journal?.gratitude}</em>
+          <strong className="label-text  standout-text">  Gratitude: </strong><em>{journal?.gratitude}</em>
           </Card.Subtitle>{" "}
           <br />
           <Card.Subtitle className="subtitle">
-            What will make today/tomorrow great: <em>{journal?.intention}</em>
+          <strong  className="label-text  standout-text"> What will make today/tomorrow great: </strong><em>{journal?.intention}</em>
           </Card.Subtitle><br />
-          <Card.Subtitle className="subtitle"> Created On:<em>{formattedCreationDate}</em> </Card.Subtitle>
+          <Card.Subtitle className="subtitle"> <strong className="label-text">Created On:</strong><em>{formattedCreationDate}</em> </Card.Subtitle>
 
           <br />
         </Card.Body>
@@ -121,6 +122,7 @@ const JournalDetails = () => {
       </Card>
       {/* <JournalReactions journalId={id} /> */}
     </Col>
+    </div>
     </div>
   );
 };
