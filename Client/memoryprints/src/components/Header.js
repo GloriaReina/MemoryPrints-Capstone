@@ -57,15 +57,18 @@ export const Header = ({setIsLoggedIn}) => {
           Home
         </NavLink>
       </li>
-      {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 1 || (localStorage.getItem("user")).userRoleId === 2)) && (
-        <>
-          <li className='nav-item'>
-            <NavLink as={Link} to="/alljournals" className='nav-links'bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
-              All Entries
-            </NavLink>
-          </li>
-        </>
-      )}
+      {(localStorage.getItem("user") && (
+  (JSON.parse(localStorage.getItem("user")).userRoleId === 1 ||
+   JSON.parse(localStorage.getItem("user")).userRoleId === 2) && (
+    <>
+      <li className='nav-item'>
+        <NavLink as={Link} to="/alljournals" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>
+          All Entries
+        </NavLink>
+      </li>
+    </>
+  )
+))}
       {(localStorage.getItem("user") && (JSON.parse(localStorage.getItem("user")).userRoleId === 1 && (
             <li className='nav-item'>
               <NavLink as={Link} to="/unapprovedjournals" className='nav-links' bsPrefix="nav-link-custom" onClick={closeMobileMenu}>

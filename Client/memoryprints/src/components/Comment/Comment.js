@@ -53,7 +53,7 @@ const appUserObject = JSON.parse(localAppUser);
                 handleCancelEdit={handleCancelEdit}
               />
             ) : (
-              <button onClick={handleEditButtonClick}>Edit Comment</button>
+              <button className='btn--outline' onClick={handleEditButtonClick}>Edit Comment</button>
             )}
           </>
         )}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const DeleteJournal = ({ journalId, handleDeleteJournal }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -12,8 +13,8 @@ const DeleteJournal = ({ journalId, handleDeleteJournal }) => {
     return (
       <div>
         <p>Are you sure you want to delete this journal?</p>
-        <button onClick={handleDeleteButtonClick}>Delete</button>
-        <button onClick={() => setConfirmDelete(false)}>Cancel</button>
+        <button className='btn--outline' onClick={handleDeleteButtonClick}>Delete</button>
+        <button className='btn--outline' onClick={() => setConfirmDelete(false)}>Cancel</button>
       </div>
     );
   }

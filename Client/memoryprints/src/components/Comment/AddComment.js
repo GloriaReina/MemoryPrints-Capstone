@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 import { addComment } from "../../Managers/CommentManager";
+import "./AddComment.css"
 
 export const AddComment = ({ journalId, setShowAddCommentForm}) => {
   const [comment, setComment] = useState({
@@ -34,34 +36,37 @@ export const AddComment = ({ journalId, setShowAddCommentForm}) => {
   };
 
   return (
-    <form
-      className="comment-form"
-      onSubmit={(clickEvent) => handleSubmit(clickEvent)}
-    >
-      <h3 className="comment-form-title">Create a New Comment</h3>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="content">Content:</label>
-          <input
-            type="text"
-            id="content"
-            value={comment.content}
-            onChange={(event) =>
-              setComment({ ...comment, content: event.target.value })
-            }
-          />
-        </div>
-      </fieldset>
-      <button type="submit" className="journal-button">
-        Submit
-      </button>
-      <button
-        type="button"
-        className="journal-button"
-        onClick={handleCancel}
-      >
-        Cancel
-      </button>
-    </form>
+    <div className="modal-container">
+    <Modal show={true} onHide={handleCancel}>
+      <Modal.Header >
+        <Modal.Title>Create a New Comment</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <form className="comment-form" onSubmit={handleSubmit}>
+          <fieldset>
+            <div className="form-group">
+              <label htmlFor="content">Content:</label>
+              <input
+                type="text"
+                id="content"
+                value={comment.content}
+                onChange={(event) =>
+                  setComment({ ...comment, content: event.target.value })
+                }
+              />
+            </div>
+          </fieldset>
+        </form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button className="cancel-addComment" variant="success" onClick={handleCancel}>
+          X
+        </Button>
+        <Button className="submit-addComment" variant="success" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Modal.Footer>
+    </Modal>
+    </div>
   );
 };

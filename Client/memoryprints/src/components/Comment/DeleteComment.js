@@ -12,14 +12,14 @@ const DeleteComment = ({ handleDeleteCommentFnc }) => {
     return (
       <div>
         <p>Are you sure you want to delete this comment?</p>
-        <button onClick={handleDeleteButtonClick}>Delete</button>
-        <button onClick={() => setConfirmDelete(false)}>Cancel</button>
+        <button className='btn--outline' onClick={handleDeleteButtonClick}>Delete</button>
+        <button className='btn--outline' onClick={() => setConfirmDelete(false)}>Cancel</button>
       </div>
     );
   }
 
   return (
-    <button onClick={() => setConfirmDelete(true)}>Delete Comment</button>
+    <button className='btn--outline' onClick={() => setConfirmDelete(true)}>Delete Comment</button>
   );
 };
 

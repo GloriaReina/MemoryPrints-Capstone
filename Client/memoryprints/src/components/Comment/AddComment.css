@@ -1,0 +1,31 @@
+.cancel-addComment {
+    position: absolute;
+    top: 2%;
+    right: 16%;
+    background-color:#d7e8d6;
+    border-radius: 3px;
+  
+  
+  }
+  
+  .cancel-addComment:hover {
+    background-color: #1fe0b9;
+  }
+  
+  /* Style the submit button */
+  .submit-addComment{
+    background-color: #d7e8d6;
+    border: none;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: #111010;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-addComment:hover {
+    background-color: #1fe0b9;
+  }
+  

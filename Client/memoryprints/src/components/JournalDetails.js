@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Col } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getJournalById } from "../Managers/JournalManager";
 import CommentList from "./Comment/CommentList";
 import DeleteJournal from "./Journal/DeleteJournal";
@@ -111,7 +111,7 @@ const JournalDetails = () => {
         <div className="button-group-right">
         <DeleteJournal journalId={+id} handleDeleteJournal={handleDeleteJournal} />
         {showJournalEditForm ? (
-          <EditJournal journal={journal} handleJournalEditRequest={handleJournalEditRequest} handleCancelEditButtonClick ={handleCancelEditButtonClick} />
+          <EditJournal journal={journal} handleEditButtonClick={handleEditButtonClick}handleJournalEditRequest={handleJournalEditRequest} handleCancelEditButtonClick ={handleCancelEditButtonClick} />
         ) : (
           <Button className='btn--outline' onClick={handleEditButtonClick}>Edit Journal</Button>
         )}

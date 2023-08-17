@@ -1,3 +1,7 @@
+body{
+  background: url('./components/images/img-3.jpg');
+
+}
 .button-container {
   display: flex;
   justify-content: space-between;
