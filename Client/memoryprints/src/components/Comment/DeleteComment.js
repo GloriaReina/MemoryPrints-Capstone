@@ -20,8 +20,8 @@ const DeleteComment = ({ handleDeleteCommentFnc }) => {
           Are you sure you want to delete this comment?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" className="delete-comment-button" onClick={() => setShowModal(false)}>Delete</Button>
-          <Button variant="success" className="cancel-edit-button" onClick={handleDeleteButtonClick}>
+          <Button variant="success" className="delete-comment-button" onClick={handleDeleteButtonClick}>Delete</Button>
+          <Button variant="success" className="cancel-edit-button" onClick={() => setShowModal(false)} >
           X
         </Button>
         </Modal.Footer>
