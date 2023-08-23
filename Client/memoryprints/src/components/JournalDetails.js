@@ -18,9 +18,21 @@ const JournalDetails = () => {
   const [showComments, setShowComments] = useState(false);
   const [showJournalEditForm, setShowJournalEditForm] = useState(false);
   const [showAddCommentForm, setShowAddCommentForm] = useState(false); 
+  const [canEdit, setCanEdit] = useState(false);
 
   const navigate = useNavigate ()
   const { id } = useParams();
+
+  useEffect(() => {
+    const localAppUser = localStorage.getItem("user");
+    const appUserObject = JSON.parse(localAppUser);
+
+    if (appUserObject && appUserObject.id === journal.userId) {
+      setCanEdit(true);
+    } else {
+      setCanEdit(false);
+    }
+  }, [journal.userId]);
 
   /* toggle function for controlling the visibility of the comment list:*/
   const toggleComments = () => {
@@ -135,18 +147,18 @@ const JournalDetails = () => {
         handleDeleteJournal={handleDeleteJournal}
         journal= {journal}
       />
-      {showJournalEditForm ? (
-        <EditJournal
-          journal={journal}
-          handleEditButtonClick={handleEditButtonClick}
-          handleJournalEditRequest={handleJournalEditRequest}
-          handleCancelEditButtonClick={handleCancelEditButtonClick}
-        />
-      ) : (
-        <Button className="btn--outline" onClick={handleEditButtonClick}>
-          Edit Journal
-        </Button>
-      )}
+        {canEdit && showJournalEditForm ? (
+            <EditJournal
+              journal={journal}
+              handleEditButtonClick={handleEditButtonClick}
+              handleJournalEditRequest={handleJournalEditRequest}
+              handleCancelEditButtonClick={handleCancelEditButtonClick}
+            />
+          ) : canEdit ? (
+            <Button className="btn--outline" onClick={handleEditButtonClick}>
+              Edit Journal
+            </Button>
+          ) : null}
     </div>
   </div>
   </div>

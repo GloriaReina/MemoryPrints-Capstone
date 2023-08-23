@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { editComment } from "../../Managers/CommentManager";
-import { GetCommentsByJournal } from "../../Managers/CommentManager";
 
 
 
