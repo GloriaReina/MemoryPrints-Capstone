@@ -57,7 +57,7 @@ const JournalDetails = () => {
     DeleteJournalById(parseInt(id)) 
     .then(() => {
       // Journal deleted successfully, navigate to the homepage
-      navigate("/homepage");
+      navigate("/");
     })
   }
 
